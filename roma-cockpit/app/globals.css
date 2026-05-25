@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --line: rgba(245, 241, 232, 0.12);
+  --line-2: rgba(245, 241, 232, 0.22);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0f0e0c;
+  background-image:
+    radial-gradient(1000px 560px at 88% -8%, rgba(218, 119, 86, 0.16), transparent 58%),
+    radial-gradient(820px 620px at -12% 18%, rgba(224, 164, 88, 0.1), transparent 55%),
+    radial-gradient(700px 700px at 50% 120%, rgba(176, 138, 189, 0.07), transparent 60%);
+  background-attachment: fixed;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Fine film grain over the whole page, matching the original cockpit. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  /* Headline gradient (paper → clay → gold). */
+  .text-gradient {
+    background: linear-gradient(120deg, #f5f1e8 20%, #e88968 70%, #e0a458);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .safe-bottom {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 0px);
+  }
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Leaflet dark theming + popup styling lifted from the original. */
+.leaflet-container {
+  background: #0c0b09;
+  font-family: "Outfit", system-ui, sans-serif;
+}
+.leaflet-popup-content-wrapper {
+  background: #1a1714;
+  color: #f5f1e8;
+  border-radius: 13px;
+  border: 1px solid var(--line-2);
+}
+.leaflet-popup-tip {
+  background: #1a1714;
+}
+.leaflet-popup-content {
+  margin: 13px 15px;
+  font-family: "Outfit", system-ui, sans-serif;
+}
