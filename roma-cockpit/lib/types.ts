@@ -29,6 +29,8 @@ export interface Step {
   logi?: string; // logistics note
   fixed?: boolean; // immovable (booked) slot
   badges?: [BadgeKind, string][];
+  /** Optional hero photo URL (Wikimedia Commons). Easily swappable here. */
+  img?: string;
 }
 
 export interface Moment {

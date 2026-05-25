@@ -20,6 +20,11 @@ const config: Config = {
         olive: "#9aa861",
         grape: "#b08abd",
         sky: "#7fa8c9",
+        // "Italie élégante" earth tones (premium, never kitsch):
+        travertin: "#ece3d2", // warm cream stone
+        ochre: "#c98a3c", // Roman ochre
+        cypress: "#6f7a4a", // deep olive / cypress green
+        pompeii: "#8c3b2e", // deep Pompeian red — RARE accent only
       },
       fontFamily: {
         display: ['"Fraunces"', "Georgia", "serif"],

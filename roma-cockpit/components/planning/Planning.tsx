@@ -1,8 +1,32 @@
 "use client";
 
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SectionHead from "@/components/ui/SectionHead";
 import type { BadgeKind, Step, TravelData } from "@/lib/types";
+
+// Hero photo for a step. Bleeds to the card edges with a dark gradient for
+// legibility, and removes itself gracefully if the image fails to load.
+function StepHero({ src, alt }: { src: string; alt: string }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) return null;
+  return (
+    <div className="-mt-[15px] -mx-[15px] mb-3 relative h-28 overflow-hidden rounded-t-[18px] bg-bg-3">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        onError={() => setFailed(true)}
+        className="w-full h-full object-cover"
+      />
+      <div
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(180deg,rgba(15,14,12,.1),rgba(15,14,12,.7))" }}
+      />
+    </div>
+  );
+}
 
 const BADGE_CLASS: Record<BadgeKind, string> = {
   "bdg-resa": "bg-olive/20 text-olive",
@@ -20,7 +44,8 @@ function StepCard({ step, color, emo, label }: { step: Step; color: string; emo:
       }`}
       style={{ background: "linear-gradient(165deg,#1a1714,rgba(26,23,20,.6))" }}
     >
-      <span className="absolute left-0 top-0 bottom-0 w-1" style={{ background: color }} />
+      <span className="absolute left-0 top-0 bottom-0 w-1 z-10" style={{ background: color }} />
+      {step.img ? <StepHero src={step.img} alt={step.title} /> : null}
       <div className="flex items-center gap-2 mb-2">
         <span className="font-display text-[15px] font-bold text-gold">{step.t}</span>
         {step.fixed ? (

@@ -44,19 +44,19 @@ export const travelData: TravelData = {
           hr: "14h–18h",
           steps: [
             { t: "—", cat: "transport", title: "Arrivée Rome + Airbnb", desc: "Via Francesco Sivori 5, quartier Prati (proche Vatican).", logi: "Pose valises, on souffle.", badges: [["bdg-resa", "Logement OK"]] },
-            { t: "16:30", cat: "fontaine", title: "Fontaine des 4 Fleuves", desc: "Piazza Navona — chef-d'œuvre du Bernin.", logi: "~15 min à pied." },
+            { t: "16:30", cat: "fontaine", title: "Fontaine des 4 Fleuves", desc: "Piazza Navona — chef-d'œuvre du Bernin.", logi: "~15 min à pied.", img: "https://commons.wikimedia.org/wiki/Special:FilePath/Fontana_dei_Quattro_Fiumi_(in_detail).JPG?width=1000" },
             { t: "16:45", cat: "statue", title: "Pasquino", desc: "La 1re statue parlante, à 2 pas de Navona.", logi: "Zéro détour." },
-            { t: "17:15", cat: "exterieur", title: "Campo de' Fiori", desc: "Place vivante, ambiance apéro le soir." },
+            { t: "17:15", cat: "exterieur", title: "Campo de' Fiori", desc: "Place vivante, ambiance apéro le soir.", img: "https://commons.wikimedia.org/wiki/Special:FilePath/Top_of_Campo_dei_Fiori.JPG?width=1000" },
           ],
         },
         {
           label: "Soirée",
           hr: "18h–22h",
           steps: [
-            { t: "18:00", cat: "exterieur", title: "Panthéon", desc: "Sublime à la lumière du soir. Entrée à vérifier." },
+            { t: "18:00", cat: "exterieur", title: "Panthéon", desc: "Sublime à la lumière du soir. Entrée à vérifier.", img: "https://commons.wikimedia.org/wiki/Special:FilePath/Rome_Pantheon_front.jpg?width=1000" },
             { t: "18:30", cat: "fontaine", title: "Fontaine du Panthéon", desc: "Fontana del Pantheon + obélisque, sur la piazza." },
-            { t: "19:30", cat: "fontaine", title: "Fontaine de Trevi", desc: "Jeter la pièce. Bondée même le soir mais incontournable." },
-            { t: "20:00", cat: "fontaine", title: "Piazza di Spagna + Barcaccia", desc: "Escaliers + fontaine de la Barcaccia (Bernin père)." },
+            { t: "19:30", cat: "fontaine", title: "Fontaine de Trevi", desc: "Jeter la pièce. Bondée même le soir mais incontournable.", img: "https://commons.wikimedia.org/wiki/Special:FilePath/Fontaine_Trevi_-_Rome.jpg?width=1000" },
+            { t: "20:00", cat: "fontaine", title: "Piazza di Spagna + Barcaccia", desc: "Escaliers + fontaine de la Barcaccia (Bernin père).", img: "https://commons.wikimedia.org/wiki/Special:FilePath/Spanish_steps_Rome_Italy.jpg?width=1000" },
             { t: "21:00", cat: "food", title: "Dîner simple", desc: "Trattoria de quartier. On ne se charge pas le 1er soir." },
           ],
         },
@@ -76,7 +76,7 @@ export const travelData: TravelData = {
           label: "Matin",
           hr: "9h–13h",
           steps: [
-            { t: "09:00", cat: "payant", fixed: true, title: "Castel Sant'Angelo", desc: "Forteresse + terrasse panoramique.", logi: "~12 min à pied.", badges: [["bdg-resa", "Réservé 9h"]] },
+            { t: "09:00", cat: "payant", fixed: true, title: "Castel Sant'Angelo", desc: "Forteresse + terrasse panoramique.", logi: "~12 min à pied.", badges: [["bdg-resa", "Réservé 9h"]], img: "https://commons.wikimedia.org/wiki/Special:FilePath/0_Castel_et_pont_Sant%27Angelo_(1).JPG?width=1000" },
             { t: "10:45", cat: "pano", title: "Ponte Sant'Angelo", desc: "Les anges du Bernin sur le Tibre." },
             { t: "11:30", cat: "chill", title: "Balade centre historique", desc: "Ruelles, places, gelato. On flâne." },
           ],
@@ -114,7 +114,7 @@ export const travelData: TravelData = {
           label: "Matin",
           hr: "8h–13h",
           steps: [
-            { t: "08:00", cat: "pano", fixed: true, title: "Coupole Saint-Pierre", desc: "Montée tôt = vue dégagée, moins de queue.", logi: "320 marches (ascenseur partiel).", badges: [["bdg-resa", "Réservé"]] },
+            { t: "08:00", cat: "pano", fixed: true, title: "Coupole Saint-Pierre", desc: "Montée tôt = vue dégagée, moins de queue.", logi: "320 marches (ascenseur partiel).", badges: [["bdg-resa", "Réservé"]], img: "https://commons.wikimedia.org/wiki/Special:FilePath/Panorama_of_Piazza_San_Pietro.JPG?width=1000" },
             { t: "09:30", cat: "payant", title: "Basilique Saint-Pierre", desc: "Pietà de Michel-Ange, baldaquin du Bernin.", logi: "⚠️ Épaules + genoux couverts." },
             { t: "12:30", cat: "food", title: "Déjeuner Borgo Pio", desc: "Ruelle piétonne à côté, moins touristique qu'on croit." },
           ],
@@ -123,7 +123,7 @@ export const travelData: TravelData = {
           label: "Après-midi",
           hr: "15h–18h",
           steps: [
-            { t: "15:00", cat: "payant", fixed: true, title: "Musées du Vatican", desc: "Chapelle Sixtine en final. Compter 3h min.", logi: "Arriver 20 min avant.", badges: [["bdg-resa", "Réservé 15h"]] },
+            { t: "15:00", cat: "payant", fixed: true, title: "Musées du Vatican", desc: "Chapelle Sixtine en final. Compter 3h min.", logi: "Arriver 20 min avant.", badges: [["bdg-resa", "Réservé 15h"]], img: "https://commons.wikimedia.org/wiki/Special:FilePath/Rome_-_Vatican_Museum_-_Spiral_Staircase_by_Giuseppe_Momo_-_0673.jpg?width=1000" },
           ],
         },
         {
@@ -149,9 +149,9 @@ export const travelData: TravelData = {
           label: "Matin",
           hr: "9h–13h",
           steps: [
-            { t: "09:00", cat: "payant", fixed: true, title: "Galleria Borghese", desc: "Bernin (Apollon & Daphné), Caravage. Créneau strict 2h.", logi: "⚠️ Résa horaire OBLIGATOIRE.", badges: [["bdg-todo", "À réserver vite"]] },
+            { t: "09:00", cat: "payant", fixed: true, title: "Galleria Borghese", desc: "Bernin (Apollon & Daphné), Caravage. Créneau strict 2h.", logi: "⚠️ Résa horaire OBLIGATOIRE.", badges: [["bdg-todo", "À réserver vite"]], img: "https://commons.wikimedia.org/wiki/Special:FilePath/Apollo_and_Daphne_(Bernini)_(cropped).jpg?width=1000" },
             { t: "11:15", cat: "pano", title: "Villa Borghese + Pincio", desc: "Grand parc, barques, terrasse du Pincio." },
-            { t: "12:30", cat: "pano", title: "Piazza del Popolo", desc: "Vue plongeante depuis le Pincio puis descente." },
+            { t: "12:30", cat: "pano", title: "Piazza del Popolo", desc: "Vue plongeante depuis le Pincio puis descente.", img: "https://commons.wikimedia.org/wiki/Special:FilePath/0_Piazza_de_Popolo_%C3%A0_Rome.JPG?width=1000" },
           ],
         },
         {
@@ -159,7 +159,7 @@ export const travelData: TravelData = {
           hr: "13h–18h",
           steps: [
             { t: "13:15", cat: "food", title: "Déjeuner Via del Babuino", desc: "Vers la place d'Espagne." },
-            { t: "16:30", cat: "statue", title: "Aventin — Trou de serrure", desc: "Le buco di Roma : St-Pierre cadrée dans une serrure.", logi: "Un peu de queue." },
+            { t: "16:30", cat: "statue", title: "Aventin — Trou de serrure", desc: "Le buco di Roma : St-Pierre cadrée dans une serrure.", logi: "Un peu de queue.", img: "https://commons.wikimedia.org/wiki/Special:FilePath/Aventino_s_Maria_del_Priorato_villa_dal_giardino_1050419.JPG?width=1000" },
             { t: "17:15", cat: "pano", title: "Jardin des Orangers", desc: "Giardino degli Aranci — vue sur Rome, juste à côté." },
           ],
         },
@@ -167,7 +167,7 @@ export const travelData: TravelData = {
           label: "Soirée",
           hr: "19h+",
           steps: [
-            { t: "19:30", cat: "pano", title: "Gianicolo — coucher de soleil", desc: "LE plus beau panorama de Rome au sunset.", logi: "Transfert depuis Aventin (bus/taxi)." },
+            { t: "19:30", cat: "pano", title: "Gianicolo — coucher de soleil", desc: "LE plus beau panorama de Rome au sunset.", logi: "Transfert depuis Aventin (bus/taxi).", img: "https://commons.wikimedia.org/wiki/Special:FilePath/Roma_Gianicolo_01.JPG?width=1000" },
             { t: "21:00", cat: "food", title: "🍝 Dîner avec tonton", desc: "Soirée romaine avec le tonton qui vit à Rome. Il choisit l'adresse ?", logi: "Caler le lieu + l'heure avec lui.", badges: [["bdg-conf", "À caler avec tonton"]] },
           ],
         },

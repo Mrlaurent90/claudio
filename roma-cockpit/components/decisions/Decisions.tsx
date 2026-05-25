@@ -4,7 +4,7 @@ import SectionHead from "@/components/ui/SectionHead";
 import type { TravelData } from "@/lib/types";
 
 const URG_CLASS: Record<string, string> = {
-  hi: "bg-clay text-ink",
+  hi: "bg-pompeii text-paper", // rare deep-red accent
   mid: "bg-gold text-ink",
   lo: "bg-bg-3 text-paper-dim border border-line",
 };

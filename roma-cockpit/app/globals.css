@@ -13,10 +13,13 @@ html {
 
 body {
   background-color: #0f0e0c;
+  /* Warm Roman earth: terracotta + ochre glows, a cypress-green base note,
+     and a whisper of Pompeian red — premium and dark, never "pizzeria". */
   background-image:
-    radial-gradient(1000px 560px at 88% -8%, rgba(218, 119, 86, 0.16), transparent 58%),
-    radial-gradient(820px 620px at -12% 18%, rgba(224, 164, 88, 0.1), transparent 55%),
-    radial-gradient(700px 700px at 50% 120%, rgba(176, 138, 189, 0.07), transparent 60%);
+    radial-gradient(1100px 600px at 88% -10%, rgba(218, 119, 86, 0.15), transparent 58%),
+    radial-gradient(840px 640px at -12% 14%, rgba(201, 138, 60, 0.11), transparent 56%),
+    radial-gradient(780px 740px at 50% 120%, rgba(111, 122, 74, 0.09), transparent 60%),
+    radial-gradient(520px 440px at 102% 64%, rgba(140, 59, 46, 0.06), transparent 62%);
   background-attachment: fixed;
   -webkit-tap-highlight-color: transparent;
 }
@@ -41,7 +44,7 @@ body::before {
   }
   /* Headline gradient (paper → clay → gold). */
   .text-gradient {
-    background: linear-gradient(120deg, #f5f1e8 20%, #e88968 70%, #e0a458);
+    background: linear-gradient(120deg, #f5f1e8 18%, #e88968 62%, #c98a3c);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
