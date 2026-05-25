@@ -157,15 +157,10 @@ export default function TripMap({
     }
   }
 
-  function toggleDay(i: number) {
-    setActiveDays((prev) => {
-      const next = new Set(prev);
-      if (next.has(i)) next.delete(i);
-      else next.add(i);
-      if (next.size === 0) next.add(i); // keep at least one
-      if (next.size === 1) setActiveDay([...next][0]); // sync Planning when single
-      return next;
-    });
+  // Single-select: exactly one day at a time (never several at once).
+  function selectDay(i: number) {
+    setActiveDays(new Set([i]));
+    setActiveDay(i); // keep the Planning section in sync
   }
   function toggleCat(k: CategoryKey) {
     setActiveCats((prev) => {
@@ -176,8 +171,6 @@ export default function TripMap({
     });
   }
 
-  const allDaysOn = activeDays.size === data.days.length;
-
   // Day selector — rendered both above and below the map so you can switch days
   // without scrolling. `variant` only keeps React keys unique between copies.
   const dayChips = (variant: string) => (
@@ -187,7 +180,7 @@ export default function TripMap({
         return (
           <button
             key={variant + nm}
-            onClick={() => toggleDay(i)}
+            onClick={() => selectDay(i)}
             aria-pressed={on}
             className="text-[12px] rounded-lg px-3 py-[6px] border transition font-medium"
             style={
@@ -200,20 +193,6 @@ export default function TripMap({
           </button>
         );
       })}
-      <button
-        key={variant + "all"}
-        onClick={() =>
-          setActiveDays(allDaysOn ? new Set([activeDay]) : new Set(data.days.map((_, i) => i)))
-        }
-        className="text-[12px] rounded-lg px-3 py-[6px] border transition font-medium"
-        style={
-          allDaysOn
-            ? { background: "#f5f1e8", color: "#0f0e0c", borderColor: "#f5f1e8" }
-            : { background: "#1a1714", color: "#d9cfc0", borderColor: "rgba(245,241,232,.22)" }
-        }
-      >
-        {allDaysOn ? "Réduire" : "Tous"}
-      </button>
     </div>
   );
 
@@ -223,7 +202,7 @@ export default function TripMap({
 
       {dayChips("top")}
       <div className="text-[11px] text-paper-dim mt-2 mb-3">
-        Choisis un ou plusieurs jours · les numéros suivent l&apos;ordre chronologique.
+        Choisis un jour · les numéros suivent l&apos;ordre chronologique.
       </div>
 
       {/* Compact category legend / filters with emoji. Tap to show/hide. */}
