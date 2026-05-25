@@ -87,7 +87,7 @@ export default function CockpitApp({ data }: { data: TravelData }) {
 
       <main className="relative z-[2] max-w-[980px] mx-auto px-[18px] pb-28">
         <Planning data={data} activeDay={activeDay} setActiveDay={setActiveDay} />
-        <TripMap data={data} />
+        <TripMap data={data} activeDay={activeDay} setActiveDay={setActiveDay} />
         <Decisions data={data} chosen={state.decisions} onChoose={setDecision} />
         <Resas data={data} statuses={state.resaStatus} onSetStatus={setResa} />
         <Budget data={data} />

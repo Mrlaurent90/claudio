@@ -208,7 +208,7 @@ export const travelData: TravelData = {
   ],
 
   places: [
-    { n: "Logement (Via Sivori 5)", cat: "chill", day: 0, lat: 41.9075, lng: 12.4585, info: "Base du séjour · Prati" },
+    { n: "Logement (Via Sivori 5)", cat: "chill", day: 0, lat: 41.9075, lng: 12.4585, info: "Base du séjour · Prati", home: true },
     { n: "Fontaine des 4 Fleuves", cat: "fontaine", day: 0, lat: 41.8992, lng: 12.4731, info: "Piazza Navona · Bernin" },
     { n: "Pasquino (statue parlante)", cat: "statue", day: 0, lat: 41.8985, lng: 12.4719, info: "La 1re statue parlante" },
     { n: "Campo de' Fiori", cat: "exterieur", day: 0, lat: 41.8956, lng: 12.4722, info: "Place vivante" },

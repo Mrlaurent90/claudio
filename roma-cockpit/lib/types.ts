@@ -58,6 +58,8 @@ export interface Place {
   lat: number;
   lng: number;
   info: string;
+  /** The lodging anchor: always shown, distinct marker, start of each route. */
+  home?: boolean;
 }
 
 export type Urgency = "hi" | "mid" | "lo";
