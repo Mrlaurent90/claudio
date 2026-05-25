@@ -60,6 +60,8 @@ export interface Place {
   lat: number;
   lng: number;
   info: string;
+  /** Time label (e.g. "16:30"), mirrors the planning step. Shown in the map card. */
+  t?: string;
   /** The lodging anchor: always shown, distinct marker, start of each route. */
   home?: boolean;
 }

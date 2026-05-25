@@ -1,10 +1,11 @@
 "use client";
 
 import "leaflet/dist/leaflet.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Map as LeafletMap, LayerGroup } from "leaflet";
 import SectionHead from "@/components/ui/SectionHead";
 import type { CategoryKey, Place, TravelData } from "@/lib/types";
+import { fmtDist, walkKm, walkMinutes } from "@/lib/geo";
 
 const DAY_COLORS = ["#e88968", "#e0a458", "#9aa861", "#da7756", "#7fa8c9"];
 const DAY_NAMES = ["J1 Dim", "J2 Lun", "J3 Mar", "J4 Mer", "J5 Jeu"];
@@ -13,10 +14,13 @@ export default function TripMap({
   data,
   activeDay,
   setActiveDay,
+  onOpenPlanning,
 }: {
   data: TravelData;
   activeDay: number;
   setActiveDay: (i: number) => void;
+  /** Jump to the planning section, focused on the given day. */
+  onOpenPlanning?: (dayIndex: number) => void;
 }) {
   const mapEl = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<LeafletMap | null>(null);
@@ -31,6 +35,43 @@ export default function TripMap({
 
   const home = data.places.find((p) => p.home) ?? null;
 
+  // Keep the planning-jump callback fresh for Leaflet popup click handlers,
+  // which are bound imperatively and would otherwise capture a stale closure.
+  const openPlanRef = useRef(onOpenPlanning);
+  openPlanRef.current = onOpenPlanning;
+
+  // The ordered, visible (filtered) walking stops for one day — shared by the
+  // map drawing and the day summary so both agree on legs/distances.
+  function visibleStops(day: number): Place[] {
+    return data.places.filter((p) => p.day === day && !p.home && activeCats.has(p.cat));
+  }
+
+  // Foot-only legs (transport transfers like the airport aren't walked).
+  function walkLegKm(from: Place | null, to: Place): number | null {
+    if (!from || to.cat === "transport") return null;
+    return walkKm([from.lat, from.lng], [to.lat, to.lng]);
+  }
+
+  // Summary of the currently selected day(s): stop count + total walking.
+  const summary = useMemo(() => {
+    let stops = 0;
+    let km = 0;
+    let hasTransfer = false;
+    for (const day of activeDays) {
+      const list = visibleStops(day);
+      stops += list.length;
+      let prev: Place | null = home;
+      for (const p of list) {
+        const leg = walkLegKm(prev, p);
+        if (leg === null) hasTransfer = true;
+        else km += leg;
+        prev = p;
+      }
+    }
+    return { stops, km, minutes: km > 0 ? walkMinutes(km) : 0, hasTransfer };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeDays, activeCats]);
+
   function homeIcon(L: typeof import("leaflet")) {
     return L.divIcon({
       className: "",
@@ -44,19 +85,37 @@ export default function TripMap({
   function stopIcon(L: typeof import("leaflet"), fill: string, ring: string, n: number) {
     return L.divIcon({
       className: "",
-      html: `<div style="display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:${fill};border:2.5px solid ${ring};box-shadow:0 0 0 2px ${ring}55,0 2px 7px rgba(0,0,0,.7)"><span style="font-size:10px;font-weight:800;color:#0f0e0c;line-height:1">${n}</span></div>`,
-      iconSize: [22, 22],
-      iconAnchor: [11, 11],
+      html: `<div style="display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:${fill};border:2.5px solid ${ring};box-shadow:0 0 0 2px ${ring}55,0 2px 7px rgba(0,0,0,.7)"><span style="font-size:12px;font-weight:800;color:#0f0e0c;line-height:1">${n}</span></div>`,
+      iconSize: [26, 26],
+      iconAnchor: [13, 13],
     });
   }
 
-  function popupHtml(p: Place, color: string, emo: string, label: string) {
+  // A small non-interactive pill placed at a leg midpoint: "~7 min".
+  function legIcon(L: typeof import("leaflet"), text: string) {
+    return L.divIcon({
+      className: "",
+      html: `<div style="white-space:nowrap;font-size:10px;font-weight:700;color:#0f0e0c;background:#d9cfc0;border:1px solid rgba(15,14,12,.25);border-radius:999px;padding:1px 7px;box-shadow:0 1px 4px rgba(0,0,0,.5)">${text}</div>`,
+      iconSize: [0, 0],
+      iconAnchor: [0, 0],
+    });
+  }
+
+  function popupHtml(p: Place, color: string, emo: string, label: string, legInfo: string) {
     const g = `https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`;
+    const time = p.t ? ` · ${p.t}` : "";
+    const leg = legInfo
+      ? `<div style="font-size:12px;color:#9aa861;margin-top:6px;font-weight:600">${legInfo}</div>`
+      : "";
     return (
-      `<div style="font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:${color}">${emo} ${label} · ${DAY_NAMES[p.day]}</div>` +
+      `<div style="font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:${color}">${emo} ${label} · ${DAY_NAMES[p.day]}${time}</div>` +
       `<div style="font-family:Fraunces,serif;font-size:16px;font-weight:700;color:#e88968">${p.n}</div>` +
       `<div style="font-size:12px;color:#d9cfc0;margin-top:3px">${p.info}</div>` +
-      `<a style="display:inline-block;margin-top:9px;font-size:12px;color:#e88968;text-decoration:none;font-weight:600;border:1px solid rgba(245,241,232,.22);padding:5px 11px;border-radius:8px" href="${g}" target="_blank" rel="noopener">↗ Google Maps</a>`
+      leg +
+      `<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">` +
+      `<button class="js-open-plan" style="cursor:pointer;font-size:12px;color:#0f0e0c;background:#e88968;font-weight:700;border:none;padding:6px 11px;border-radius:8px">Ouvrir dans le planning</button>` +
+      `<a style="font-size:12px;color:#e88968;text-decoration:none;font-weight:600;border:1px solid rgba(245,241,232,.22);padding:5px 11px;border-radius:8px" href="${g}" target="_blank" rel="noopener">↗ Google Maps</a>` +
+      `</div>`
     );
   }
 
@@ -130,25 +189,48 @@ export default function TripMap({
     const days = [...activeDays].sort((a, b) => a - b);
     for (const day of days) {
       const dayColor = DAY_COLORS[day % 5];
-      const dayStops = data.places.filter((p) => p.day === day && !p.home);
+      const stops = visibleStops(day);
 
       const line: [number, number][] = home ? [[home.lat, home.lng]] : [];
-      dayStops.forEach((p) => {
-        if (activeCats.has(p.cat)) line.push([p.lat, p.lng]);
-      });
+      stops.forEach((p) => line.push([p.lat, p.lng]));
       if (line.length > 1) {
         L.polyline(line, { color: dayColor, weight: 3, opacity: 0.7, dashArray: "4 8" }).addTo(
           routeLayer.current
         );
       }
 
-      dayStops.forEach((p, idx) => {
-        if (!activeCats.has(p.cat)) return;
+      let prev: Place | null = home;
+      stops.forEach((p, idx) => {
         const c = data.categories[p.cat];
-        L.marker([p.lat, p.lng], { icon: stopIcon(L, c.color, dayColor, idx + 1) })
+        const legKm = walkLegKm(prev, p);
+
+        // Leg label + popup text: walking estimate, or a transfer note.
+        let legInfo = "";
+        if (prev) {
+          const fromName = prev.home ? "le logement" : prev.n;
+          if (p.cat === "transport") {
+            legInfo = `🚕 Transfert depuis ${fromName} (non à pied)`;
+          } else if (legKm !== null) {
+            const mins = walkMinutes(legKm);
+            legInfo = `🚶 ~${mins} min depuis ${fromName} · ${fmtDist(legKm)}`;
+            const mid: [number, number] = [(prev.lat + p.lat) / 2, (prev.lng + p.lng) / 2];
+            L.marker(mid, { icon: legIcon(L, `~${mins} min`), interactive: false, zIndexOffset: -500 }).addTo(
+              routeLayer.current!
+            );
+          }
+        }
+
+        const marker = L.marker([p.lat, p.lng], { icon: stopIcon(L, c.color, dayColor, idx + 1) })
           .addTo(markerLayer.current!)
-          .bindPopup(popupHtml(p, c.color, c.emo, c.label));
+          .bindPopup(popupHtml(p, c.color, c.emo, c.label, legInfo));
+
+        marker.on("popupopen", (e) => {
+          const btn = (e.popup.getElement() as HTMLElement | undefined)?.querySelector(".js-open-plan");
+          btn?.addEventListener("click", () => openPlanRef.current?.(p.day), { once: true });
+        });
+
         fitPts.push([p.lat, p.lng]);
+        prev = p;
       });
     }
 
@@ -232,6 +314,24 @@ export default function TripMap({
         })}
       </div>
       <div className="text-[11px] text-paper-dim mb-3.5">Touche un type pour l&apos;afficher ou le masquer.</div>
+
+      {/* Day summary: stops + estimated walking. Distances are straight-line
+          adjusted for street detours (~±15%), shown as estimates. */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mb-2.5 text-[12px]">
+        <span className="text-paper">
+          <b className="text-clay-bright">{summary.stops}</b> étape{summary.stops > 1 ? "s" : ""}
+        </span>
+        {summary.km > 0 && (
+          <>
+            <span className="text-paper">
+              🚶 <b className="text-clay-bright">~{summary.minutes} min</b> de marche
+            </span>
+            <span className="text-paper-dim">≈ {fmtDist(summary.km)}</span>
+          </>
+        )}
+        {summary.hasTransfer && <span className="text-gold">🚕 + transfert</span>}
+        <span className="text-paper-dim text-[10.5px]">estimation à pied</span>
+      </div>
 
       <div ref={mapEl} className="h-[440px] rounded-[20px] border border-line2 shadow-soft z-[2]" />
 
