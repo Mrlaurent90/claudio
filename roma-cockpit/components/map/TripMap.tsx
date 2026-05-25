@@ -23,16 +23,14 @@ export default function TripMap({
   const markerLayer = useRef<LayerGroup | null>(null);
   const routeLayer = useRef<LayerGroup | null>(null);
   const LRef = useRef<typeof import("leaflet") | null>(null);
-  const ready = useRef(false);
 
   const allCats = Object.keys(data.categories) as CategoryKey[];
+  // Multi-select: show one OR several days at once.
+  const [activeDays, setActiveDays] = useState<Set<number>>(new Set([activeDay]));
   const [activeCats, setActiveCats] = useState<Set<CategoryKey>>(new Set(allCats));
-  // "day" = focus one day's route from the lodging; "all" = overview of everything.
-  const [mode, setMode] = useState<"day" | "all">("day");
 
   const home = data.places.find((p) => p.home) ?? null;
 
-  // House marker for the lodging — visually distinct (bigger, gold ring, 🏠).
   function homeIcon(L: typeof import("leaflet")) {
     return L.divIcon({
       className: "",
@@ -42,17 +40,13 @@ export default function TripMap({
     });
   }
 
-  // Numbered, category-coloured dot for an itinerary stop.
-  function stopIcon(L: typeof import("leaflet"), color: string, n: number | null) {
-    const inner = n !== null
-      ? `<span style="font-size:10px;font-weight:800;color:#0f0e0c;line-height:1">${n}</span>`
-      : "";
-    const size = n !== null ? 22 : 17;
+  // Numbered stop: category colour inside, day colour ring (ties it to its route).
+  function stopIcon(L: typeof import("leaflet"), fill: string, ring: string, n: number) {
     return L.divIcon({
       className: "",
-      html: `<div style="display:grid;place-items:center;width:${size}px;height:${size}px;border-radius:50%;background:${color};border:2.5px solid #0f0e0c;box-shadow:0 0 0 2px ${color}55,0 2px 7px rgba(0,0,0,.7)">${inner}</div>`,
-      iconSize: [size, size],
-      iconAnchor: [size / 2, size / 2],
+      html: `<div style="display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:${fill};border:2.5px solid ${ring};box-shadow:0 0 0 2px ${ring}55,0 2px 7px rgba(0,0,0,.7)"><span style="font-size:10px;font-weight:800;color:#0f0e0c;line-height:1">${n}</span></div>`,
+      iconSize: [22, 22],
+      iconAnchor: [11, 11],
     });
   }
 
@@ -84,7 +78,6 @@ export default function TripMap({
       markerLayer.current = L.layerGroup().addTo(map);
       routeLayer.current = L.layerGroup().addTo(map);
       mapRef.current = map;
-      ready.current = true;
       setTimeout(() => map.invalidateSize(), 200);
       draw(true);
     })();
@@ -92,22 +85,22 @@ export default function TripMap({
       cancelled = true;
       mapRef.current?.remove();
       mapRef.current = null;
-      ready.current = false;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Selecting a day (here or from the Planning section) always focuses that
-  // day's route — never leaves the map stuck in the "all" overview.
+  // Changing the day in the Planning section focuses the map on that single
+  // day (the Planning ↔ map link). The user can then add more days here.
   useEffect(() => {
-    setMode("day");
+    setActiveDays(new Set([activeDay]));
   }, [activeDay]);
 
-  // Redraw on any change. `fit` recenters only when the day/mode changes.
+  // Redraw + recenter when the day set changes; redraw without recentering when
+  // only category visibility changes.
   useEffect(() => {
     draw(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeDay, mode]);
+  }, [activeDays]);
   useEffect(() => {
     draw(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -120,7 +113,7 @@ export default function TripMap({
     markerLayer.current.clearLayers();
     routeLayer.current.clearLayers();
 
-    // Lodging: ALWAYS visible, ignores filters.
+    // Lodging: ALWAYS visible, ignores all filters.
     if (home) {
       L.marker([home.lat, home.lng], { icon: homeIcon(L), zIndexOffset: 1000 })
         .addTo(markerLayer.current)
@@ -133,52 +126,49 @@ export default function TripMap({
 
     const fitPts: [number, number][] = home ? [[home.lat, home.lng]] : [];
 
-    if (mode === "day") {
-      // Day stops in authored (chronological) order, minus the lodging.
-      const dayStops = data.places.filter((p) => p.day === activeDay && !p.home);
-      const visible = dayStops.filter((p) => activeCats.has(p.cat));
+    // One route per selected day, each starting from the lodging.
+    const days = [...activeDays].sort((a, b) => a - b);
+    for (const day of days) {
+      const dayColor = DAY_COLORS[day % 5];
+      const dayStops = data.places.filter((p) => p.day === day && !p.home);
 
-      // Route = lodging → each visible stop, in order.
       const line: [number, number][] = home ? [[home.lat, home.lng]] : [];
-      visible.forEach((p) => line.push([p.lat, p.lng]));
+      dayStops.forEach((p) => {
+        if (activeCats.has(p.cat)) line.push([p.lat, p.lng]);
+      });
       if (line.length > 1) {
-        L.polyline(line, {
-          color: DAY_COLORS[activeDay % 5],
-          weight: 3,
-          opacity: 0.7,
-          dashArray: "4 8",
-        }).addTo(routeLayer.current);
+        L.polyline(line, { color: dayColor, weight: 3, opacity: 0.7, dashArray: "4 8" }).addTo(
+          routeLayer.current
+        );
       }
 
-      // Markers numbered by their position in the full day sequence (stable
-      // even when categories are filtered → gaps reflect hidden stops).
       dayStops.forEach((p, idx) => {
         if (!activeCats.has(p.cat)) return;
         const c = data.categories[p.cat];
-        L.marker([p.lat, p.lng], { icon: stopIcon(L, c.color, idx + 1) })
+        L.marker([p.lat, p.lng], { icon: stopIcon(L, c.color, dayColor, idx + 1) })
           .addTo(markerLayer.current!)
           .bindPopup(popupHtml(p, c.color, c.emo, c.label));
         fitPts.push([p.lat, p.lng]);
       });
-    } else {
-      // Overview: every stop, category-filtered, no numbering, no routes.
-      data.places
-        .filter((p) => !p.home && activeCats.has(p.cat))
-        .forEach((p) => {
-          const c = data.categories[p.cat];
-          L.marker([p.lat, p.lng], { icon: stopIcon(L, c.color, null) })
-            .addTo(markerLayer.current!)
-            .bindPopup(popupHtml(p, c.color, c.emo, c.label));
-          fitPts.push([p.lat, p.lng]);
-        });
     }
 
     if (fit && fitPts.length > 0) {
-      const bounds = L.latLngBounds(fitPts);
-      map.fitBounds(bounds, { padding: [48, 48], maxZoom: 16, animate: true });
+      map.fitBounds(L.latLngBounds(fitPts), { padding: [48, 48], maxZoom: 16, animate: true });
     }
   }
 
+  function toggleDay(i: number) {
+    setActiveDays((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i);
+      else next.add(i);
+      // Keep at least one day selected.
+      if (next.size === 0) next.add(i);
+      // If it boils down to a single day, sync the Planning section to it.
+      if (next.size === 1) setActiveDay([...next][0]);
+      return next;
+    });
+  }
   function toggleCat(k: CategoryKey) {
     setActiveCats((prev) => {
       const next = new Set(prev);
@@ -188,21 +178,21 @@ export default function TripMap({
     });
   }
 
+  const allDaysOn = activeDays.size === data.days.length;
+
   return (
     <section id="carte" className="pt-10 scroll-mt-2">
-      <SectionHead idx="02" title="Carte" note="Trajet du jour depuis le logement" />
+      <SectionHead idx="02" title="Carte" note="Trajets depuis le logement" />
 
-      {/* Day selector — single day, synced with the Planning section. */}
-      <div className="flex gap-1.5 flex-wrap mb-3">
+      {/* Day selector — MULTI-select: pick one or several days at once. */}
+      <div className="flex gap-1.5 flex-wrap mb-2 items-center">
         {DAY_NAMES.map((nm, i) => {
-          const on = mode === "day" && i === activeDay;
+          const on = activeDays.has(i);
           return (
             <button
               key={nm}
-              onClick={() => {
-                setMode("day");
-                setActiveDay(i);
-              }}
+              onClick={() => toggleDay(i)}
+              aria-pressed={on}
               className="text-[12px] rounded-lg px-3 py-[6px] border transition font-medium"
               style={
                 on
@@ -215,19 +205,24 @@ export default function TripMap({
           );
         })}
         <button
-          onClick={() => setMode("all")}
+          onClick={() =>
+            setActiveDays(allDaysOn ? new Set([activeDay]) : new Set(data.days.map((_, i) => i)))
+          }
           className="text-[12px] rounded-lg px-3 py-[6px] border transition font-medium"
           style={
-            mode === "all"
+            allDaysOn
               ? { background: "#f5f1e8", color: "#0f0e0c", borderColor: "#f5f1e8" }
               : { background: "#1a1714", color: "#d9cfc0", borderColor: "rgba(245,241,232,.22)" }
           }
         >
-          Tous
+          {allDaysOn ? "Réduire" : "Tous"}
         </button>
       </div>
+      <div className="text-[11px] text-paper-dim mb-3">
+        Choisis un ou plusieurs jours. Les numéros suivent l&apos;ordre chronologique de chaque jour.
+      </div>
 
-      {/* Legend = category toggles + the always-on lodging marker. */}
+      {/* Category legend / filters — add or hide each type of place. */}
       <div className="flex gap-[7px] flex-wrap mb-2">
         <span className="text-[12px] rounded-full px-[13px] py-[7px] border inline-flex gap-1.5 items-center bg-bg-2 text-gold border-gold/40">
           🏠 Logement <span className="text-paper-dim font-normal">(toujours)</span>
@@ -239,6 +234,7 @@ export default function TripMap({
             <button
               key={k}
               onClick={() => toggleCat(k)}
+              aria-pressed={on}
               className="text-[12px] rounded-full px-[13px] py-[7px] border inline-flex gap-1.5 items-center transition"
               style={
                 on
@@ -252,11 +248,7 @@ export default function TripMap({
           );
         })}
       </div>
-      <div className="text-[11px] text-paper-dim mb-3.5">
-        {mode === "day"
-          ? "Les numéros suivent l'ordre chronologique du jour. Touche une pastille pour filtrer une catégorie."
-          : "Vue d'ensemble de tous les lieux du séjour."}
-      </div>
+      <div className="text-[11px] text-paper-dim mb-3.5">Touche un type pour l&apos;afficher ou le masquer.</div>
 
       <div ref={mapEl} className="h-[440px] rounded-[20px] border border-line2 shadow-soft z-[2]" />
     </section>
