@@ -162,10 +162,8 @@ export default function TripMap({
       const next = new Set(prev);
       if (next.has(i)) next.delete(i);
       else next.add(i);
-      // Keep at least one day selected.
-      if (next.size === 0) next.add(i);
-      // If it boils down to a single day, sync the Planning section to it.
-      if (next.size === 1) setActiveDay([...next][0]);
+      if (next.size === 0) next.add(i); // keep at least one
+      if (next.size === 1) setActiveDay([...next][0]); // sync Planning when single
       return next;
     });
   }
@@ -180,52 +178,58 @@ export default function TripMap({
 
   const allDaysOn = activeDays.size === data.days.length;
 
+  // Day selector — rendered both above and below the map so you can switch days
+  // without scrolling. `variant` only keeps React keys unique between copies.
+  const dayChips = (variant: string) => (
+    <div className="flex gap-1.5 flex-wrap items-center">
+      {DAY_NAMES.map((nm, i) => {
+        const on = activeDays.has(i);
+        return (
+          <button
+            key={variant + nm}
+            onClick={() => toggleDay(i)}
+            aria-pressed={on}
+            className="text-[12px] rounded-lg px-3 py-[6px] border transition font-medium"
+            style={
+              on
+                ? { background: DAY_COLORS[i % 5], color: "#0f0e0c", borderColor: DAY_COLORS[i % 5] }
+                : { background: "#1a1714", color: "#d9cfc0", borderColor: "rgba(245,241,232,.22)" }
+            }
+          >
+            {nm}
+          </button>
+        );
+      })}
+      <button
+        key={variant + "all"}
+        onClick={() =>
+          setActiveDays(allDaysOn ? new Set([activeDay]) : new Set(data.days.map((_, i) => i)))
+        }
+        className="text-[12px] rounded-lg px-3 py-[6px] border transition font-medium"
+        style={
+          allDaysOn
+            ? { background: "#f5f1e8", color: "#0f0e0c", borderColor: "#f5f1e8" }
+            : { background: "#1a1714", color: "#d9cfc0", borderColor: "rgba(245,241,232,.22)" }
+        }
+      >
+        {allDaysOn ? "Réduire" : "Tous"}
+      </button>
+    </div>
+  );
+
   return (
     <section id="carte" className="pt-10 scroll-mt-2">
       <SectionHead idx="02" title="Carte" note="Trajets depuis le logement" />
 
-      {/* Day selector — MULTI-select: pick one or several days at once. */}
-      <div className="flex gap-1.5 flex-wrap mb-2 items-center">
-        {DAY_NAMES.map((nm, i) => {
-          const on = activeDays.has(i);
-          return (
-            <button
-              key={nm}
-              onClick={() => toggleDay(i)}
-              aria-pressed={on}
-              className="text-[12px] rounded-lg px-3 py-[6px] border transition font-medium"
-              style={
-                on
-                  ? { background: DAY_COLORS[i % 5], color: "#0f0e0c", borderColor: DAY_COLORS[i % 5] }
-                  : { background: "#1a1714", color: "#d9cfc0", borderColor: "rgba(245,241,232,.22)" }
-              }
-            >
-              {nm}
-            </button>
-          );
-        })}
-        <button
-          onClick={() =>
-            setActiveDays(allDaysOn ? new Set([activeDay]) : new Set(data.days.map((_, i) => i)))
-          }
-          className="text-[12px] rounded-lg px-3 py-[6px] border transition font-medium"
-          style={
-            allDaysOn
-              ? { background: "#f5f1e8", color: "#0f0e0c", borderColor: "#f5f1e8" }
-              : { background: "#1a1714", color: "#d9cfc0", borderColor: "rgba(245,241,232,.22)" }
-          }
-        >
-          {allDaysOn ? "Réduire" : "Tous"}
-        </button>
-      </div>
-      <div className="text-[11px] text-paper-dim mb-3">
-        Choisis un ou plusieurs jours. Les numéros suivent l&apos;ordre chronologique de chaque jour.
+      {dayChips("top")}
+      <div className="text-[11px] text-paper-dim mt-2 mb-3">
+        Choisis un ou plusieurs jours · les numéros suivent l&apos;ordre chronologique.
       </div>
 
-      {/* Category legend / filters — add or hide each type of place. */}
-      <div className="flex gap-[7px] flex-wrap mb-2">
-        <span className="text-[12px] rounded-full px-[13px] py-[7px] border inline-flex gap-1.5 items-center bg-bg-2 text-gold border-gold/40">
-          🏠 Logement <span className="text-paper-dim font-normal">(toujours)</span>
+      {/* Compact category legend / filters with emoji. Tap to show/hide. */}
+      <div className="flex gap-1.5 flex-wrap mb-1.5">
+        <span className="text-[11px] rounded-full px-2.5 py-1 border inline-flex gap-1 items-center bg-bg-2 text-gold border-gold/40">
+          🏠 Logement
         </span>
         {allCats.map((k) => {
           const v = data.categories[k];
@@ -235,14 +239,14 @@ export default function TripMap({
               key={k}
               onClick={() => toggleCat(k)}
               aria-pressed={on}
-              className="text-[12px] rounded-full px-[13px] py-[7px] border inline-flex gap-1.5 items-center transition"
+              className="text-[11px] rounded-full px-2.5 py-1 border inline-flex gap-1 items-center transition"
               style={
                 on
                   ? { background: v.color, color: "#0f0e0c", borderColor: v.color }
                   : { background: "#1a1714", color: "#d9cfc0", borderColor: "rgba(245,241,232,.22)" }
               }
             >
-              <span className="w-[9px] h-[9px] rounded-full" style={{ background: v.color }} />
+              <span className="leading-none">{v.emo}</span>
               {v.label}
             </button>
           );
@@ -251,6 +255,12 @@ export default function TripMap({
       <div className="text-[11px] text-paper-dim mb-3.5">Touche un type pour l&apos;afficher ou le masquer.</div>
 
       <div ref={mapEl} className="h-[440px] rounded-[20px] border border-line2 shadow-soft z-[2]" />
+
+      {/* Day selector mirrored under the map for quick switching on-site. */}
+      <div className="mt-3">
+        <div className="text-[11px] text-paper-dim mb-1.5 font-medium">Itinéraires par jour</div>
+        {dayChips("bottom")}
+      </div>
     </section>
   );
 }
