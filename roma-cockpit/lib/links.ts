@@ -17,6 +17,7 @@ const PLACE_QUERIES: Record<string, string> = {
   // Day 2
   "Castel Sant'Angelo": "Castel Sant'Angelo",
   "Ponte Sant'Angelo": "Ponte Sant'Angelo",
+  "San Clemente": "Basilica di San Clemente",
   "Palazzo Spada": "Palazzo Spada",
   "Fontaine des Tortues": "Fontana delle Tartarughe",
   "Marforio (statue parlante)": "Marforio",
@@ -42,6 +43,9 @@ const PLACE_QUERIES: Record<string, string> = {
   "Via del Babuino (déjeuner)": "Via del Babuino",
   "Aventin — Trou de serrure": "Buco della Serratura dell'Aventino",
   "Jardin des Orangers": "Giardino degli Aranci",
+  "Pyramide de Cestius": "Piramide di Caio Cestio",
+  "Cimetière protestant": "Cimitero Acattolico",
+  "Fontana dell'Acqua Paola": "Fontana dell'Acqua Paola",
   "Gianicolo (belvédère)": "Gianicolo",
   "Gianicolo — coucher de soleil": "Gianicolo",
   // Day 5
