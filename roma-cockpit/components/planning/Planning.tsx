@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SectionHead from "@/components/ui/SectionHead";
 import type { BadgeKind, Step, TravelData } from "@/lib/types";
-import { googleMapsSearch } from "@/lib/links";
+import { googleMapsFiche } from "@/lib/links";
 
 // Hero photo for a step. Bleeds to the card edges with a dark gradient for
 // legibility, and removes itself gracefully if the image fails to load.
@@ -29,10 +29,6 @@ function StepHero({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-// Logistics and unnamed-meal steps ("Arrivée Airbnb", "Dîner simple") aren't a
-// searchable place, so we skip the Google links there.
-const NO_LINK_CATS = new Set<Step["cat"]>(["transport", "food"]);
-
 const BADGE_CLASS: Record<BadgeKind, string> = {
   "bdg-resa": "bg-olive/20 text-olive",
   "bdg-todo": "bg-clay/20 text-clay-bright",
@@ -41,6 +37,7 @@ const BADGE_CLASS: Record<BadgeKind, string> = {
 };
 
 function StepCard({ step, color, emo, label }: { step: Step; color: string; emo: string; label: string }) {
+  const fiche = googleMapsFiche(step.title);
   return (
     <motion.div
       whileHover={{ y: -3 }}
@@ -82,10 +79,10 @@ function StepCard({ step, color, emo, label }: { step: Step; color: string; emo:
           ))}
         </div>
       ) : null}
-      {NO_LINK_CATS.has(step.cat) ? null : (
+      {fiche ? (
         <div className="flex gap-1.5 flex-wrap mt-2.5">
           <a
-            href={googleMapsSearch(step.title)}
+            href={fiche}
             target="_blank"
             rel="noopener noreferrer"
             className="text-[11px] font-semibold text-clay-bright border border-line2 rounded-lg px-2.5 py-[5px] hover:border-clay transition"
@@ -93,7 +90,7 @@ function StepCard({ step, color, emo, label }: { step: Step; color: string; emo:
             📍 Voir sur Google Maps
           </a>
         </div>
-      )}
+      ) : null}
     </motion.div>
   );
 }

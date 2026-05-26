@@ -6,7 +6,7 @@ import type { Map as LeafletMap, LayerGroup } from "leaflet";
 import SectionHead from "@/components/ui/SectionHead";
 import type { CategoryKey, Place, TravelData } from "@/lib/types";
 import { fmtDist, walkKm, walkMinutes } from "@/lib/geo";
-import { googleMapsSearch } from "@/lib/links";
+import { googleMapsFiche } from "@/lib/links";
 
 const DAY_COLORS = ["#e88968", "#e0a458", "#9aa861", "#da7756", "#7fa8c9"];
 const DAY_NAMES = ["J1 Dim", "J2 Lun", "J3 Mar", "J4 Mer", "J5 Jeu"];
@@ -103,10 +103,13 @@ export default function TripMap({
   }
 
   function popupHtml(p: Place, color: string, emo: string, label: string, legInfo: string) {
-    const search = googleMapsSearch(p.n);
+    const fiche = googleMapsFiche(p.n);
     const time = p.t ? ` · ${p.t}` : "";
     const leg = legInfo
       ? `<div style="font-size:12px;color:#9aa861;margin-top:6px;font-weight:600">${legInfo}</div>`
+      : "";
+    const ficheLink = fiche
+      ? `<a style="font-size:12px;color:#e88968;text-decoration:none;font-weight:600;border:1px solid rgba(245,241,232,.22);padding:5px 11px;border-radius:8px" href="${fiche}" target="_blank" rel="noopener">📍 Voir sur Google Maps</a>`
       : "";
     return (
       `<div style="font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:${color}">${emo} ${label} · ${DAY_NAMES[p.day]}${time}</div>` +
@@ -115,7 +118,7 @@ export default function TripMap({
       leg +
       `<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">` +
       `<button class="js-open-plan" style="cursor:pointer;font-size:12px;color:#0f0e0c;background:#e88968;font-weight:700;border:none;padding:6px 11px;border-radius:8px">Ouvrir dans le planning</button>` +
-      `<a style="font-size:12px;color:#e88968;text-decoration:none;font-weight:600;border:1px solid rgba(245,241,232,.22);padding:5px 11px;border-radius:8px" href="${search}" target="_blank" rel="noopener">📍 Voir sur Google Maps</a>` +
+      ficheLink +
       `</div>`
     );
   }
