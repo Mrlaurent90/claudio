@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SectionHead from "@/components/ui/SectionHead";
 import type { BadgeKind, Step, TravelData } from "@/lib/types";
-import { googleMapsDirections, googleMapsSearch } from "@/lib/links";
+import { googleMapsSearch } from "@/lib/links";
 
 // Hero photo for a step. Bleeds to the card edges with a dark gradient for
 // legibility, and removes itself gracefully if the image fails to load.
@@ -85,20 +85,12 @@ function StepCard({ step, color, emo, label }: { step: Step; color: string; emo:
       {NO_LINK_CATS.has(step.cat) ? null : (
         <div className="flex gap-1.5 flex-wrap mt-2.5">
           <a
-            href={googleMapsDirections(step.title)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[11px] font-semibold text-clay-bright border border-line2 rounded-lg px-2.5 py-[5px] hover:border-clay transition"
-          >
-            ↗ Ouvrir dans Google Maps
-          </a>
-          <a
             href={googleMapsSearch(step.title)}
             target="_blank"
             rel="noopener noreferrer"
             className="text-[11px] font-semibold text-clay-bright border border-line2 rounded-lg px-2.5 py-[5px] hover:border-clay transition"
           >
-            🔎 Voir sur Google
+            📍 Voir sur Google Maps
           </a>
         </div>
       )}
