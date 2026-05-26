@@ -29,6 +29,10 @@ function StepHero({ src, alt }: { src: string; alt: string }) {
   );
 }
 
+// Logistics and unnamed-meal steps ("Arrivée Airbnb", "Dîner simple") aren't a
+// searchable place, so we skip the Google links there.
+const NO_LINK_CATS = new Set<Step["cat"]>(["transport", "food"]);
+
 const BADGE_CLASS: Record<BadgeKind, string> = {
   "bdg-resa": "bg-olive/20 text-olive",
   "bdg-todo": "bg-clay/20 text-clay-bright",
@@ -78,24 +82,26 @@ function StepCard({ step, color, emo, label }: { step: Step; color: string; emo:
           ))}
         </div>
       ) : null}
-      <div className="flex gap-1.5 flex-wrap mt-2.5">
-        <a
-          href={googleMapsDirections(step.title)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-[11px] font-semibold text-clay-bright border border-line2 rounded-lg px-2.5 py-[5px] hover:border-clay transition"
-        >
-          ↗ Ouvrir dans Google Maps
-        </a>
-        <a
-          href={googleMapsSearch(step.title)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-[11px] font-semibold text-clay-bright border border-line2 rounded-lg px-2.5 py-[5px] hover:border-clay transition"
-        >
-          🔎 Voir sur Google
-        </a>
-      </div>
+      {NO_LINK_CATS.has(step.cat) ? null : (
+        <div className="flex gap-1.5 flex-wrap mt-2.5">
+          <a
+            href={googleMapsDirections(step.title)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[11px] font-semibold text-clay-bright border border-line2 rounded-lg px-2.5 py-[5px] hover:border-clay transition"
+          >
+            ↗ Ouvrir dans Google Maps
+          </a>
+          <a
+            href={googleMapsSearch(step.title)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[11px] font-semibold text-clay-bright border border-line2 rounded-lg px-2.5 py-[5px] hover:border-clay transition"
+          >
+            🔎 Voir sur Google
+          </a>
+        </div>
+      )}
     </motion.div>
   );
 }
