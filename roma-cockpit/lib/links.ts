@@ -13,6 +13,8 @@ const PLACE_QUERIES: Record<string, string> = {
   Panthéon: "Pantheon",
   "Fontaine du Panthéon": "Fontana del Pantheon",
   "Fontaine de Trevi": "Fontana di Trevi",
+  "Fontaine du Triton": "Fontana del Tritone",
+  "Fontana delle Api": "Fontana delle Api",
   "Piazza di Spagna + Barcaccia": "Piazza di Spagna",
   // Day 2
   "Castel Sant'Angelo": "Castel Sant'Angelo",
@@ -35,8 +37,7 @@ const PLACE_QUERIES: Record<string, string> = {
   "Borgo Pio (déjeuner)": "Borgo Pio",
   "Musées du Vatican": "Musei Vaticani",
   "Ice Club Roma (bar de glace)": "Ice Club Roma",
-  // Day 4 (Borghese + panoramas)
-  "Galleria Borghese": "Galleria Borghese",
+  // Day 4 (Villa Borghese + panoramas)
   "Villa Borghese (Pincio)": "Villa Borghese",
   "Villa Borghese + Pincio": "Villa Borghese",
   "Piazza del Popolo": "Piazza del Popolo",
@@ -61,4 +62,15 @@ export function googleMapsFiche(label: string): string | null {
   if (!name) return null;
   const query = encodeURIComponent(`${name} Rome`);
   return `https://www.google.com/maps/search/?api=1&query=${query}`;
+}
+
+/**
+ * Universal link that opens the Uber app (or its web fallback) with the current
+ * location as pickup. When a destination is known, it's prefilled as dropoff.
+ */
+export function uberLink(dropoff?: { lat: number; lng: number; name?: string }): string {
+  const base = "https://m.uber.com/ul/?action=setPickup&pickup=my_location";
+  if (!dropoff) return base;
+  const nick = dropoff.name ? `&dropoff%5Bnickname%5D=${encodeURIComponent(dropoff.name)}` : "";
+  return `${base}&dropoff%5Blatitude%5D=${dropoff.lat}&dropoff%5Blongitude%5D=${dropoff.lng}${nick}`;
 }

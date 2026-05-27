@@ -6,7 +6,7 @@ import type { Map as LeafletMap, LayerGroup } from "leaflet";
 import SectionHead from "@/components/ui/SectionHead";
 import type { CategoryKey, Place, TravelData } from "@/lib/types";
 import { fmtDist, walkKm, walkMinutes } from "@/lib/geo";
-import { googleMapsFiche } from "@/lib/links";
+import { googleMapsFiche, uberLink } from "@/lib/links";
 
 const DAY_COLORS = ["#e88968", "#e0a458", "#9aa861", "#da7756", "#7fa8c9"];
 const DAY_NAMES = ["J1 Dim", "J2 Lun", "J3 Mar", "J4 Mer", "J5 Jeu"];
@@ -15,12 +15,10 @@ const DAY_FULL = ["J1 · Dimanche", "J2 · Lundi", "J3 · Mardi", "J4 · Mercred
 export default function TripMap({
   data,
   activeDay,
-  setActiveDay,
   onOpenPlanning,
 }: {
   data: TravelData;
   activeDay: number;
-  setActiveDay: (i: number) => void;
   /** Jump to the planning section, focused on the given day. */
   onOpenPlanning?: (dayIndex: number) => void;
 }) {
@@ -42,10 +40,13 @@ export default function TripMap({
   const openPlanRef = useRef(onOpenPlanning);
   openPlanRef.current = onOpenPlanning;
 
-  // The ordered, visible (filtered) walking stops for one day — shared by the
-  // map drawing and the day summary so both agree on legs/distances.
+  // The visible (filtered) walking stops for one day, sorted strictly by time so
+  // the marker numbers and the route line always follow the day's chronology —
+  // shared by the map drawing and the day summary so both agree on legs.
   function visibleStops(day: number): Place[] {
-    return data.places.filter((p) => p.day === day && !p.home && activeCats.has(p.cat));
+    return data.places
+      .filter((p) => p.day === day && !p.home && activeCats.has(p.cat))
+      .sort((a, b) => (a.t ?? "").localeCompare(b.t ?? ""));
   }
 
   // Foot-only legs (transport transfers like the airport aren't walked).
@@ -74,6 +75,15 @@ export default function TripMap({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeDays, activeCats]);
 
+  // Pick black or white for a number sitting on a category colour, by luminance.
+  function numColor(hex: string): string {
+    const m = hex.replace("#", "");
+    const r = parseInt(m.slice(0, 2), 16);
+    const g = parseInt(m.slice(2, 4), 16);
+    const b = parseInt(m.slice(4, 6), 16);
+    return 0.299 * r + 0.587 * g + 0.114 * b > 140 ? "#0f0e0c" : "#f5f1e8";
+  }
+
   function homeIcon(L: typeof import("leaflet")) {
     return L.divIcon({
       className: "",
@@ -85,9 +95,10 @@ export default function TripMap({
 
   // Numbered stop: category colour inside, day colour ring (ties it to its route).
   function stopIcon(L: typeof import("leaflet"), fill: string, ring: string, n: number) {
+    const ink = numColor(fill); // black or white, whichever reads on the category colour
     return L.divIcon({
       className: "",
-      html: `<div style="display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:${fill};border:2.5px solid ${ring};box-shadow:0 0 0 2px ${ring}55,0 2px 7px rgba(0,0,0,.7)"><span style="font-size:12px;font-weight:800;color:#0f0e0c;line-height:1">${n}</span></div>`,
+      html: `<div style="display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:${fill};border:2.5px solid ${ring};box-shadow:0 0 0 2px ${ring}55,0 2px 7px rgba(0,0,0,.7)"><span style="font-size:12px;font-weight:800;color:${ink};line-height:1">${n}</span></div>`,
       iconSize: [26, 26],
       iconAnchor: [13, 13],
     });
@@ -110,6 +121,10 @@ export default function TripMap({
     const ficheLink = fiche
       ? `<a style="font-size:12px;color:#e88968;text-decoration:none;font-weight:600;border:1px solid rgba(245,241,232,.22);padding:5px 11px;border-radius:8px" href="${fiche}" target="_blank" rel="noopener">📍 Voir sur Google Maps</a>`
       : "";
+    const uberBtn =
+      p.cat === "transport"
+        ? `<a style="font-size:12px;color:#d9cfc0;text-decoration:none;font-weight:600;border:1px solid rgba(245,241,232,.22);padding:5px 11px;border-radius:8px" href="${uberLink({ lat: p.lat, lng: p.lng, name: p.n })}" target="_blank" rel="noopener">🚕 Ouvrir Uber</a>`
+        : "";
     return (
       hero +
       `<div style="font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:${color}">${emo} ${label} · ${DAY_NAMES[p.day]}${time}</div>` +
@@ -119,6 +134,7 @@ export default function TripMap({
       `<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">` +
       `<button class="js-open-plan" style="cursor:pointer;font-size:12px;color:#0f0e0c;background:#e88968;font-weight:700;border:none;padding:6px 11px;border-radius:8px">Ouvrir dans le planning</button>` +
       ficheLink +
+      uberBtn +
       `</div>`
     );
   }
@@ -158,16 +174,27 @@ export default function TripMap({
     setActiveDays(new Set([activeDay]));
   }, [activeDay]);
 
-  // Redraw + recenter when the day set changes; redraw without recentering when
-  // only category visibility changes.
+  // Redraw WITHOUT moving the view when the day or category set changes: the map
+  // stays exactly where it is, only the markers/route swap. The user reframes the
+  // itinerary on demand with the recenter button. (Initial fit happens on mount.)
   useEffect(() => {
-    draw(true);
+    draw(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeDays]);
   useEffect(() => {
     draw(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeCats]);
+
+  // Fit the view to the lodging + the currently shown day(s) stops.
+  function recenter() {
+    const L = LRef.current;
+    const map = mapRef.current;
+    if (!L || !map) return;
+    const pts: [number, number][] = home ? [[home.lat, home.lng]] : [];
+    for (const day of activeDays) visibleStops(day).forEach((p) => pts.push([p.lat, p.lng]));
+    if (pts.length) map.fitBounds(L.latLngBounds(pts), { padding: [48, 48], maxZoom: 16, animate: true });
+  }
 
   function draw(fit: boolean) {
     const L = LRef.current;
@@ -178,10 +205,18 @@ export default function TripMap({
 
     // Lodging: ALWAYS visible, ignores all filters.
     if (home) {
+      const homeHero =
+        `<div style="position:relative;height:84px;border-radius:10px;overflow:hidden;margin-bottom:8px;display:grid;place-items:center;background:linear-gradient(135deg,#e0a45855,#1a1714)">` +
+        `<span style="font-size:30px;opacity:.45">🏠</span>` +
+        (home.img
+          ? `<img src="${home.img}" alt="" onerror="this.style.display='none'" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />`
+          : "") +
+        `</div>`;
       L.marker([home.lat, home.lng], { icon: homeIcon(L), zIndexOffset: 1000 })
         .addTo(markerLayer.current)
         .bindPopup(
-          `<div style="font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#e0a458">🏠 Logement</div>` +
+          homeHero +
+            `<div style="font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#e0a458">🏠 Logement</div>` +
             `<div style="font-family:Fraunces,serif;font-size:16px;font-weight:700;color:#e0a458">${home.n}</div>` +
             `<div style="font-size:12px;color:#d9cfc0;margin-top:3px">${home.info}</div>`
         );
@@ -239,10 +274,11 @@ export default function TripMap({
     }
   }
 
-  // Single-select: exactly one day at a time (never several at once).
+  // Single-select: exactly one day at a time (never several at once). Map-local
+  // only — it does NOT touch the planning's day, so switching days here never
+  // reflows the page above the map (the viewport stays put, the map just redraws).
   function selectDay(i: number) {
     setActiveDays(new Set([i]));
-    setActiveDay(i); // keep the Planning section in sync
   }
   function toggleCat(k: CategoryKey) {
     setActiveCats((prev) => {
@@ -308,6 +344,19 @@ export default function TripMap({
           {badgeLabel}
         </div>
         <div ref={mapEl} className="h-[500px] rounded-[20px] border border-line2 shadow-soft z-[2]" />
+        <button
+          onClick={recenter}
+          aria-label="Recentrer sur l'itinéraire"
+          className="absolute bottom-3 right-3 z-[1000] flex items-center gap-1.5 rounded-full px-3 py-2 text-[12px] font-semibold backdrop-blur-sm transition hover:brightness-110"
+          style={{
+            background: "rgba(15,14,12,.82)",
+            border: "1px solid rgba(245,241,232,.28)",
+            color: "#f5f1e8",
+            boxShadow: "0 2px 10px rgba(0,0,0,.5)",
+          }}
+        >
+          🎯 Recentrer
+        </button>
       </div>
 
       {/* Day summary moved below the map: stops + estimated walking. Distances are

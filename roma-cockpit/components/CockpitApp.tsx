@@ -90,7 +90,6 @@ export default function CockpitApp({ data }: { data: TravelData }) {
         <TripMap
           data={data}
           activeDay={activeDay}
-          setActiveDay={setActiveDay}
           onOpenPlanning={(i) => { setActiveDay(i); jump("planning"); }}
         />
         <Decisions data={data} chosen={state.decisions} onChoose={setDecision} />
