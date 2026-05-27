@@ -62,6 +62,8 @@ export interface Place {
   info: string;
   /** Time label (e.g. "16:30"), mirrors the planning step. Shown in the map card. */
   t?: string;
+  /** Optional photo URL (Wikimedia Commons). Falls back to a category tile if absent. */
+  img?: string;
   /** The lodging anchor: always shown, distinct marker, start of each route. */
   home?: boolean;
 }
