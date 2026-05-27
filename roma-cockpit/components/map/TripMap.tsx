@@ -96,6 +96,14 @@ export default function TripMap({
   function popupHtml(p: Place, color: string, emo: string, label: string, legInfo: string) {
     const fiche = googleMapsFiche(p.n);
     const time = p.t ? ` · ${p.t}` : "";
+    // Thumbnail: photo over a category tile; if the photo fails, the tile shows.
+    const hero =
+      `<div style="position:relative;height:84px;border-radius:10px;overflow:hidden;margin-bottom:8px;display:grid;place-items:center;background:linear-gradient(135deg,${color}55,#1a1714)">` +
+      `<span style="font-size:30px;opacity:.45">${emo}</span>` +
+      (p.img
+        ? `<img src="${p.img}" alt="" onerror="this.style.display='none'" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />`
+        : "") +
+      `</div>`;
     const leg = legInfo
       ? `<div style="font-size:12px;color:#9aa861;margin-top:6px;font-weight:600">${legInfo}</div>`
       : "";
@@ -103,6 +111,7 @@ export default function TripMap({
       ? `<a style="font-size:12px;color:#e88968;text-decoration:none;font-weight:600;border:1px solid rgba(245,241,232,.22);padding:5px 11px;border-radius:8px" href="${fiche}" target="_blank" rel="noopener">📍 Voir sur Google Maps</a>`
       : "";
     return (
+      hero +
       `<div style="font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:${color}">${emo} ${label} · ${DAY_NAMES[p.day]}${time}</div>` +
       `<div style="font-family:Fraunces,serif;font-size:16px;font-weight:700;color:#e88968">${p.n}</div>` +
       `<div style="font-size:12px;color:#d9cfc0;margin-top:3px">${p.info}</div>` +
