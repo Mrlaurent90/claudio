@@ -6,7 +6,7 @@ import type { Map as LeafletMap, LayerGroup } from "leaflet";
 import SectionHead from "@/components/ui/SectionHead";
 import type { CategoryKey, Place, TravelData } from "@/lib/types";
 import { fmtDist, walkKm, walkMinutes } from "@/lib/geo";
-import { googleMapsFiche } from "@/lib/links";
+import { googleMapsFiche, uberLink } from "@/lib/links";
 
 const DAY_COLORS = ["#e88968", "#e0a458", "#9aa861", "#da7756", "#7fa8c9"];
 const DAY_NAMES = ["J1 Dim", "J2 Lun", "J3 Mar", "J4 Mer", "J5 Jeu"];
@@ -111,6 +111,10 @@ export default function TripMap({
     const ficheLink = fiche
       ? `<a style="font-size:12px;color:#e88968;text-decoration:none;font-weight:600;border:1px solid rgba(245,241,232,.22);padding:5px 11px;border-radius:8px" href="${fiche}" target="_blank" rel="noopener">📍 Voir sur Google Maps</a>`
       : "";
+    const uberBtn =
+      p.cat === "transport"
+        ? `<a style="font-size:12px;color:#d9cfc0;text-decoration:none;font-weight:600;border:1px solid rgba(245,241,232,.22);padding:5px 11px;border-radius:8px" href="${uberLink({ lat: p.lat, lng: p.lng, name: p.n })}" target="_blank" rel="noopener">🚕 Ouvrir Uber</a>`
+        : "";
     return (
       hero +
       `<div style="font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:${color}">${emo} ${label} · ${DAY_NAMES[p.day]}${time}</div>` +
@@ -120,6 +124,7 @@ export default function TripMap({
       `<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">` +
       `<button class="js-open-plan" style="cursor:pointer;font-size:12px;color:#0f0e0c;background:#e88968;font-weight:700;border:none;padding:6px 11px;border-radius:8px">Ouvrir dans le planning</button>` +
       ficheLink +
+      uberBtn +
       `</div>`
     );
   }
@@ -159,16 +164,27 @@ export default function TripMap({
     setActiveDays(new Set([activeDay]));
   }, [activeDay]);
 
-  // Redraw + recenter when the day set changes; redraw without recentering when
-  // only category visibility changes.
+  // Redraw WITHOUT moving the view when the day or category set changes: the map
+  // stays exactly where it is, only the markers/route swap. The user reframes the
+  // itinerary on demand with the recenter button. (Initial fit happens on mount.)
   useEffect(() => {
-    draw(true);
+    draw(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeDays]);
   useEffect(() => {
     draw(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeCats]);
+
+  // Fit the view to the lodging + the currently shown day(s) stops.
+  function recenter() {
+    const L = LRef.current;
+    const map = mapRef.current;
+    if (!L || !map) return;
+    const pts: [number, number][] = home ? [[home.lat, home.lng]] : [];
+    for (const day of activeDays) visibleStops(day).forEach((p) => pts.push([p.lat, p.lng]));
+    if (pts.length) map.fitBounds(L.latLngBounds(pts), { padding: [48, 48], maxZoom: 16, animate: true });
+  }
 
   function draw(fit: boolean) {
     const L = LRef.current;
@@ -179,10 +195,18 @@ export default function TripMap({
 
     // Lodging: ALWAYS visible, ignores all filters.
     if (home) {
+      const homeHero =
+        `<div style="position:relative;height:84px;border-radius:10px;overflow:hidden;margin-bottom:8px;display:grid;place-items:center;background:linear-gradient(135deg,#e0a45855,#1a1714)">` +
+        `<span style="font-size:30px;opacity:.45">🏠</span>` +
+        (home.img
+          ? `<img src="${home.img}" alt="" onerror="this.style.display='none'" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />`
+          : "") +
+        `</div>`;
       L.marker([home.lat, home.lng], { icon: homeIcon(L), zIndexOffset: 1000 })
         .addTo(markerLayer.current)
         .bindPopup(
-          `<div style="font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#e0a458">🏠 Logement</div>` +
+          homeHero +
+            `<div style="font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#e0a458">🏠 Logement</div>` +
             `<div style="font-family:Fraunces,serif;font-size:16px;font-weight:700;color:#e0a458">${home.n}</div>` +
             `<div style="font-size:12px;color:#d9cfc0;margin-top:3px">${home.info}</div>`
         );
@@ -310,6 +334,19 @@ export default function TripMap({
           {badgeLabel}
         </div>
         <div ref={mapEl} className="h-[500px] rounded-[20px] border border-line2 shadow-soft z-[2]" />
+        <button
+          onClick={recenter}
+          aria-label="Recentrer sur l'itinéraire"
+          className="absolute bottom-3 right-3 z-[1000] flex items-center gap-1.5 rounded-full px-3 py-2 text-[12px] font-semibold backdrop-blur-sm transition hover:brightness-110"
+          style={{
+            background: "rgba(15,14,12,.82)",
+            border: "1px solid rgba(245,241,232,.28)",
+            color: "#f5f1e8",
+            boxShadow: "0 2px 10px rgba(0,0,0,.5)",
+          }}
+        >
+          🎯 Recentrer
+        </button>
       </div>
 
       {/* Day summary moved below the map: stops + estimated walking. Distances are

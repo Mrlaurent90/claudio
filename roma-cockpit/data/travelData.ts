@@ -11,6 +11,8 @@ import type { TravelData } from "@/lib/types";
 // Steps/places without an entry render a category-coloured tile instead.
 const wiki = (file: string) => `https://commons.wikimedia.org/wiki/Special:FilePath/${file}?width=1000`;
 const PHOTO = {
+  // Local asset: drop your own photo at roma-cockpit/public/airbnb-terrasse.jpg.
+  airbnb: "/airbnb-terrasse.jpg",
   fontaine4Fleuves: wiki("Fontana_dei_Quattro_Fiumi_(in_detail).JPG"),
   pasquino: wiki("Roma-pasquino01.jpg"),
   campoDeFiori: wiki("Top_of_Campo_dei_Fiori.JPG"),
@@ -27,6 +29,9 @@ const PHOTO = {
   tartarughe: wiki("Fontana_delle_Tartarughe_Roma.jpg"),
   babuino: wiki("Fontana_del_Babuino.jpg"),
   marforio: wiki("Marforio_-_Musei_Capitolini.jpg"),
+  madamaLucrezia: wiki("Madama_Lucrezia_Roma.jpg"),
+  abateLuigi: wiki("Abate_Luigi_Roma.jpg"),
+  ilFacchino: wiki("Il_Facchino_Roma.jpg"),
   coupole: wiki("Panorama_of_Piazza_San_Pietro.JPG"),
   basiliquePietro: wiki("Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg"),
   museesVatican: wiki("Rome_-_Vatican_Museum_-_Spiral_Staircase_by_Giuseppe_Momo_-_0673.jpg"),
@@ -77,7 +82,7 @@ export const travelData: TravelData = {
           label: "Après-midi",
           hr: "14h–18h",
           steps: [
-            { t: "—", cat: "transport", title: "Arrivée Rome + Airbnb", desc: "Via Francesco Sivori 5, quartier Prati (proche Vatican).", logi: "Pose valises, on souffle.", badges: [["bdg-resa", "Logement OK"]] },
+            { t: "—", cat: "transport", title: "Arrivée Rome + Airbnb", desc: "Via Francesco Sivori 5, quartier Prati (proche Vatican).", logi: "Pose valises, on souffle.", badges: [["bdg-resa", "Logement OK"]], img: PHOTO.airbnb },
             { t: "16:30", cat: "fontaine", title: "Fontaine des 4 Fleuves", desc: "Piazza Navona — chef-d'œuvre du Bernin.", logi: "~15 min à pied.", img: PHOTO.fontaine4Fleuves },
             { t: "16:45", cat: "statue", title: "Pasquino", desc: "La 1re statue parlante, à 2 pas de Navona.", logi: "Zéro détour.", img: PHOTO.pasquino },
             { t: "17:15", cat: "exterieur", title: "Campo de' Fiori", desc: "Place vivante, ambiance apéro le soir.", img: PHOTO.campoDeFiori },
@@ -247,7 +252,7 @@ export const travelData: TravelData = {
   ],
 
   places: [
-    { n: "Logement (Via Sivori 5)", cat: "chill", day: 0, lat: 41.906036, lng: 12.447664, info: "Base du séjour · 6e ét., vue Vatican · proche métro Cipro", home: true },
+    { n: "Logement (Via Sivori 5)", cat: "chill", day: 0, lat: 41.906036, lng: 12.447664, info: "Base du séjour · 6e ét., vue Vatican · proche métro Cipro", home: true, img: PHOTO.airbnb },
     { n: "Fontaine des 4 Fleuves", cat: "fontaine", day: 0, t: "16:30", lat: 41.8992, lng: 12.4731, info: "Piazza Navona · Bernin", img: PHOTO.fontaine4Fleuves },
     { n: "Pasquino (statue parlante)", cat: "statue", day: 0, t: "16:45", lat: 41.8985, lng: 12.4719, info: "La 1re statue parlante", img: PHOTO.pasquino },
     { n: "Campo de' Fiori", cat: "exterieur", day: 0, t: "17:15", lat: 41.8956, lng: 12.4722, info: "Place vivante", img: PHOTO.campoDeFiori },
@@ -263,9 +268,9 @@ export const travelData: TravelData = {
     { n: "Palazzo Spada", cat: "payant", day: 1, t: "15:00", lat: 41.8954, lng: 12.4715, info: "Optionnel · trompe-l'œil · 8h30–19h30, fermé mardi", img: PHOTO.palazzoSpada },
     { n: "Fontaine des Tortues", cat: "fontaine", day: 1, t: "15:45", lat: 41.8941, lng: 12.4775, info: "Ghetto juif · la plus mignonne", img: PHOTO.tartarughe },
     { n: "Marforio (statue parlante)", cat: "statue", day: 1, t: "16:30", lat: 41.8936, lng: 12.4843, info: "Musées Capitolins", img: PHOTO.marforio },
-    { n: "Madama Lucrezia (statue)", cat: "statue", day: 1, t: "16:45", lat: 41.8961, lng: 12.4805, info: "Piazza Venezia" },
-    { n: "Abate Luigi (statue)", cat: "statue", day: 1, t: "17:00", lat: 41.8970, lng: 12.4757, info: "Piazza Vidoni" },
-    { n: "Il Facchino (statue)", cat: "statue", day: 1, t: "17:10", lat: 41.8979, lng: 12.4789, info: "Via Lata" },
+    { n: "Madama Lucrezia (statue)", cat: "statue", day: 1, t: "16:45", lat: 41.8961, lng: 12.4805, info: "Piazza Venezia", img: PHOTO.madamaLucrezia },
+    { n: "Abate Luigi (statue)", cat: "statue", day: 1, t: "17:00", lat: 41.8970, lng: 12.4757, info: "Piazza Vidoni", img: PHOTO.abateLuigi },
+    { n: "Il Facchino (statue)", cat: "statue", day: 1, t: "17:10", lat: 41.8979, lng: 12.4789, info: "Via Lata", img: PHOTO.ilFacchino },
     { n: "Il Babuino (statue)", cat: "statue", day: 1, t: "17:30", lat: 41.9070, lng: 12.4790, info: "Via del Babuino", img: PHOTO.babuino },
     { n: "Speakeasy (soir)", cat: "bar", day: 1, t: "21:00", lat: 41.8990, lng: 12.4710, info: "Jerry Thomas Project · à arbitrer" },
     { n: "Coupole St-Pierre", cat: "pano", day: 2, t: "08:00", lat: 41.9022, lng: 12.4539, info: "8h · réservé", img: PHOTO.coupole },
@@ -287,7 +292,9 @@ export const travelData: TravelData = {
   ],
 
   decisions: [
-    { id: "dec-aeroport", title: "Transport aéroport (J5)", urg: "mid", a: "Leonardo Express (~14€, 32 min)", b: "Taxi forfait (~50€ fixe)", reco: "Taxi avec valises + vol serré ; train si budget prioritaire.", impact: ["💶 14€ vs 50€", "🧳 taxi = porte-à-porte", "⏱️ taxi ~45 min"] },
+    { id: "dec-mtp", title: "Aller à l'aéroport de Montpellier (MTP) — départ", urg: "mid", a: "Voiture + parking longue durée à MTP", b: "Dépose-minute (qqn nous amène) / tram + navette", reco: "Si quelqu'un peut vous déposer, c'est gratuit et simple. Sinon parking longue durée à réserver à l'avance (moins cher en ligne).", impact: ["💶 parking ~6-10€/j", "🅿️ réserver en ligne", "⏱️ arriver 2h avant"] },
+    { id: "dec-fco-arrivee", title: "Aéroport Rome (FCO) → Airbnb (arrivée J1)", urg: "hi", a: "Leonardo Express → Termini puis métro/taxi", b: "Taxi/Uber direct (~50€ forfait)", reco: "Avec les valises à l'arrivée et l'envie de poser les affaires, le taxi/Uber direct jusqu'à Via Sivori est le plus simple. Train si budget serré (mais 2 correspondances jusqu'à Prati).", impact: ["💶 14€ vs ~50€", "🧳 direct vs correspondances", "⏱️ ~45 min porte-à-porte"] },
+    { id: "dec-aeroport", title: "Aéroport Rome (FCO) — départ (J5)", urg: "mid", a: "Leonardo Express (~14€, 32 min)", b: "Taxi forfait (~50€ fixe)", reco: "Taxi avec valises + vol serré ; train si budget prioritaire.", impact: ["💶 14€ vs 50€", "🧳 taxi = porte-à-porte", "⏱️ taxi ~45 min"] },
     { id: "dec-speakeasy", title: "Speakeasy lundi soir", urg: "lo", a: "Réserver Jerry Thomas Project", b: "Bar de quartier improvisé", reco: "Si l'idée plaît, réserve : les speakeasies romains demandent souvent un 'mot de passe'.", impact: ["💶 cocktails ~14€", "🌙 ambiance unique", "📞 résa conseillée"] },
     { id: "dec-iceclub", title: "Ice Club (bar de glace) — utile ?", urg: "lo", a: "Y aller mardi soir", b: "Skip (gadget)", reco: "Skip plutôt. Après le Vatican vous serez cuits. Mais c'est sur la carte si l'envie vient.", impact: ["💶 ~15€ entrée", "😴 mardi = fatigue max", "🎭 effet gadget"] },
     { id: "dec-rooftop", title: "Rooftop sunset — alternative soirée premium", urg: "lo", a: "Apéritivo rooftop au coucher du soleil (vue coupole)", b: "S'en tenir au Gianicolo / soirée prévue", reco: "Belle alternative premium au sunset si l'envie d'un cadre chic prend le pas sur le Gianicolo. À réserver le jour même selon la météo.", impact: ["💶 ~25-35€/pers", "🌅 golden hour", "📍 en ville, facile"] },

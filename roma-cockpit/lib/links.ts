@@ -63,3 +63,14 @@ export function googleMapsFiche(label: string): string | null {
   const query = encodeURIComponent(`${name} Rome`);
   return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }
+
+/**
+ * Universal link that opens the Uber app (or its web fallback) with the current
+ * location as pickup. When a destination is known, it's prefilled as dropoff.
+ */
+export function uberLink(dropoff?: { lat: number; lng: number; name?: string }): string {
+  const base = "https://m.uber.com/ul/?action=setPickup&pickup=my_location";
+  if (!dropoff) return base;
+  const nick = dropoff.name ? `&dropoff%5Bnickname%5D=${encodeURIComponent(dropoff.name)}` : "";
+  return `${base}&dropoff%5Blatitude%5D=${dropoff.lat}&dropoff%5Blongitude%5D=${dropoff.lng}${nick}`;
+}

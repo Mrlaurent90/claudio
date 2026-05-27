@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SectionHead from "@/components/ui/SectionHead";
 import type { BadgeKind, Step, TravelData } from "@/lib/types";
-import { googleMapsFiche } from "@/lib/links";
+import { googleMapsFiche, uberLink } from "@/lib/links";
 
 // Hero for a step. Always renders a visual: the photo when one is given and
 // loads, otherwise a category-coloured tile with its emoji. A dark gradient
@@ -86,16 +86,28 @@ function StepCard({ step, color, emo, label }: { step: Step; color: string; emo:
           ))}
         </div>
       ) : null}
-      {fiche ? (
+      {fiche || step.cat === "transport" ? (
         <div className="flex gap-1.5 flex-wrap mt-2.5">
-          <a
-            href={fiche}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[11px] font-semibold text-clay-bright border border-line2 rounded-lg px-2.5 py-[5px] hover:border-clay transition"
-          >
-            📍 Voir sur Google Maps
-          </a>
+          {fiche ? (
+            <a
+              href={fiche}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] font-semibold text-clay-bright border border-line2 rounded-lg px-2.5 py-[5px] hover:border-clay transition"
+            >
+              📍 Voir sur Google Maps
+            </a>
+          ) : null}
+          {step.cat === "transport" ? (
+            <a
+              href={uberLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] font-semibold text-paper border border-line2 rounded-lg px-2.5 py-[5px] hover:border-paper transition"
+            >
+              🚕 Ouvrir Uber
+            </a>
+          ) : null}
         </div>
       ) : null}
     </motion.div>
