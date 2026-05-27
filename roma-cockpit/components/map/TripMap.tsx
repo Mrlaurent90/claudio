@@ -10,6 +10,7 @@ import { googleMapsFiche } from "@/lib/links";
 
 const DAY_COLORS = ["#e88968", "#e0a458", "#9aa861", "#da7756", "#7fa8c9"];
 const DAY_NAMES = ["J1 Dim", "J2 Lun", "J3 Mar", "J4 Mer", "J5 Jeu"];
+const DAY_FULL = ["J1 · Dimanche", "J2 · Lundi", "J3 · Mardi", "J4 · Mercredi", "J5 · Jeudi"];
 
 export default function TripMap({
   data,
@@ -89,16 +90,6 @@ export default function TripMap({
       html: `<div style="display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:${fill};border:2.5px solid ${ring};box-shadow:0 0 0 2px ${ring}55,0 2px 7px rgba(0,0,0,.7)"><span style="font-size:12px;font-weight:800;color:#0f0e0c;line-height:1">${n}</span></div>`,
       iconSize: [26, 26],
       iconAnchor: [13, 13],
-    });
-  }
-
-  // A small non-interactive pill placed at a leg midpoint: "~7 min".
-  function legIcon(L: typeof import("leaflet"), text: string) {
-    return L.divIcon({
-      className: "",
-      html: `<div style="white-space:nowrap;font-size:10px;font-weight:700;color:#0f0e0c;background:#d9cfc0;border:1px solid rgba(15,14,12,.25);border-radius:999px;padding:1px 7px;box-shadow:0 1px 4px rgba(0,0,0,.5)">${text}</div>`,
-      iconSize: [0, 0],
-      iconAnchor: [0, 0],
     });
   }
 
@@ -217,10 +208,6 @@ export default function TripMap({
           } else if (legKm !== null) {
             const mins = walkMinutes(legKm);
             legInfo = `🚶 ~${mins} min depuis ${fromName} · ${fmtDist(legKm)}`;
-            const mid: [number, number] = [(prev.lat + p.lat) / 2, (prev.lng + p.lng) / 2];
-            L.marker(mid, { icon: legIcon(L, `~${mins} min`), interactive: false, zIndexOffset: -500 }).addTo(
-              routeLayer.current!
-            );
           }
         }
 
@@ -282,6 +269,12 @@ export default function TripMap({
     </div>
   );
 
+  // Day(s) currently in focus — drives the badge laid over the map.
+  const selectedDays = [...activeDays].sort((a, b) => a - b);
+  const badgeLabel =
+    selectedDays.length === 1 ? DAY_FULL[selectedDays[0]] : `${selectedDays.length} jours`;
+  const badgeColor = selectedDays.length === 1 ? DAY_COLORS[selectedDays[0] % 5] : "#e0a458";
+
   return (
     <section id="carte" className="pt-10 scroll-mt-2">
       <SectionHead idx="02" title="Carte" note="Trajets depuis le logement" />
@@ -289,6 +282,41 @@ export default function TripMap({
       {dayChips("top")}
       <div className="text-[11px] text-paper-dim mt-2 mb-3">
         Choisis un jour · les numéros suivent l&apos;ordre chronologique.
+      </div>
+
+      {/* Map with the selected day badged in an overlay on top. */}
+      <div className="relative">
+        <div
+          className="absolute top-3 left-1/2 -translate-x-1/2 z-[1000] pointer-events-none flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[12px] font-semibold backdrop-blur-sm"
+          style={{
+            background: "rgba(15,14,12,.82)",
+            border: `1px solid ${badgeColor}`,
+            color: badgeColor,
+            boxShadow: "0 2px 10px rgba(0,0,0,.5)",
+          }}
+        >
+          <span className="h-2 w-2 rounded-full" style={{ background: badgeColor }} />
+          {badgeLabel}
+        </div>
+        <div ref={mapEl} className="h-[500px] rounded-[20px] border border-line2 shadow-soft z-[2]" />
+      </div>
+
+      {/* Day summary moved below the map: stops + estimated walking. Distances are
+          straight-line adjusted for street detours (~±15%), shown as estimates. */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 mb-2.5 text-[12px]">
+        <span className="text-paper">
+          <b className="text-clay-bright">{summary.stops}</b> étape{summary.stops > 1 ? "s" : ""}
+        </span>
+        {summary.km > 0 && (
+          <>
+            <span className="text-paper">
+              🚶 <b className="text-clay-bright">~{summary.minutes} min</b> de marche
+            </span>
+            <span className="text-paper-dim">≈ {fmtDist(summary.km)}</span>
+          </>
+        )}
+        {summary.hasTransfer && <span className="text-gold">🚕 + transfert</span>}
+        <span className="text-paper-dim text-[10.5px]">estimation à pied</span>
       </div>
 
       {/* Compact category legend / filters with emoji. Tap to show/hide. */}
@@ -319,28 +347,8 @@ export default function TripMap({
       </div>
       <div className="text-[11px] text-paper-dim mb-3.5">Touche un type pour l&apos;afficher ou le masquer.</div>
 
-      {/* Day summary: stops + estimated walking. Distances are straight-line
-          adjusted for street detours (~±15%), shown as estimates. */}
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mb-2.5 text-[12px]">
-        <span className="text-paper">
-          <b className="text-clay-bright">{summary.stops}</b> étape{summary.stops > 1 ? "s" : ""}
-        </span>
-        {summary.km > 0 && (
-          <>
-            <span className="text-paper">
-              🚶 <b className="text-clay-bright">~{summary.minutes} min</b> de marche
-            </span>
-            <span className="text-paper-dim">≈ {fmtDist(summary.km)}</span>
-          </>
-        )}
-        {summary.hasTransfer && <span className="text-gold">🚕 + transfert</span>}
-        <span className="text-paper-dim text-[10.5px]">estimation à pied</span>
-      </div>
-
-      <div ref={mapEl} className="h-[440px] rounded-[20px] border border-line2 shadow-soft z-[2]" />
-
       {/* Day selector mirrored under the map for quick switching on-site. */}
-      <div className="mt-3">
+      <div>
         <div className="text-[11px] text-paper-dim mb-1.5 font-medium">Itinéraires par jour</div>
         {dayChips("bottom")}
       </div>
