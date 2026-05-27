@@ -28,7 +28,6 @@ const PHOTO = {
   coupole: wiki("Panorama_of_Piazza_San_Pietro.JPG"),
   basiliquePietro: wiki("Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg"),
   museesVatican: wiki("Rome_-_Vatican_Museum_-_Spiral_Staircase_by_Giuseppe_Momo_-_0673.jpg"),
-  borghese: wiki("Apollo_and_Daphne_(Bernini)_(cropped).jpg"),
   pincio: wiki("Terrazza_del_Pincio_Roma.jpg"),
   popolo: wiki("0_Piazza_de_Popolo_%C3%A0_Rome.JPG"),
   orangers: wiki("Giardino_degli_Aranci_Roma.jpg"),
@@ -174,8 +173,8 @@ export const travelData: TravelData = {
       id: "d3",
       num: "Jour 4",
       date: "Mer 03/06",
-      sum: "Borghese + panoramas + sunset",
-      obj: "Borghese + panoramas + Aventin + Gianicolo sunset + dîner tonton",
+      sum: "Villa Borghese + panoramas + sunset",
+      obj: "Villa Borghese (parc) + panoramas + Aventin + Gianicolo sunset + dîner tonton",
       walk: "Soutenu",
       energy: "Journée variée",
       moments: [
@@ -183,8 +182,7 @@ export const travelData: TravelData = {
           label: "Matin",
           hr: "9h–13h",
           steps: [
-            { t: "09:00", cat: "payant", fixed: true, title: "Galleria Borghese", desc: "Bernin (Apollon & Daphné), Caravage. Créneau strict 2h.", logi: "⚠️ Résa horaire OBLIGATOIRE.", badges: [["bdg-todo", "À réserver vite"]], img: PHOTO.borghese },
-            { t: "11:15", cat: "pano", title: "Villa Borghese + Pincio", desc: "Grand parc, barques, terrasse du Pincio.", img: PHOTO.pincio },
+            { t: "10:00", cat: "pano", title: "Villa Borghese + Pincio", desc: "Grand parc, barques, terrasse du Pincio. Matinée détendue (pas de musée).", img: PHOTO.pincio },
             { t: "12:30", cat: "pano", title: "Piazza del Popolo", desc: "Vue plongeante depuis le Pincio puis descente.", img: PHOTO.popolo },
           ],
         },
@@ -205,13 +203,13 @@ export const travelData: TravelData = {
           steps: [
             { t: "19:15", cat: "fontaine", title: "Fontana dell'Acqua Paola", desc: "« Il Fontanone » : fontaine monumentale baroque + panorama (scène d'ouverture de La Grande Bellezza).", logi: "Sur la montée vers le Gianicolo.", img: PHOTO.acquaPaola },
             { t: "19:30", cat: "pano", title: "Gianicolo — coucher de soleil", desc: "LE plus beau panorama de Rome au sunset.", logi: "Transfert depuis Aventin (bus/taxi).", img: PHOTO.gianicolo },
-            { t: "21:00", cat: "food", title: "🍝 Dîner avec tonton", desc: "Soirée romaine avec le tonton qui vit à Rome. Il choisit l'adresse ?", logi: "Caler le lieu + l'heure avec lui.", badges: [["bdg-conf", "À caler avec tonton"]] },
+            { t: "21:00", cat: "food", fixed: true, title: "🍝 Dîner avec tonton", desc: "Soirée romaine en famille avec le tonton qui vit à Rome. Acté pour le mercredi soir.", logi: "Lieu à caler avec lui.", badges: [["bdg-conf", "Confirmé · mercredi"]] },
           ],
         },
       ],
       alerts: [
-        ["alert-warn", "Matin : éviter Vatican / Saint-Pierre — audience générale du pape ~10h. Le créneau Borghese 9h tombe parfait."],
-        ["alert-hot", "Journée étalée géographiquement (Borghese nord → Aventin sud → Gianicolo ouest). Anticiper transferts + dîner tonton."],
+        ["alert-warn", "Matin : éviter le secteur Vatican / Saint-Pierre — audience générale du pape ~10h. Matinée parc tranquille à la place."],
+        ["alert-hot", "Journée étalée géographiquement (Villa Borghese nord → Aventin sud → Gianicolo ouest). Anticiper transferts + dîner tonton."],
       ],
     },
     {
@@ -269,8 +267,7 @@ export const travelData: TravelData = {
     { n: "Borgo Pio (déjeuner)", cat: "food", day: 2, t: "12:30", lat: 41.9047, lng: 12.4585, info: "Ruelle piétonne" },
     { n: "Musées du Vatican", cat: "payant", day: 2, t: "15:00", lat: 41.9065, lng: 12.4536, info: "15h · réservé", img: PHOTO.museesVatican },
     { n: "Ice Club Roma (bar de glace)", cat: "bar", day: 2, t: "21:00", lat: 41.9006, lng: 12.4717, info: "Bar de glace · optionnel" },
-    { n: "Galleria Borghese", cat: "payant", day: 3, t: "09:00", lat: 41.9142, lng: 12.4922, info: "9h · à réserver", img: PHOTO.borghese },
-    { n: "Villa Borghese (Pincio)", cat: "pano", day: 3, t: "11:15", lat: 41.9109, lng: 12.4783, info: "Parc + terrasse", img: PHOTO.pincio },
+    { n: "Villa Borghese (Pincio)", cat: "pano", day: 3, t: "10:00", lat: 41.9109, lng: 12.4783, info: "Parc + terrasse · balade", img: PHOTO.pincio },
     { n: "Piazza del Popolo", cat: "pano", day: 3, t: "12:30", lat: 41.9108, lng: 12.4768, info: "Vue depuis Pincio", img: PHOTO.popolo },
     { n: "Via del Babuino (déjeuner)", cat: "food", day: 3, t: "13:15", lat: 41.9070, lng: 12.4793, info: "Vers place d'Espagne" },
     { n: "Aventin — Trou de serrure", cat: "statue", day: 3, t: "16:30", lat: 41.8836, lng: 12.4783, info: "Buco di Roma", img: PHOTO.aventin },
@@ -284,8 +281,6 @@ export const travelData: TravelData = {
   ],
 
   decisions: [
-    { id: "dec-borghese", title: "Galleria Borghese — réserver", urg: "hi", a: "Réserver créneau 9h mercredi", b: "Zapper (risque de regret)", reco: "Réserve MAINTENANT le créneau 9h. Sold-out des semaines avant, créneaux 2h stricts.", impact: ["💶 ~13€/pers", "😌 fatigue OK", "📍 colle au planning mer."] },
-    { id: "dec-tonton", title: "Dîner avec tonton — quel soir & où ?", urg: "hi", a: "Mercredi après le Gianicolo", b: "Autre soir si tonton préfère", reco: "Cale vite avec lui : c'est LA contrainte sociale du séjour. S'il choisit l'adresse, tu économises la résa premium.", impact: ["💶 variable", "👨 priorité famille", "📅 fixer la date tôt"] },
     { id: "dec-aeroport", title: "Transport aéroport (J5)", urg: "mid", a: "Leonardo Express (~14€, 32 min)", b: "Taxi forfait (~50€ fixe)", reco: "Taxi avec valises + vol serré ; train si budget prioritaire.", impact: ["💶 14€ vs 50€", "🧳 taxi = porte-à-porte", "⏱️ taxi ~45 min"] },
     { id: "dec-speakeasy", title: "Speakeasy lundi soir", urg: "lo", a: "Réserver Jerry Thomas Project", b: "Bar de quartier improvisé", reco: "Si l'idée plaît, réserve : les speakeasies romains demandent souvent un 'mot de passe'.", impact: ["💶 cocktails ~14€", "🌙 ambiance unique", "📞 résa conseillée"] },
     { id: "dec-iceclub", title: "Ice Club (bar de glace) — utile ?", urg: "lo", a: "Y aller mardi soir", b: "Skip (gadget)", reco: "Skip plutôt. Après le Vatican vous serez cuits. Mais c'est sur la carte si l'envie vient.", impact: ["💶 ~15€ entrée", "😴 mardi = fatigue max", "🎭 effet gadget"] },
@@ -297,8 +292,7 @@ export const travelData: TravelData = {
     { id: "resa-airbnb", n: "Airbnb", sub: "Via Francesco Sivori 5 · 4 nuits", st: "resa" },
     { id: "resa-castel", n: "Castel Sant'Angelo", sub: "Lundi 01/06 · 9h", st: "resa" },
     { id: "resa-vatican", n: "Coupole + Musées du Vatican", sub: "Mardi 02/06 · coupole 8h, musées 15h", st: "resa" },
-    { id: "resa-borghese", n: "Galleria Borghese", sub: "Mercredi 03/06 · créneau 9h visé", st: "todo" },
-    { id: "resa-tonton", n: "Dîner avec tonton", sub: "Soir + lieu à caler avec lui", st: "conf" },
+    { id: "resa-tonton", n: "Dîner avec tonton", sub: "Mercredi 03/06 soir · resto à caler avec lui", st: "resa" },
     { id: "resa-soir", n: "Speakeasy / Ice Club", sub: "Selon arbitrage", st: "opt" },
     { id: "resa-transport", n: "Transport aéroport", sub: "Mode à choisir", st: "conf" },
   ],
@@ -318,16 +312,16 @@ export const travelData: TravelData = {
 
   premium: [
     { kind: "prem", title: "Apéritivo rooftop au sunset", desc: "Rooftop avec vue (coupole en ligne de mire). Cocktail + golden hour romain.", rows: [["Plaisir", "★★★★★"], ["Budget", "~25-35€/pers"], ["Logistique", "Facile, en ville"], ["Effet waouh", "Très fort"]] },
-    { kind: "prem", title: "Dîner avec tonton", desc: "Le vrai temps fort social : une soirée romaine en famille. S'il connaît une bonne table, c'est l'expérience premium ET locale du séjour.", rows: [["Plaisir", "★★★★★"], ["Budget", "variable"], ["Logistique", "Caler avec lui"], ["Effet waouh", "Authentique"]] },
+    { kind: "prem", title: "Dîner avec tonton", desc: "Le vrai temps fort social : une soirée romaine en famille, actée pour le mercredi soir. S'il connaît une bonne table, c'est l'expérience premium ET locale du séjour.", rows: [["Plaisir", "★★★★★"], ["Budget", "variable"], ["Logistique", "Mercredi soir"], ["Effet waouh", "Authentique"]] },
     { kind: "inso", title: "① Statues parlantes (les 6)", desc: "Pasquino, Marforio, Madama Lucrezia, Abate Luigi, il Facchino, il Babuino. La satire populaire depuis la Renaissance. Toutes sur la carte." },
     { kind: "inso", title: "② Trou de serrure de l'Aventin", desc: "Le buco di Roma : Saint-Pierre cadrée dans une serrure + Jardin des Orangers à côté. J4." },
     { kind: "inso", title: "③ Bar de glace OU speakeasy", desc: "Ice Club (bar de glace, gadget fun) vs speakeasy caché. Choisis-en un. Les deux sont sur la carte." },
   ],
 
   checklist: {
-    "Documents & billets": ["Cartes d'identité / passeports", "Billets d'avion (QR)", "QR Vatican (coupole + musées)", "QR Castel Sant'Angelo", "QR Galleria Borghese", "Confirmation Airbnb", "Carte offline Rome"],
+    "Documents & billets": ["Cartes d'identité / passeports", "Billets d'avion (QR)", "QR Vatican (coupole + musées)", "QR Castel Sant'Angelo", "Confirmation Airbnb", "Carte offline Rome"],
     "Sac & terrain": ["Chaussures confortables", "Batterie externe", "Gourde", "Lunettes de soleil", "Crème solaire"],
-    "Avant départ": ["Vérifier horaires officiels des résas", "Tenue correcte basilique", "Réserver Galleria Borghese", "Caler le dîner tonton", "Choisir transport aéroport"],
+    "Avant départ": ["Vérifier horaires officiels des résas", "Tenue correcte basilique", "Choisir le resto du dîner tonton (mercredi)", "Choisir transport aéroport"],
   },
 
   alerts: [
@@ -335,8 +329,7 @@ export const travelData: TravelData = {
     ["⏳", "Musées du Vatican mardi 15h : arriver 20 min avant même avec coupe-file."],
     ["😮‍💨", "Mardi = journée la plus intense. Soirée légère, hydratation."],
     ["🚫", "Mercredi matin : éviter le Vatican (audience du pape ~10h)."],
-    ["🎟️", "Galleria Borghese : réserver d'urgence — créneaux limités, sold-out fréquent."],
-    ["👨", "Caler le dîner tonton tôt : c'est la contrainte sociale à fixer en premier."],
+    ["👨", "Dîner tonton acté mercredi soir — reste à choisir le resto avec lui."],
     ["✅", "Avant de partir : revérifier TOUS les horaires officiels."],
   ],
 };

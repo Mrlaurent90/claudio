@@ -35,8 +35,7 @@ const PLACE_QUERIES: Record<string, string> = {
   "Borgo Pio (déjeuner)": "Borgo Pio",
   "Musées du Vatican": "Musei Vaticani",
   "Ice Club Roma (bar de glace)": "Ice Club Roma",
-  // Day 4 (Borghese + panoramas)
-  "Galleria Borghese": "Galleria Borghese",
+  // Day 4 (Villa Borghese + panoramas)
   "Villa Borghese (Pincio)": "Villa Borghese",
   "Villa Borghese + Pincio": "Villa Borghese",
   "Piazza del Popolo": "Piazza del Popolo",
