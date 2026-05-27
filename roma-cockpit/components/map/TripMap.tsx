@@ -15,12 +15,10 @@ const DAY_FULL = ["J1 · Dimanche", "J2 · Lundi", "J3 · Mardi", "J4 · Mercred
 export default function TripMap({
   data,
   activeDay,
-  setActiveDay,
   onOpenPlanning,
 }: {
   data: TravelData;
   activeDay: number;
-  setActiveDay: (i: number) => void;
   /** Jump to the planning section, focused on the given day. */
   onOpenPlanning?: (dayIndex: number) => void;
 }) {
@@ -42,10 +40,13 @@ export default function TripMap({
   const openPlanRef = useRef(onOpenPlanning);
   openPlanRef.current = onOpenPlanning;
 
-  // The ordered, visible (filtered) walking stops for one day — shared by the
-  // map drawing and the day summary so both agree on legs/distances.
+  // The visible (filtered) walking stops for one day, sorted strictly by time so
+  // the marker numbers and the route line always follow the day's chronology —
+  // shared by the map drawing and the day summary so both agree on legs.
   function visibleStops(day: number): Place[] {
-    return data.places.filter((p) => p.day === day && !p.home && activeCats.has(p.cat));
+    return data.places
+      .filter((p) => p.day === day && !p.home && activeCats.has(p.cat))
+      .sort((a, b) => (a.t ?? "").localeCompare(b.t ?? ""));
   }
 
   // Foot-only legs (transport transfers like the airport aren't walked).
@@ -239,10 +240,11 @@ export default function TripMap({
     }
   }
 
-  // Single-select: exactly one day at a time (never several at once).
+  // Single-select: exactly one day at a time (never several at once). Map-local
+  // only — it does NOT touch the planning's day, so switching days here never
+  // reflows the page above the map (the viewport stays put, the map just redraws).
   function selectDay(i: number) {
     setActiveDays(new Set([i]));
-    setActiveDay(i); // keep the Planning section in sync
   }
   function toggleCat(k: CategoryKey) {
     setActiveCats((prev) => {

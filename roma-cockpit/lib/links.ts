@@ -13,6 +13,8 @@ const PLACE_QUERIES: Record<string, string> = {
   Panthéon: "Pantheon",
   "Fontaine du Panthéon": "Fontana del Pantheon",
   "Fontaine de Trevi": "Fontana di Trevi",
+  "Fontaine du Triton": "Fontana del Tritone",
+  "Fontana delle Api": "Fontana delle Api",
   "Piazza di Spagna + Barcaccia": "Piazza di Spagna",
   // Day 2
   "Castel Sant'Angelo": "Castel Sant'Angelo",
