@@ -75,6 +75,15 @@ export default function TripMap({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeDays, activeCats]);
 
+  // Pick black or white for a number sitting on a category colour, by luminance.
+  function numColor(hex: string): string {
+    const m = hex.replace("#", "");
+    const r = parseInt(m.slice(0, 2), 16);
+    const g = parseInt(m.slice(2, 4), 16);
+    const b = parseInt(m.slice(4, 6), 16);
+    return 0.299 * r + 0.587 * g + 0.114 * b > 140 ? "#0f0e0c" : "#f5f1e8";
+  }
+
   function homeIcon(L: typeof import("leaflet")) {
     return L.divIcon({
       className: "",
@@ -86,9 +95,10 @@ export default function TripMap({
 
   // Numbered stop: category colour inside, day colour ring (ties it to its route).
   function stopIcon(L: typeof import("leaflet"), fill: string, ring: string, n: number) {
+    const ink = numColor(fill); // black or white, whichever reads on the category colour
     return L.divIcon({
       className: "",
-      html: `<div style="display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:${fill};border:2.5px solid ${ring};box-shadow:0 0 0 2px ${ring}55,0 2px 7px rgba(0,0,0,.7)"><span style="font-size:12px;font-weight:800;color:#0f0e0c;line-height:1">${n}</span></div>`,
+      html: `<div style="display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:${fill};border:2.5px solid ${ring};box-shadow:0 0 0 2px ${ring}55,0 2px 7px rgba(0,0,0,.7)"><span style="font-size:12px;font-weight:800;color:${ink};line-height:1">${n}</span></div>`,
       iconSize: [26, 26],
       iconAnchor: [13, 13],
     });
