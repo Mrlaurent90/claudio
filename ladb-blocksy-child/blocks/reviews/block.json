@@ -4,7 +4,7 @@
   "name": "ladb/reviews",
   "version": "1.0.0",
   "title": "LADB Reviews",
-  "category": "theme",
+  "category": "ladb",
   "textdomain": "ladb",
   "supports": {
     "html": false,

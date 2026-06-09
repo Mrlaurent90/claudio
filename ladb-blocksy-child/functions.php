@@ -6,6 +6,21 @@ require_once get_stylesheet_directory() . '/inc/schema.php';
 require_once get_stylesheet_directory() . '/inc/performance.php';
 require_once get_stylesheet_directory() . '/inc/mobile-cta.php';
 
+// Catégorie de blocs personnalisée dans l'éditeur
+add_filter( 'block_categories_all', 'ladb_register_block_category', 10, 2 );
+function ladb_register_block_category( $categories ) {
+	return array_merge(
+		[
+			[
+				'slug'  => 'ladb',
+				'title' => 'LADB — Blocs',
+				'icon'  => null,
+			],
+		],
+		$categories
+	);
+}
+
 add_action( 'wp_enqueue_scripts', 'ladb_enqueue_assets' );
 function ladb_enqueue_assets() {
 	// Hérite du parent Blocksy

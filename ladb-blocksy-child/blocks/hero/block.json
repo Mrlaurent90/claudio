@@ -4,7 +4,7 @@
   "name": "ladb/hero",
   "version": "1.0.0",
   "title": "LADB Hero",
-  "category": "theme",
+  "category": "ladb",
   "textdomain": "ladb",
   "supports": {
     "html": false,

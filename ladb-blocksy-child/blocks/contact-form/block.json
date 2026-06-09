@@ -4,7 +4,7 @@
   "name": "ladb/contact-form",
   "version": "1.0.0",
   "title": "LADB Contact Form",
-  "category": "theme",
+  "category": "ladb",
   "textdomain": "ladb",
   "supports": {
     "html": false,

@@ -4,7 +4,7 @@
   "name": "ladb/blog-teaser",
   "version": "1.0.0",
   "title": "LADB Blog Teaser",
-  "category": "theme",
+  "category": "ladb",
   "textdomain": "ladb",
   "supports": {
     "html": false,

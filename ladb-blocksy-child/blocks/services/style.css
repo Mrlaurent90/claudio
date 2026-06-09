@@ -1,123 +1,210 @@
+/* ============================================================
+   LADB — Services (3 cartes métiers)
+   ============================================================ */
+
+/* ── Variables locales ───────────────────────────────────── */
+
 .ladb-services {
-  background: var(--ladb-creme, #FAF8F4);
-  padding-block: var(--ladb-section, clamp(3rem, 8vw, 6rem));
+	--_cuivre:       var(--ladb-cuivre-mid, #C07A3E);
+	--_cuivre-bg:    rgba(192, 122, 62, 0.12);
+	--_cuivre-fonce: var(--ladb-cuivre-fonce, #9F5E28);
+	--_bleu:         var(--ladb-bleu-nuit, #0B1A33);
+	--_creme:        var(--ladb-creme, #FAF8F4);
+	--_blanc:        var(--ladb-blanc, #FFFFFF);
+	--_shadow:       0 4px 24px rgba(11, 26, 51, 0.08);
+	--_t:            var(--ladb-transition, 200ms ease);
 }
 
+/* ── Section ─────────────────────────────────────────────── */
+
+.ladb-services {
+	background-color: var(--_creme);
+	padding-block: var(--ladb-section, clamp(3rem, 8vw, 6rem));
+}
+
+.ladb-services__inner {
+	max-width: var(--ladb-container, 1200px);
+	margin-inline: auto;
+	padding-inline: var(--ladb-gutter, clamp(1rem, 4vw, 2rem));
+}
+
+/* ── Header centré ───────────────────────────────────────── */
+
 .ladb-services__header {
-  text-align: center;
-  margin-bottom: 3rem;
+	text-align: center;
+	margin-bottom: 3rem;
+}
+
+.ladb-services__eyebrow {
+	display: inline-block;
+	font-family: var(--ladb-font-corps, 'Hanken Grotesk', sans-serif);
+	font-size: 0.8125rem;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--_cuivre);
+	padding-bottom: 0.45rem;
+	border-bottom: 2px solid var(--_cuivre);
+	margin-bottom: 1rem;
 }
 
 .ladb-services__heading {
-  font-family: var(--ladb-font-titre, 'Bricolage Grotesque', sans-serif);
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 700;
-  color: var(--ladb-bleu-nuit, #0B1A33);
-  margin-block: 0.75rem 1rem;
+	font-family: var(--ladb-font-titre, 'Bricolage Grotesque', sans-serif);
+	font-size: clamp(1.75rem, 4vw, 2.5rem);
+	font-weight: 700;
+	color: var(--_bleu);
+	line-height: 1.2;
+	margin-block: 0 1rem;
 }
 
 .ladb-services__desc {
-  font-size: 1.0625rem;
-  color: rgba(11, 26, 51, 0.65);
-  max-width: 560px;
-  margin-inline: auto;
-  margin-bottom: 0;
+	font-family: var(--ladb-font-corps, 'Hanken Grotesk', sans-serif);
+	font-size: 1.0625rem;
+	color: var(--_bleu);
+	opacity: 0.7;
+	line-height: 1.6;
+	max-width: 560px;
+	margin-inline: auto;
+	margin-bottom: 0;
 }
+
+/* ── Grille 3 colonnes ───────────────────────────────────── */
 
 .ladb-services__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1.5rem;
 }
 
+/* ── Carte ───────────────────────────────────────────────── */
+
 .ladb-services__card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 4px 24px rgba(11, 26, 51, 0.08);
-  border-top: 4px solid transparent;
-  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
-  display: flex;
-  flex-direction: column;
+	background-color: var(--_blanc);
+	border-radius: 16px;
+	box-shadow: var(--_shadow);
+	padding: 2rem;
+	border-top: 4px solid transparent;
+	transition:
+		border-top-color var(--_t),
+		box-shadow var(--_t),
+		transform var(--_t);
+	display: flex;
+	flex-direction: column;
 }
 
 .ladb-services__card:hover {
-  border-top-color: var(--ladb-cuivre-mid, #C07A3E);
-  box-shadow: 0 8px 40px rgba(11, 26, 51, 0.14);
-  transform: translateY(-2px);
+	border-top-color: var(--_cuivre);
+	box-shadow: 0 8px 32px rgba(11, 26, 51, 0.14);
+	transform: translateY(-2px);
 }
+
+/* ── Icône ───────────────────────────────────────────────── */
 
 .ladb-services__card-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: rgba(192, 122, 62, 0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--ladb-cuivre-mid, #C07A3E);
-  margin-bottom: 1.25rem;
-  flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	background-color: var(--_cuivre-bg);
+	color: var(--_cuivre);
+	flex-shrink: 0;
 }
+
+/* ── Titre carte ─────────────────────────────────────────── */
 
 .ladb-services__card-title {
-  font-family: var(--ladb-font-titre, 'Bricolage Grotesque', sans-serif);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--ladb-bleu-nuit, #0B1A33);
-  margin-block: 0 0.75rem;
+	font-family: var(--ladb-font-titre, 'Bricolage Grotesque', sans-serif);
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: var(--_bleu);
+	margin-block: 1rem 0.5rem;
+	line-height: 1.3;
 }
+
+/* ── Description carte ───────────────────────────────────── */
 
 .ladb-services__card-desc {
-  font-size: 0.9375rem;
-  color: rgba(11, 26, 51, 0.65);
-  line-height: 1.6;
-  margin-block: 0 1.25rem;
+	font-family: var(--ladb-font-corps, 'Hanken Grotesk', sans-serif);
+	font-size: 0.9375rem;
+	color: var(--_bleu);
+	opacity: 0.7;
+	line-height: 1.55;
+	margin-block: 0 1rem;
 }
+
+/* ── Bullets ─────────────────────────────────────────────── */
 
 .ladb-services__bullets {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1.5rem;
-  flex: 1;
+	list-style: none;
+	padding: 0;
+	margin: 0 0 1.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	flex: 1;
 }
 
-.ladb-services__bullets li {
-  font-size: 0.875rem;
-  color: rgba(11, 26, 51, 0.75);
-  padding-block: 0.3rem;
-  line-height: 1.5;
+.ladb-services__bullet {
+	font-family: var(--ladb-font-corps, 'Hanken Grotesk', sans-serif);
+	font-size: 0.9rem;
+	color: var(--_bleu);
+	line-height: 1.5;
+	padding-left: 1.5em;
+	position: relative;
 }
 
-.ladb-services__bullets li::before {
-  content: "—";
-  color: var(--ladb-cuivre-mid, #C07A3E);
-  margin-right: 0.5rem;
-  font-weight: 700;
+.ladb-services__bullet::before {
+	content: '\2014'; /* — tiret cadratin */
+	position: absolute;
+	left: 0;
+	color: var(--_cuivre);
+	font-weight: 700;
 }
 
-.ladb-services__card-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--ladb-cuivre-mid, #C07A3E);
-  text-decoration: none;
-  margin-top: auto;
-  transition: gap 200ms ease;
+/* ── Lien "En savoir plus" ───────────────────────────────── */
+
+.ladb-services__link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.375rem;
+	font-family: var(--ladb-font-corps, 'Hanken Grotesk', sans-serif);
+	font-size: 0.9375rem;
+	font-weight: 600;
+	color: var(--_cuivre);
+	text-decoration: none;
+	margin-top: auto;
+	transition: color var(--_t), text-decoration-color var(--_t);
 }
 
-.ladb-services__card-link:hover {
-  text-decoration: underline;
-  gap: 0.6rem;
-  color: var(--ladb-cuivre-fonce, #9F5E28);
+.ladb-services__link:hover,
+.ladb-services__link:focus-visible {
+	color: var(--_cuivre-fonce);
+	text-decoration: underline;
+	text-underline-offset: 3px;
 }
+
+.ladb-services__link svg {
+	flex-shrink: 0;
+	transition: transform var(--_t);
+}
+
+.ladb-services__link:hover svg,
+.ladb-services__link:focus-visible svg {
+	transform: translateX(3px);
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
 
 @media (max-width: 900px) {
-  .ladb-services__grid {
-    grid-template-columns: 1fr;
-    max-width: 480px;
-    margin-inline: auto;
-  }
+	.ladb-services__grid {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media (max-width: 580px) {
+	.ladb-services__grid {
+		grid-template-columns: 1fr;
+	}
 }
