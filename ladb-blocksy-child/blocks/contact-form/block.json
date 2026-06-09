@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ladb/contact-form",
+  "version": "1.0.0",
+  "title": "LADB Contact Form",
+  "category": "theme",
+  "textdomain": "ladb",
+  "supports": {
+    "html": false,
+    "align": ["full"]
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "default": "Devis gratuit"
+    },
+    "heading": {
+      "type": "string",
+      "default": "Demandez votre devis"
+    },
+    "description": {
+      "type": "string",
+      "default": "Remplissez le formulaire ou appelez-nous directement. Réponse sous 2h en journée."
+    },
+    "phone": {
+      "type": "string",
+      "default": "06 86 41 69 25"
+    },
+    "cf7Shortcode": {
+      "type": "string",
+      "default": "[contact-form-7 id=\"\" title=\"Devis LADB\"]"
+    },
+    "availabilityText": {
+      "type": "string",
+      "default": "Disponible 24h/24 — 7j/7 pour les urgences"
+    },
+    "legalText": {
+      "type": "string",
+      "default": "Vos données sont utilisées uniquement pour traiter votre demande. Conformément au RGPD, vous pouvez exercer vos droits en nous contactant."
+    }
+  },
+  "editorScript": "file:./build/index.js",
+  "style": "file:./build/style-index.css",
+  "editorStyle": "file:./build/index.css"
+}

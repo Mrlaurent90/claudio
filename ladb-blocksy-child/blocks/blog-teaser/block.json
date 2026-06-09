@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ladb/blog-teaser",
+  "version": "1.0.0",
+  "title": "LADB Blog Teaser",
+  "category": "theme",
+  "textdomain": "ladb",
+  "supports": {
+    "html": false,
+    "align": ["full"]
+  },
+  "usesContext": [],
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "default": "Le blog LADB"
+    },
+    "heading": {
+      "type": "string",
+      "default": "Conseils & actualités"
+    },
+    "description": {
+      "type": "string",
+      "default": "Astuces, guides et actualités pour mieux gérer vitrage, serrures et miroirs."
+    },
+    "viewAllText": {
+      "type": "string",
+      "default": "Voir tous les articles"
+    },
+    "viewAllUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "categorySlug": {
+      "type": "string",
+      "default": ""
+    },
+    "postsCount": {
+      "type": "number",
+      "default": 4
+    }
+  },
+  "editorScript": "file:./build/index.js",
+  "style": "file:./style.css",
+  "render": "file:./render.php"
+}

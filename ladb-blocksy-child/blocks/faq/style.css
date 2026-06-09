@@ -1,0 +1,199 @@
+/* ladb/faq — style.css */
+
+/* ── Variables (harmonisées avec le thème) ── */
+
+:root {
+	--ladb-bleu-nuit: #0B1A33;
+	--ladb-creme: #FAF8F4;
+	--ladb-cuivre-mid: #C07A3E;
+	--ladb-cuivre-light: #E1AA6E;
+}
+
+/* ── Section ── */
+
+.ladb-faq {
+	position: relative;
+	background-color: var(--ladb-bleu-nuit);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	color: var(--ladb-creme);
+	padding-block: clamp(4rem, 10vw, 7rem);
+	overflow: hidden;
+}
+
+/* ── Overlay sombre ── */
+
+.ladb-faq__overlay {
+	position: absolute;
+	inset: 0;
+	background-color: rgba(6, 13, 26, 0.75);
+	pointer-events: none;
+	z-index: 0;
+}
+
+/* ── Inner ── */
+
+.ladb-faq__inner {
+	position: relative;
+	z-index: 1;
+	max-width: 1280px;
+	margin-inline: auto;
+	padding-inline: clamp(1.25rem, 5vw, 3rem);
+}
+
+/* ── Header centré ── */
+
+.ladb-faq__header {
+	text-align: center;
+	margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.ladb-faq__eyebrow {
+	display: inline-block;
+	border-top: 2px solid var(--ladb-cuivre-light);
+	padding-top: 0.5rem;
+	color: var(--ladb-cuivre-mid);
+	font-size: 0.8125rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	margin-bottom: 1rem;
+}
+
+.ladb-faq__heading {
+	font-family: 'Bricolage Grotesque', sans-serif;
+	font-weight: 700;
+	font-size: clamp(1.75rem, 4vw, 2.75rem);
+	line-height: 1.15;
+	color: var(--ladb-creme);
+	margin: 0;
+}
+
+/* ── Liste FAQ ── */
+
+.ladb-faq__list {
+	max-width: 760px;
+	margin-inline: auto;
+	padding: 0;
+	list-style: none; /* au cas où */
+}
+
+/* ── Item ── */
+
+.ladb-faq__item {
+	border-bottom: 1px solid rgba(225, 170, 110, 0.2);
+	padding-block: 1.25rem;
+}
+
+.ladb-faq__item:first-child {
+	border-top: 1px solid rgba(225, 170, 110, 0.2);
+}
+
+/* ── Bouton question ── */
+
+.ladb-faq__question {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	width: 100%;
+	font-family: 'Bricolage Grotesque', sans-serif;
+	font-size: 1rem;
+	font-weight: 700;
+	color: var(--ladb-creme);
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	text-align: left;
+	line-height: 1.4;
+	transition: color 0.2s ease;
+}
+
+.ladb-faq__question:hover {
+	color: var(--ladb-cuivre-light);
+}
+
+/* ── Icône +/× ── */
+
+.ladb-faq__icon {
+	flex-shrink: 0;
+	display: inline-block;
+	width: 1.25rem;
+	height: 1.25rem;
+	position: relative;
+	color: var(--ladb-cuivre-light);
+	transition: transform 0.3s ease;
+}
+
+.ladb-faq__icon::before,
+.ladb-faq__icon::after {
+	content: '';
+	position: absolute;
+	background-color: currentColor;
+	border-radius: 2px;
+	transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+/* barre horizontale */
+.ladb-faq__icon::before {
+	top: 50%;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	transform: translateY(-50%);
+}
+
+/* barre verticale → forme le + */
+.ladb-faq__icon::after {
+	top: 0;
+	left: 50%;
+	width: 2px;
+	height: 100%;
+	transform: translateX(-50%);
+}
+
+/* État ouvert : rotation 45° = × */
+.ladb-faq__item.is-open .ladb-faq__icon {
+	transform: rotate(45deg);
+}
+
+.ladb-faq__item.is-open .ladb-faq__question {
+	color: var(--ladb-cuivre-light);
+}
+
+/* ── Réponse ── */
+
+.ladb-faq__answer {
+	font-family: 'Hanken Grotesk', sans-serif;
+	font-size: 0.9375rem;
+	color: rgba(250, 248, 244, 0.8);
+	line-height: 1.65;
+	padding-top: 0.75rem;
+	padding-bottom: 1rem;
+	margin: 0;
+}
+
+.ladb-faq__answer[hidden] {
+	display: none;
+}
+
+/* ── Aperçu éditeur : question non-interactive ── */
+
+.ladb-faq__question--preview {
+	cursor: default;
+	pointer-events: none;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 600px) {
+	.ladb-faq__question {
+		font-size: 0.9375rem;
+	}
+
+	.ladb-faq__answer {
+		font-size: 0.875rem;
+	}
+}

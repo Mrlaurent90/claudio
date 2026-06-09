@@ -1,0 +1,283 @@
+/* ladb/blog-teaser — style.css */
+
+/* ── Variables (reprises du thème) ── */
+
+.ladb-blog-teaser {
+	--ladb-bleu-nuit: #0B1A33;
+	--ladb-creme: #FAF8F4;
+	--ladb-cuivre-mid: #C07A3E;
+	--ladb-cuivre-light: #E1AA6E;
+	--ladb-card-radius: 12px;
+}
+
+/* ── Section ── */
+
+.ladb-blog-teaser {
+	background-color: var(--ladb-creme);
+	padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+
+/* ── Container utilitaire ── */
+
+.ladb-blog-teaser .ladb-container {
+	max-width: 1280px;
+	margin-inline: auto;
+	padding-inline: clamp(1.25rem, 5vw, 3rem);
+}
+
+/* ── Header ── */
+
+.ladb-blog-teaser__header {
+	margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.ladb-blog-teaser__header .ladb-eyebrow {
+	display: inline-block;
+	border-top: 2px solid var(--ladb-cuivre-light);
+	padding-top: 0.5rem;
+	color: var(--ladb-cuivre-mid);
+	font-size: 0.8125rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	margin-bottom: 1rem;
+}
+
+.ladb-blog-teaser__heading {
+	font-family: 'Bricolage Grotesque', sans-serif;
+	font-weight: 700;
+	font-size: clamp(1.625rem, 3.5vw, 2rem);
+	line-height: 1.15;
+	color: var(--ladb-bleu-nuit);
+	margin: 0 0 0.75rem;
+}
+
+.ladb-blog-teaser__desc {
+	font-family: 'Hanken Grotesk', sans-serif;
+	font-size: 1rem;
+	line-height: 1.65;
+	color: color-mix(in srgb, var(--ladb-bleu-nuit) 72%, transparent);
+	max-width: 62ch;
+	margin: 0;
+}
+
+/* ── Grid ── */
+
+.ladb-blog-teaser__grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 1.5rem;
+}
+
+/* ── Card ── */
+
+.ladb-blog-teaser__card {
+	background-color: #fff;
+	border-radius: var(--ladb-card-radius);
+	overflow: hidden;
+	box-shadow:
+		0 1px 3px rgba(11, 26, 51, 0.06),
+		0 4px 16px rgba(11, 26, 51, 0.07);
+	display: flex;
+	flex-direction: column;
+	transition: box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.ladb-blog-teaser__card:hover {
+	box-shadow:
+		0 2px 6px rgba(11, 26, 51, 0.08),
+		0 8px 28px rgba(11, 26, 51, 0.12);
+	transform: translateY(-3px);
+}
+
+/* ── Card link (image wrapper) ── */
+
+.ladb-blog-teaser__card-link {
+	display: block;
+}
+
+/* ── Image ── */
+
+.ladb-blog-teaser__img-wrap {
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+}
+
+.ladb-blog-teaser__img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	display: block;
+	transition: transform 0.35s ease;
+}
+
+.ladb-blog-teaser__card:hover .ladb-blog-teaser__img {
+	transform: scale(1.04);
+}
+
+.ladb-blog-teaser__img-wrap--placeholder {
+	background-color: #E5E3DF;
+}
+
+/* ── Card body ── */
+
+.ladb-blog-teaser__card-body {
+	padding: 1.25rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	flex: 1;
+}
+
+/* ── Category pill ── */
+
+.ladb-blog-teaser__cat {
+	display: inline-block;
+	align-self: flex-start;
+	background-color: color-mix(in srgb, var(--ladb-cuivre-mid) 12%, transparent);
+	color: var(--ladb-cuivre-mid);
+	font-size: 0.6875rem;
+	font-weight: 700;
+	letter-spacing: 0.07em;
+	text-transform: uppercase;
+	padding: 0.25rem 0.625rem;
+	border-radius: 999px;
+}
+
+/* ── Card title ── */
+
+.ladb-blog-teaser__card-title {
+	font-family: 'Bricolage Grotesque', sans-serif;
+	font-weight: 700;
+	font-size: 1rem;
+	line-height: 1.35;
+	margin: 0;
+	color: var(--ladb-bleu-nuit);
+	flex: 1;
+}
+
+.ladb-blog-teaser__card-title a {
+	color: var(--ladb-bleu-nuit);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.ladb-blog-teaser__card-title a:hover {
+	color: var(--ladb-cuivre-mid);
+}
+
+/* ── Meta ── */
+
+.ladb-blog-teaser__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem 1rem;
+	font-family: 'Hanken Grotesk', sans-serif;
+	font-size: 0.8125rem;
+	color: var(--ladb-bleu-nuit);
+	opacity: 0.6;
+	margin-top: auto;
+}
+
+/* ── Footer ── */
+
+.ladb-blog-teaser__footer {
+	margin-top: 3rem;
+	display: flex;
+	justify-content: center;
+}
+
+/* ── Empty state ── */
+
+.ladb-blog-teaser--empty {
+	padding: 3rem;
+	text-align: center;
+	color: color-mix(in srgb, var(--ladb-bleu-nuit) 50%, transparent);
+}
+
+/* ── Editor placeholder ── */
+
+.ladb-blog-teaser--editor {
+	border: 2px dashed color-mix(in srgb, var(--ladb-cuivre-mid) 35%, transparent);
+	border-radius: 8px;
+}
+
+.ladb-blog-teaser__editor-placeholder {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0.75rem;
+	padding: 2.5rem 2rem;
+	text-align: center;
+}
+
+.ladb-blog-teaser__editor-icon {
+	color: var(--ladb-cuivre-mid);
+	opacity: 0.7;
+}
+
+.ladb-blog-teaser__editor-label {
+	font-size: 0.9375rem;
+	font-weight: 600;
+	color: var(--ladb-bleu-nuit);
+	margin: 0;
+}
+
+.ladb-blog-teaser__editor-summary {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	font-size: 0.8125rem;
+	color: color-mix(in srgb, var(--ladb-bleu-nuit) 65%, transparent);
+}
+
+/* ── Responsive — tablette ── */
+
+@media (max-width: 1024px) {
+	.ladb-blog-teaser__grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* ── Responsive — mobile ── */
+
+@media (max-width: 600px) {
+	.ladb-blog-teaser__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.ladb-blog-teaser__card {
+		flex-direction: row;
+		align-items: stretch;
+	}
+
+	.ladb-blog-teaser__card-link {
+		flex-shrink: 0;
+		width: 120px;
+	}
+
+	.ladb-blog-teaser__img-wrap {
+		aspect-ratio: unset;
+		height: 100%;
+	}
+}
+
+@media (max-width: 400px) {
+	.ladb-blog-teaser__card {
+		flex-direction: column;
+	}
+
+	.ladb-blog-teaser__card-link {
+		width: auto;
+	}
+
+	.ladb-blog-teaser__img-wrap {
+		aspect-ratio: 16 / 9;
+		height: auto;
+	}
+}
