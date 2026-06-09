@@ -1,0 +1,62 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ladb/services",
+  "version": "1.0.0",
+  "title": "LADB — Services",
+  "category": "ladb",
+  "description": "Section 3 cartes métiers — Vitrier, Serrurier, Miroitier",
+  "keywords": ["services", "cards", "métiers", "ladb"],
+  "textdomain": "ladb",
+  "supports": {
+    "html": false,
+    "align": ["full", "wide"]
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "default": "Nos métiers"
+    },
+    "heading": {
+      "type": "string",
+      "default": "Vitrier · Serrurier · Miroitier"
+    },
+    "description": {
+      "type": "string",
+      "default": "Artisans qualifiés, disponibles 24h/24 à Montpellier et dans l'Hérault."
+    },
+
+    "card1Icon": { "type": "string", "default": "glass" },
+    "card1Title": { "type": "string", "default": "Vitrier d'urgence" },
+    "card1Description": { "type": "string", "default": "Vitrage cassé ? On intervient en 30 min." },
+    "card1Bullet1": { "type": "string", "default": "Vitrage simple/double/triple" },
+    "card1Bullet2": { "type": "string", "default": "Fenêtres & baies vitrées" },
+    "card1Bullet3": { "type": "string", "default": "Velux & verrières" },
+    "card1Bullet4": { "type": "string", "default": "Devis immédiat" },
+    "card1LinkText": { "type": "string", "default": "En savoir plus" },
+    "card1LinkUrl": { "type": "string", "default": "" },
+
+    "card2Icon": { "type": "string", "default": "lock" },
+    "card2Title": { "type": "string", "default": "Serrurier certifié" },
+    "card2Description": { "type": "string", "default": "Serrure bloquée, porte claquée. On ouvre sans casse." },
+    "card2Bullet1": { "type": "string", "default": "Ouverture sans destruction" },
+    "card2Bullet2": { "type": "string", "default": "Remplacement serrures 3 points" },
+    "card2Bullet3": { "type": "string", "default": "Blindage de porte" },
+    "card2Bullet4": { "type": "string", "default": "Certification A2P" },
+    "card2LinkText": { "type": "string", "default": "En savoir plus" },
+    "card2LinkUrl": { "type": "string", "default": "" },
+
+    "card3Icon": { "type": "string", "default": "mirror" },
+    "card3Title": { "type": "string", "default": "Miroitier sur mesure" },
+    "card3Description": { "type": "string", "default": "Miroirs, garde-corps, tables — sur mesure en atelier." },
+    "card3Bullet1": { "type": "string", "default": "Miroirs découpés sur mesure" },
+    "card3Bullet2": { "type": "string", "default": "Garde-corps verre" },
+    "card3Bullet3": { "type": "string", "default": "Tables & plateaux" },
+    "card3Bullet4": { "type": "string", "default": "Pose à domicile" },
+    "card3LinkText": { "type": "string", "default": "En savoir plus" },
+    "card3LinkUrl": { "type": "string", "default": "" }
+  },
+  "editorScript": "file:./build/index.js",
+  "style": "file:./build/style-index.css",
+  "editorStyle": "file:./build/index.css"
+}

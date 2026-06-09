@@ -1,0 +1,97 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ladb/reviews",
+  "version": "1.0.0",
+  "title": "LADB Reviews",
+  "category": "theme",
+  "textdomain": "ladb",
+  "supports": {
+    "html": false,
+    "align": ["full"]
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "default": "Ce que disent nos clients"
+    },
+    "heading": {
+      "type": "string",
+      "default": "47 avis 5/5 sur Google"
+    },
+    "score": {
+      "type": "string",
+      "default": "5.0"
+    },
+    "reviewCount": {
+      "type": "string",
+      "default": "47"
+    },
+    "googleUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "review1Initials": {
+      "type": "string",
+      "default": "M.D"
+    },
+    "review1Name": {
+      "type": "string",
+      "default": "Marie Dubois"
+    },
+    "review1Date": {
+      "type": "string",
+      "default": "il y a 2 semaines"
+    },
+    "review1City": {
+      "type": "string",
+      "default": "Montpellier"
+    },
+    "review1Quote": {
+      "type": "string",
+      "default": "Vitrine cassée un dimanche soir. Arrivée en 25 minutes, travail propre et rapide. Je recommande sans hésiter."
+    },
+    "review2Initials": {
+      "type": "string",
+      "default": "J.L"
+    },
+    "review2Name": {
+      "type": "string",
+      "default": "Jean-Luc Martin"
+    },
+    "review2Date": {
+      "type": "string",
+      "default": "il y a 1 mois"
+    },
+    "review2City": {
+      "type": "string",
+      "default": "Castelnau-le-Lez"
+    },
+    "review2Quote": {
+      "type": "string",
+      "default": "Porte claquée avec les clés à l'intérieur. Technicien très professionnel, porte ouverte sans dommage en 10 minutes."
+    },
+    "review3Initials": {
+      "type": "string",
+      "default": "S.B"
+    },
+    "review3Name": {
+      "type": "string",
+      "default": "Sophie Bernard"
+    },
+    "review3Date": {
+      "type": "string",
+      "default": "il y a 3 semaines"
+    },
+    "review3City": {
+      "type": "string",
+      "default": "Lattes"
+    },
+    "review3Quote": {
+      "type": "string",
+      "default": "Miroir sur mesure pour notre salle de bain. Découpe parfaite, pose soignée. Rapport qualité-prix excellent."
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style.css"
+}

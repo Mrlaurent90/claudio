@@ -1,0 +1,312 @@
+/* ladb/hero — style.css */
+
+:root {
+	--ladb-bleu-nuit: #0B1A33;
+	--ladb-creme: #FAF8F4;
+	--ladb-cuivre-mid: #C07A3E;
+	--ladb-cuivre-light: #E1AA6E;
+	--ladb-radius-image: 16px;
+}
+
+.ladb-hero {
+	background-color: var(--ladb-bleu-nuit);
+	color: var(--ladb-creme);
+	padding-block: clamp(4rem, 10vw, 7rem);
+	overflow: hidden;
+}
+
+.ladb-hero__inner {
+	display: grid;
+	grid-template-columns: 55fr 45fr;
+	gap: clamp(2rem, 5vw, 4rem);
+	align-items: center;
+	max-width: 1280px;
+	margin-inline: auto;
+	padding-inline: clamp(1.25rem, 5vw, 3rem);
+}
+
+/* ── Kicker ── */
+
+.ladb-eyebrow {
+	display: inline-block;
+	border-top: 2px solid var(--ladb-cuivre-light);
+	padding-top: 0.5rem;
+	color: var(--ladb-cuivre-mid);
+	font-size: 0.8125rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	margin-bottom: 1.25rem;
+}
+
+/* ── H1 ── */
+
+.ladb-hero__h1 {
+	font-family: 'Bricolage Grotesque', sans-serif;
+	font-weight: 700;
+	font-size: clamp(2.5rem, 5vw, 4rem);
+	line-height: 1.08;
+	margin: 0 0 1.5rem;
+	color: var(--ladb-creme);
+}
+
+.ladb-hero__h1-line {
+	display: block;
+}
+
+.ladb-hero__h1-line--accent {
+	font-style: italic;
+	color: var(--ladb-cuivre-mid);
+}
+
+/* ── Lede ── */
+
+.ladb-hero__lede {
+	font-family: 'Hanken Grotesk', sans-serif;
+	font-size: 1.125rem;
+	line-height: 1.6;
+	color: rgba(250, 248, 244, 0.8);
+	max-width: 52ch;
+	margin: 0 0 2rem;
+}
+
+/* ── CTAs ── */
+
+.ladb-hero__ctas {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	margin-bottom: 2rem;
+}
+
+.ladb-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.75rem 1.5rem;
+	font-size: 1rem;
+	font-weight: 600;
+	border-radius: 8px;
+	text-decoration: none;
+	cursor: pointer;
+	transition: opacity 0.2s ease, transform 0.15s ease;
+	white-space: nowrap;
+}
+
+.ladb-btn:hover {
+	opacity: 0.88;
+	transform: translateY(-1px);
+}
+
+.ladb-btn--primary {
+	background-color: var(--ladb-cuivre-mid);
+	color: #fff;
+	border: 2px solid transparent;
+}
+
+.ladb-btn--ghost {
+	background-color: transparent;
+	color: var(--ladb-creme);
+	border: 2px solid rgba(250, 248, 244, 0.4);
+}
+
+.ladb-btn--ghost:hover {
+	border-color: rgba(250, 248, 244, 0.7);
+}
+
+/* ── Phone ── */
+
+.ladb-hero__phone {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	text-decoration: none;
+	color: var(--ladb-cuivre-mid);
+	font-family: 'Bricolage Grotesque', sans-serif;
+	transition: opacity 0.2s ease;
+}
+
+.ladb-hero__phone:hover {
+	opacity: 0.8;
+}
+
+.ladb-hero__phone svg {
+	flex-shrink: 0;
+	color: var(--ladb-cuivre-mid);
+}
+
+.ladb-hero__phone-number {
+	font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+	font-weight: 700;
+	letter-spacing: 0.02em;
+}
+
+/* ── Media column ── */
+
+.ladb-hero__media {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+/* ── Image ── */
+
+.ladb-hero__image-wrap {
+	position: relative;
+	border-radius: var(--ladb-radius-image);
+	overflow: hidden;
+	aspect-ratio: 4 / 5;
+	box-shadow:
+		0 0 0 1px rgba(193, 122, 62, 0.15),
+		0 8px 32px rgba(193, 122, 62, 0.12),
+		0 2px 8px rgba(0, 0, 0, 0.4);
+	margin: 0;
+}
+
+.ladb-hero__image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center top;
+	display: block;
+}
+
+/* ── Badge ── */
+
+.ladb-hero__badge {
+	position: absolute;
+	bottom: 1rem;
+	left: 1rem;
+	background-color: var(--ladb-cuivre-mid);
+	color: #fff;
+	font-size: 0.6875rem;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	padding: 0.35rem 0.75rem;
+	border-radius: 4px;
+}
+
+/* ── Caption ── */
+
+.ladb-hero__caption {
+	font-size: 0.8125rem;
+	color: rgba(250, 248, 244, 0.55);
+	text-align: center;
+	margin: 0;
+	padding: 0 0.25rem;
+}
+
+/* ── Markers ── */
+
+.ladb-hero__markers {
+	display: flex;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	gap: 0.5rem 0;
+}
+
+.ladb-hero__marker {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	padding-inline: 1rem;
+	flex: 1;
+	min-width: 0;
+}
+
+.ladb-hero__marker:first-child {
+	padding-left: 0;
+}
+
+.ladb-hero__marker-sep {
+	color: rgba(250, 248, 244, 0.25);
+	font-size: 1.25rem;
+	line-height: 1;
+	align-self: center;
+	flex-shrink: 0;
+}
+
+.ladb-hero__marker-value {
+	font-family: 'Bricolage Grotesque', sans-serif;
+	font-weight: 700;
+	font-size: 1.125rem;
+	color: var(--ladb-cuivre-mid);
+	white-space: nowrap;
+}
+
+.ladb-hero__marker-label {
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: var(--ladb-creme);
+	opacity: 0.9;
+	white-space: nowrap;
+}
+
+.ladb-hero__marker-sub {
+	font-size: 0.6875rem;
+	color: rgba(250, 248, 244, 0.6);
+	white-space: nowrap;
+}
+
+/* ── Editor placeholder ── */
+
+.ladb-hero__image-placeholder {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	aspect-ratio: 4 / 5;
+	border-radius: var(--ladb-radius-image);
+	background-color: rgba(250, 248, 244, 0.06);
+	border: 2px dashed rgba(250, 248, 244, 0.2);
+	color: rgba(250, 248, 244, 0.5);
+	cursor: pointer;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 768px) {
+	.ladb-hero__inner {
+		grid-template-columns: 1fr;
+	}
+
+	.ladb-hero__media {
+		order: -1;
+	}
+
+	.ladb-hero__image-wrap {
+		aspect-ratio: 3 / 2;
+	}
+
+	.ladb-hero__h1 {
+		font-size: clamp(2rem, 8vw, 2.75rem);
+	}
+
+	.ladb-hero__markers {
+		justify-content: center;
+	}
+
+	.ladb-hero__marker {
+		align-items: center;
+		text-align: center;
+	}
+}
+
+@media (max-width: 480px) {
+	.ladb-hero__ctas {
+		flex-direction: column;
+	}
+
+	.ladb-btn {
+		width: 100%;
+		text-align: center;
+	}
+
+	.ladb-hero__marker-value,
+	.ladb-hero__marker-label,
+	.ladb-hero__marker-sub {
+		white-space: normal;
+	}
+}

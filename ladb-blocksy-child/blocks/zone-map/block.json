@@ -1,0 +1,77 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ladb/zone-map",
+  "version": "1.0.0",
+  "title": "LADB Zone d'intervention",
+  "category": "theme",
+  "textdomain": "ladb",
+  "supports": {
+    "html": false,
+    "align": ["full"]
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": "Zone d'intervention"
+    },
+    "mapImageId": {
+      "type": "number"
+    },
+    "mapImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "mapImageAlt": {
+      "type": "string",
+      "default": "Carte zone intervention LADB Hérault"
+    },
+    "mapPin": {
+      "type": "string",
+      "default": "Montpellier — siège"
+    },
+    "cities": {
+      "type": "array",
+      "default": [
+        { "name": "Montpellier", "url": "" },
+        { "name": "Castelnau-le-Lez", "url": "" },
+        { "name": "Lattes", "url": "" },
+        { "name": "Pérols", "url": "" },
+        { "name": "Palavas-les-Flots", "url": "" },
+        { "name": "Mauguio", "url": "" },
+        { "name": "Lunel", "url": "" },
+        { "name": "Sète", "url": "" },
+        { "name": "Béziers", "url": "" },
+        { "name": "Agde", "url": "" },
+        { "name": "Lodève", "url": "" },
+        { "name": "Clermont-l'Hérault", "url": "" }
+      ]
+    },
+    "chip1Label": {
+      "type": "string",
+      "default": "Vitrier -herault"
+    },
+    "chip1Url": {
+      "type": "string",
+      "default": ""
+    },
+    "chip2Label": {
+      "type": "string",
+      "default": "Serrurier -herault"
+    },
+    "chip2Url": {
+      "type": "string",
+      "default": ""
+    },
+    "chip3Label": {
+      "type": "string",
+      "default": "Miroitier -herault"
+    },
+    "chip3Url": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style.css"
+}
