@@ -1,0 +1,180 @@
+/* ============================================================
+   LADB — Variables & helpers globaux
+   ============================================================ */
+
+:root {
+  /* Couleurs */
+  --ladb-bleu-nuit:    #0B1A33;
+  --ladb-abyssal:      #060D1A;
+  --ladb-creme:        #FAF8F4;
+  --ladb-cuivre:       #E1AA6E;
+  --ladb-cuivre-mid:   #C07A3E;
+  --ladb-cuivre-fonce: #9F5E28;
+  --ladb-vert:         #1FA35F;
+  --ladb-rouge:        #C8412E;
+  --ladb-blanc:        #FFFFFF;
+
+  /* Filet cuivre (eyebrows) */
+  --ladb-filet: 2px solid var(--ladb-cuivre);
+
+  /* Typographie */
+  --ladb-font-titre: 'Bricolage Grotesque', sans-serif;
+  --ladb-font-corps: 'Hanken Grotesk', sans-serif;
+
+  /* Spacing */
+  --ladb-section: clamp(3rem, 8vw, 6rem);
+  --ladb-container: 1200px;
+  --ladb-gutter: clamp(1rem, 4vw, 2rem);
+
+  /* Radius */
+  --ladb-radius-sm: 4px;
+  --ladb-radius-md: 8px;
+  --ladb-radius-lg: 16px;
+
+  /* Ombre */
+  --ladb-shadow: 0 4px 24px rgba(11, 26, 51, 0.12);
+  --ladb-shadow-lg: 0 8px 48px rgba(11, 26, 51, 0.18);
+
+  /* Transition */
+  --ladb-transition: 200ms ease;
+}
+
+/* Base */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--ladb-font-corps);
+  color: var(--ladb-bleu-nuit);
+  background: var(--ladb-creme);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ladb-font-titre);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+/* Container helper */
+.ladb-container {
+  max-width: var(--ladb-container);
+  margin-inline: auto;
+  padding-inline: var(--ladb-gutter);
+}
+
+/* Eyebrow (filet cuivre) */
+.ladb-eyebrow {
+  display: inline-block;
+  font-family: var(--ladb-font-corps);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ladb-cuivre-mid);
+  padding-top: 0.5rem;
+  border-top: var(--ladb-filet);
+  margin-bottom: 1rem;
+}
+
+/* Boutons */
+.ladb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--ladb-radius-md);
+  font-family: var(--ladb-font-corps);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background var(--ladb-transition), color var(--ladb-transition), border-color var(--ladb-transition);
+}
+
+.ladb-btn--primary {
+  background: var(--ladb-cuivre-mid);
+  color: var(--ladb-blanc);
+  border-color: var(--ladb-cuivre-mid);
+}
+.ladb-btn--primary:hover {
+  background: var(--ladb-cuivre-fonce);
+  border-color: var(--ladb-cuivre-fonce);
+  color: var(--ladb-blanc);
+}
+
+.ladb-btn--ghost {
+  background: transparent;
+  color: var(--ladb-creme);
+  border-color: rgba(250, 248, 244, 0.4);
+}
+.ladb-btn--ghost:hover {
+  background: rgba(250, 248, 244, 0.1);
+  border-color: var(--ladb-creme);
+  color: var(--ladb-creme);
+}
+
+.ladb-btn--vert {
+  background: var(--ladb-vert);
+  color: var(--ladb-blanc);
+  border-color: var(--ladb-vert);
+}
+.ladb-btn--vert:hover {
+  background: #178a4f;
+  border-color: #178a4f;
+  color: var(--ladb-blanc);
+}
+
+/* ============================================================
+   Overrides Blocksy header & footer
+   ============================================================ */
+
+/* Header : fond bleu nuit */
+.site-header,
+.ct-header {
+  background-color: var(--ladb-bleu-nuit) !important;
+}
+
+/* Nav links : crème */
+.ct-header .ct-nav-links a,
+.ct-header .menu-item a {
+  color: var(--ladb-creme) !important;
+}
+.ct-header .ct-nav-links a:hover {
+  color: var(--ladb-cuivre) !important;
+}
+
+/* Footer : bleu abyssal */
+.ct-footer,
+.site-footer {
+  background-color: var(--ladb-abyssal) !important;
+  color: var(--ladb-creme) !important;
+}
+
+/* Espace sous la sticky mobile CTA */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 72px;
+  }
+}
+
+/* Accessibilité */
+:focus-visible {
+  outline: 2px solid var(--ladb-cuivre);
+  outline-offset: 2px;
+}
+
+/* Utilitaires */
+.ladb-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}

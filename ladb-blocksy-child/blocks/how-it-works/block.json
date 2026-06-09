@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ladb/how-it-works",
+  "version": "1.0.0",
+  "title": "LADB — Comment ça marche",
+  "category": "ladb",
+  "description": "Section 3 étapes numérotées avec photo de fond",
+  "keywords": ["how", "steps", "process", "ladb"],
+  "supports": {
+    "html": false,
+    "align": ["full", "wide"]
+  },
+  "attributes": {
+    "eyebrow":    { "type": "string", "default": "Simple & rapide" },
+    "heading":    { "type": "string", "default": "Comment ça marche ?" },
+    "description":{ "type": "string", "default": "En 3 étapes, on règle votre problème. Disponible 24h/24." },
+    "bgImageId":  { "type": "number" },
+    "bgImageUrl": { "type": "string", "default": "" },
+    "step1Number":{ "type": "string", "default": "01" },
+    "step1Title": { "type": "string", "default": "Vous appelez" },
+    "step1Desc":  { "type": "string", "default": "Un artisan décroche immédiatement, évalue votre situation et vous donne un délai d'intervention précis." },
+    "step2Number":{ "type": "string", "default": "02" },
+    "step2Title": { "type": "string", "default": "On intervient" },
+    "step2Desc":  { "type": "string", "default": "Notre technicien arrive sur place en moins de 30 minutes avec le matériel adapté à votre problème." },
+    "step3Number":{ "type": "string", "default": "03" },
+    "step3Title": { "type": "string", "default": "C'est réglé" },
+    "step3Desc":  { "type": "string", "default": "Travail soigné, devis transparent et facturation honnête. Vous reprenez votre vie normalement." }
+  },
+  "editorScript": "file:./build/index.js",
+  "style": "file:./build/style-index.css",
+  "editorStyle": "file:./build/index.css"
+}

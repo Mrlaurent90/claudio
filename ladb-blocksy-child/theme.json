@@ -1,0 +1,87 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 2,
+  "settings": {
+    "color": {
+      "palette": [
+        { "slug": "bleu-nuit",  "color": "#0B1A33", "name": "Bleu Nuit" },
+        { "slug": "abyssal",    "color": "#060D1A", "name": "Abyssal" },
+        { "slug": "creme",      "color": "#FAF8F4", "name": "Crème" },
+        { "slug": "cuivre",     "color": "#E1AA6E", "name": "Cuivre Clair" },
+        { "slug": "cuivre-mid", "color": "#C07A3E", "name": "Cuivre Moyen" },
+        { "slug": "cuivre-fonce","color": "#9F5E28","name": "Cuivre Foncé" },
+        { "slug": "vert",       "color": "#1FA35F", "name": "Vert" },
+        { "slug": "rouge",      "color": "#C8412E", "name": "Rouge" },
+        { "slug": "blanc",      "color": "#FFFFFF", "name": "Blanc" }
+      ],
+      "custom": true,
+      "customGradient": false,
+      "defaultPalette": false
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "slug": "bricolage",
+          "name": "Bricolage Grotesque",
+          "fontFamily": "'Bricolage Grotesque', sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Bricolage Grotesque",
+              "fontWeight": "400 800",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/BricolageGrotesque-Variable.woff2"]
+            }
+          ]
+        },
+        {
+          "slug": "hanken",
+          "name": "Hanken Grotesk",
+          "fontFamily": "'Hanken Grotesk', sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Hanken Grotesk",
+              "fontWeight": "400 700",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/HankenGrotesk-Variable.woff2"]
+            }
+          ]
+        }
+      ],
+      "customFontSize": true,
+      "dropCap": false,
+      "fluid": true
+    },
+    "spacing": {
+      "units": ["px", "rem", "%", "vw"],
+      "custom": true,
+      "customSpacingSize": true,
+      "spacingSizes": [
+        { "slug": "xs",   "size": "0.5rem",  "name": "XS" },
+        { "slug": "sm",   "size": "1rem",    "name": "SM" },
+        { "slug": "md",   "size": "1.5rem",  "name": "MD" },
+        { "slug": "lg",   "size": "2.5rem",  "name": "LG" },
+        { "slug": "xl",   "size": "4rem",    "name": "XL" },
+        { "slug": "2xl",  "size": "6rem",    "name": "2XL" },
+        { "slug": "section", "size": "clamp(3rem, 8vw, 6rem)", "name": "Section" }
+      ]
+    },
+    "layout": {
+      "contentSize": "760px",
+      "wideSize": "1200px"
+    },
+    "useRootPaddingAwareAlignments": true
+  },
+  "styles": {
+    "color": {
+      "background": "#FAF8F4",
+      "text": "#0B1A33"
+    },
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--hanken)",
+      "fontSize": "1rem",
+      "lineHeight": "1.6"
+    }
+  }
+}

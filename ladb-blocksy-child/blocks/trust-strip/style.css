@@ -1,0 +1,57 @@
+.ladb-trust-strip {
+  background: var(--ladb-creme, #FAF8F4);
+  padding-block: 2rem;
+  border-top: 1px solid rgba(11, 26, 51, 0.08);
+  border-bottom: 1px solid rgba(11, 26, 51, 0.08);
+}
+
+.ladb-trust-strip__inner {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ladb-trust-strip__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  flex: 1;
+  min-width: 260px;
+  max-width: 480px;
+}
+
+.ladb-trust-strip__icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(192, 122, 62, 0.12);
+  border-radius: 50%;
+  color: var(--ladb-cuivre-mid, #C07A3E);
+}
+
+.ladb-trust-strip__title {
+  display: block;
+  font-family: var(--ladb-font-titre, 'Bricolage Grotesque', sans-serif);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--ladb-bleu-nuit, #0B1A33);
+  margin-bottom: 0.25rem;
+}
+
+.ladb-trust-strip__subtitle {
+  font-size: 0.875rem;
+  color: rgba(11, 26, 51, 0.65);
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .ladb-trust-strip__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
