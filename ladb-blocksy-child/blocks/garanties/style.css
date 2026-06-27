@@ -1,0 +1,111 @@
+/* ============================================================
+   ladb/garanties — style.css
+   Section "Pourquoi nous choisir" : fond creme, cartes flex-row.
+   ============================================================ */
+
+/* ── Section wrapper ── */
+.ladb-garanties {
+	background-color: var(--ladb-creme, #FAF8F4);
+	color: var(--ladb-bleu-nuit, #0B1A33);
+	padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+
+.ladb-garanties__inner {
+	max-width: 1280px;
+	margin-inline: auto;
+	padding-inline: clamp(1.25rem, 5vw, 3rem);
+}
+
+/* ── Kicker ── */
+.ladb-garanties .ladb-section-kicker {
+	display: inline-block;
+	border-top: 2px solid var(--ladb-cuivre-mid, #C07A3E);
+	padding-top: 0.5rem;
+	color: var(--ladb-cuivre-mid, #C07A3E);
+	font-size: 0.8125rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	margin-bottom: 1rem;
+}
+
+/* ── H2 ── */
+.ladb-garanties .ladb-section-h2 {
+	font-family: 'Bricolage Grotesque', sans-serif;
+	font-weight: 700;
+	font-size: clamp(1.875rem, 4vw, 2.75rem);
+	line-height: 1.1;
+	color: var(--ladb-bleu-nuit, #0B1A33);
+	margin: 0 0 1rem;
+}
+
+/* ── Intro ── */
+.ladb-garanties__intro {
+	font-size: 1rem;
+	color: rgba(11, 26, 51, 0.65);
+	max-width: 64ch;
+	margin: 0 0 2.5rem;
+	line-height: 1.6;
+}
+
+/* ── Grid 3 colonnes ── */
+.ladb-garanties__grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1.5rem 2rem;
+}
+
+@media (max-width: 900px) {
+	.ladb-garanties__grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 580px) {
+	.ladb-garanties__grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ── Carte (flex row) ── */
+.ladb-garanties__card {
+	display: flex;
+	gap: 1rem;
+	align-items: flex-start;
+}
+
+/* ── Icone ── */
+.ladb-garanties__icon {
+	color: var(--ladb-cuivre-mid, #C07A3E);
+	flex-shrink: 0;
+	width: 22px;
+	height: 22px;
+	margin-top: 2px;
+}
+
+.ladb-garanties__icon svg {
+	display: block;
+}
+
+/* ── Contenu ── */
+.ladb-garanties__content {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+}
+
+.ladb-garanties__title {
+	font-family: 'Bricolage Grotesque', sans-serif;
+	font-size: 0.9375rem;
+	font-weight: 700;
+	color: var(--ladb-bleu-nuit, #0B1A33);
+	margin: 0;
+	line-height: 1.3;
+}
+
+.ladb-garanties__desc {
+	font-size: 0.875rem;
+	color: rgba(11, 26, 51, 0.7);
+	line-height: 1.55;
+	margin: 0;
+}

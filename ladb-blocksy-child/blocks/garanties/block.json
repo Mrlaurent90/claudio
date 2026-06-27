@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ladb/garanties",
+  "version": "1.0.0",
+  "title": "LADB — Pourquoi nous choisir",
+  "category": "ladb",
+  "description": "Grille de N cartes garanties/arguments pour les pages piliers.",
+  "keywords": ["garanties", "arguments", "pilier", "ladb"],
+  "textdomain": "ladb",
+  "supports": {
+    "html": false,
+    "align": ["full", "wide"]
+  },
+  "render": "file:./render.php",
+  "editorScript": "file:./index.js",
+  "style": "file:./style.css",
+  "attributes": {
+    "eyebrow": { "type": "string", "default": "Pourquoi nous choisir" },
+    "heading": { "type": "string", "default": "Pourquoi choisir Les Alchimistes du Bâtiment ?" },
+    "intro":   { "type": "string", "default": "Une équipe artisanale, locale, transparente sur les prix et engagée sur la qualité." },
+    "items": {
+      "type": "array",
+      "default": [
+        { "icon": "shield-check", "title": "Garantie décennale",              "description": "Tous nos travaux de vitrerie sont couverts 10 ans. Nous travaillons avec des matériaux certifiés Saint-Gobain, AGC et Guardian." },
+        { "icon": "document",     "title": "Devis gratuit & sans engagement",   "description": "Estimatif en 2 minutes par téléphone ou sur place. Le montant annoncé est le montant facturé, aucune surprise." },
+        { "icon": "clock",        "title": "Intervention sous 24h",             "description": "Dépannage sous 2h pour les urgences (bris de glace, effraction) et pose planifiée sous 24h ouvrables." },
+        { "icon": "squares",      "title": "Matériaux professionnels",         "description": "Simple vitrage, double vitrage, verre feuilleté ou trempé : uniquement des produits conformes aux normes européennes en vigueur." },
+        { "icon": "team",         "title": "Équipe formée & assurée",         "description": "Nos artisans vitriers sont qualifiés et assurés en responsabilité civile professionnelle et décennale." },
+        { "icon": "star",         "title": "47 avis Google · 5/5",            "description": "Nos clients nous font confiance depuis 10 ans. Lisez leurs témoignages sur notre fiche Google et jugez par vous-même." }
+      ]
+    }
+  }
+}
