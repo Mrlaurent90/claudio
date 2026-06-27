@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ladb/pillar-services",
+  "version": "1.0.0",
+  "title": "LADB — Prestations pilier",
+  "category": "ladb",
+  "description": "Grille de N cartes prestations pour les pages piliers service.",
+  "keywords": ["prestations", "services", "pilier", "ladb"],
+  "textdomain": "ladb",
+  "supports": {
+    "html": false,
+    "align": ["full", "wide"]
+  },
+  "render": "file:./render.php",
+  "editorScript": "file:./index.js",
+  "style": "file:./style.css",
+  "attributes": {
+    "eyebrow": { "type": "string", "default": "Ce que nous faisons" },
+    "heading": { "type": "string", "default": "Nos prestations vitrerie" },
+    "intro":   { "type": "string", "default": "Toutes nos interventions incluent devis gratuit, protection du chantier et nettoyage après pose." },
+    "items": {
+      "type": "array",
+      "default": [
+        { "icon": "vitre",      "title": "Remplacement vitre cassée",        "description": "Intervention rapide sur toutes surfaces : simple vitrage, feuilleté, trempé. Sécurisation et pose en une seule venue.",                                                       "link_url": "", "link_label": "En savoir plus" },
+        { "icon": "double",     "title": "Pose double vitrage",              "description": "Amélioration thermique et phonique sur vos châssis existants PVC, alu ou bois. Vitrage 4/16/4 ou 4/20/4 selon besoin.",                                                          "link_url": "", "link_label": "En savoir plus" },
+        { "icon": "survitrage", "title": "Survitrage",                       "description": "Solution sans travaux lourds : application d’un second vitrage sur la menuiserie existante pour une isolation renforcée.",                                                        "link_url": "", "link_label": "En savoir plus" },
+        { "icon": "mesure",     "title": "Verre sur mesure",                 "description": "Découpe et façonnage sur devis : tablettes, étagères, miroirs, cloisons vitrées, garde-corps et verrières.",                                                    "link_url": "", "link_label": "En savoir plus" },
+        { "icon": "urgence",    "title": "Bris de glace urgent",             "description": "Sécurisation immédiate, bâchage et remplacement express suite à un bris ou une effraction. Disponible 24h/24, 7j/7.",                                                    "link_url": "", "link_label": "En savoir plus" },
+        { "icon": "chatiere",   "title": "Pose de chatière",                 "description": "Chatière pour animaux dans une porte vitrée ou un double vitrage. Découpe et pose propres, sans abîmer l’isolation.",                                           "link_url": "", "link_label": "En savoir plus" },
+        { "icon": "vitrine",    "title": "Vitrine et devanture de commerce", "description": "Pose et remplacement de vitrines de magasin, sécurisation après effraction, intervention rapide pour les professionnels.",                                                      "link_url": "", "link_label": "En savoir plus" },
+        { "icon": "effraction", "title": "Sécurisation après effraction",    "description": "Mise en sécurité immédiate après un cambriolage : bâchage puis remplacement du vitrage. Intervention rapide jour et nuit.",                                     "link_url": "", "link_label": "En savoir plus" },
+        { "icon": "verriere",   "title": "Verrière sur mesure",              "description": "Verrière d’atelier et cloison vitrée pour séparer une pièce sans perdre la lumière. Conception et pose sur mesure.",                                           "link_url": "", "link_label": "En savoir plus" }
+      ]
+    }
+  }
+}

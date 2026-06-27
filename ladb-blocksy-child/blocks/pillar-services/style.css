@@ -1,0 +1,140 @@
+/* ============================================================
+   ladb/pillar-services — style.css
+   Couleurs via CSS vars definies dans hero/style.css (:root).
+   ============================================================ */
+
+/* ── Section wrapper ── */
+.ladb-pillar-services {
+	background-color: var(--ladb-bleu-nuit, #0B1A33);
+	color: var(--ladb-creme, #FAF8F4);
+	padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+
+.ladb-pillar-services__inner {
+	max-width: 1280px;
+	margin-inline: auto;
+	padding-inline: clamp(1.25rem, 5vw, 3rem);
+}
+
+/* ── Kicker ── */
+.ladb-pillar-services .ladb-section-kicker {
+	display: inline-block;
+	border-top: 2px solid var(--ladb-cuivre-light, #E1AA6E);
+	padding-top: 0.5rem;
+	color: var(--ladb-cuivre-mid, #C07A3E);
+	font-size: 0.8125rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	margin-bottom: 1rem;
+}
+
+/* ── H2 ── */
+.ladb-pillar-services .ladb-section-h2 {
+	font-family: 'Bricolage Grotesque', sans-serif;
+	font-weight: 700;
+	font-size: clamp(1.875rem, 4vw, 2.75rem);
+	line-height: 1.1;
+	color: var(--ladb-creme, #FAF8F4);
+	margin: 0 0 1rem;
+}
+
+/* ── Intro ── */
+.ladb-pillar-services__intro {
+	font-size: 1rem;
+	color: rgba(250, 248, 244, 0.7);
+	max-width: 64ch;
+	margin: 0 0 2.5rem;
+	line-height: 1.6;
+}
+
+/* ── Grid ── */
+.ladb-pillar-services__grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+	.ladb-pillar-services__grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 580px) {
+	.ladb-pillar-services__grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ── Card ── */
+.ladb-pillar-services__card {
+	background-color: rgba(255, 255, 255, 0.04);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 12px;
+	padding: 1.75rem 1.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ladb-pillar-services__card:hover {
+	transform: translateY(-3px);
+	border-color: rgba(225, 170, 110, 0.3);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Icone ── */
+.ladb-pillar-services__icon {
+	color: var(--ladb-cuivre-light, #E1AA6E);
+	flex-shrink: 0;
+	width: 32px;
+	height: 32px;
+	margin-bottom: 0.25rem;
+}
+
+.ladb-pillar-services__icon svg {
+	display: block;
+}
+
+/* ── Titre carte ── */
+.ladb-pillar-services__title {
+	font-family: 'Bricolage Grotesque', sans-serif;
+	font-size: 1rem;
+	font-weight: 700;
+	color: var(--ladb-creme, #FAF8F4);
+	margin: 0;
+	line-height: 1.3;
+}
+
+/* ── Description ── */
+.ladb-pillar-services__desc {
+	font-size: 0.9375rem;
+	color: rgba(250, 248, 244, 0.65);
+	line-height: 1.55;
+	margin: 0;
+	flex: 1;
+}
+
+/* ── Lien (actif ou desactive) ── */
+.ladb-pillar-services__link {
+	align-self: flex-start;
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: var(--ladb-cuivre-light, #E1AA6E);
+	text-decoration: none;
+	margin-top: auto;
+	padding-top: 0.25rem;
+	transition: opacity 0.15s ease;
+}
+
+a.ladb-pillar-services__link:hover {
+	opacity: 0.8;
+	text-decoration: underline;
+}
+
+.ladb-pillar-services__link--disabled {
+	opacity: 0.35;
+	cursor: default;
+}
