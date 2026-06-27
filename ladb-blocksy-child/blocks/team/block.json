@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ladb/team",
+  "title": "LADB – Équipe",
+  "category": "ladb",
+  "description": "Présentation des membres de l’équipe.",
+  "render": "file:./render.php",
+  "editorScript": "file:./index.js",
+  "style": "file:./style.css",
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "default": "Notre équipe"
+    },
+    "heading": {
+      "type": "string",
+      "default": "L’équipe Les Alchimistes du Bâtiment"
+    },
+    "ctaLabel": {
+      "type": "string",
+      "default": "Découvrir l’équipe"
+    },
+    "ctaUrl": {
+      "type": "string",
+      "default": "/a-propos/"
+    },
+    "members": {
+      "type": "array",
+      "default": [
+        { "name": "Adrien",  "role": "Fondateur, sur le terrain",          "imageUrl": "", "imageAlt": "" },
+        { "name": "Geoffrey", "role": "Artisan vitrier",                    "imageUrl": "", "imageAlt": "" },
+        { "name": "Jérémy",  "role": "Devis et relation client",             "imageUrl": "", "imageAlt": "" },
+        { "name": "Lise",    "role": "Suivi de dossier et administratif",   "imageUrl": "", "imageAlt": "" }
+      ]
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": false
+  },
+  "textdomain": "ladb-blocksy-child"
+}
