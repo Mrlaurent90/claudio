@@ -1,0 +1,56 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ladb/realisations",
+  "title": "LADB – Réalisations",
+  "category": "ladb",
+  "description": "Carrousel horizontal de chantiers réalisés.",
+  "render": "file:./render.php",
+  "editorScript": "file:./index.js",
+  "style": "file:./style.css",
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "default": "Nos chantiers"
+    },
+    "heading": {
+      "type": "string",
+      "default": "Réalisations à Montpellier et environs"
+    },
+    "items": {
+      "type": "array",
+      "default": [
+        {
+          "chantier": "Remplacement double vitrage",
+          "lieu": "Antigone",
+          "imageUrl": "",
+          "imageAlt": ""
+        },
+        {
+          "chantier": "Sécurisation bris de glace",
+          "lieu": "Centre-ville",
+          "imageUrl": "",
+          "imageAlt": ""
+        },
+        {
+          "chantier": "Verrière sur mesure",
+          "lieu": "Port Marianne",
+          "imageUrl": "",
+          "imageAlt": ""
+        },
+        {
+          "chantier": "Vitrine commerce",
+          "lieu": "Comédie",
+          "imageUrl": "",
+          "imageAlt": ""
+        }
+      ]
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": false
+  },
+  "textdomain": "ladb-blocksy-child",
+  "editorStyle": false
+}
