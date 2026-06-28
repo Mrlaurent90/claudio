@@ -7,12 +7,17 @@
  */
 ?>
 <!-- wp:ladb/hero {
-  "kicker":"Vitrier à Montpellier",
-  "heading":"Votre vitrier artisan à Montpellier et environs",
-  "lede":"Remplacement de vitres, double vitrage, verrières sur mesure, intervention rapide sur Montpellier et l'Hérault.",
-  "cta1Label":"Demander un devis gratuit","cta1Url":"/devis-gratuit/",
-  "cta2Label":"Nous appeler","cta2Url":"tel:+33686416925",
-  "phone":"+33 6 86 41 69 25"
+  "kicker":"Vitrerie · Dépannage · Pose",
+  "headlineL1":"Vitrier",
+  "headlineL2":"à Montpellier :",
+  "headlineL3":"remplacement vitrage, pose et dépannage",
+  "lede":"Vitre cassée, double vitrage, fenêtre sur mesure : nos artisans vitriers interviennent à Montpellier et dans l'agglomération, 7j/7 et 24h/24 pour les urgences. Devis gratuit, prix annoncé = prix facturé.",
+  "ctaPrimaryLabel":"Demander un devis gratuit",
+  "ctaPrimaryUrl":"/devis-gratuit/",
+  "ctaPhone":"0686416925",
+  "ctaPhoneLabel":"06 86 41 69 25",
+  "liveBadge":"Disponible 24h/24",
+  "location":"Artisan vitrier · Montpellier 34"
 } /-->
 
 <!-- wp:ladb/reviews /-->
@@ -20,14 +25,36 @@
 <!-- wp:group {"className":"ladb-editorial ladb-editorial--expertise","layout":{"type":"constrained"}} -->
 <div class="wp-block-group ladb-editorial ladb-editorial--expertise">
   <!-- wp:heading {"level":2} -->
-  <h2>Notre expertise en vitrerie à Montpellier</h2>
+  <h2>Notre expertise vitrerie à Montpellier</h2>
   <!-- /wp:heading -->
   <!-- wp:paragraph -->
-  <p>Depuis plusieurs années, les artisans LADB interviennent sur tous les travaux de vitrerie à Montpellier : remplacement de vitres cassées, pose de double vitrage, verrières et vitrages sur mesure, sécurisation après bris de glace. Nous travaillons aussi bien chez les particuliers que pour les professionnels et les bailleurs.</p>
+  <p>Les Alchimistes du Bâtiment, c'est une équipe montpelliéraine menée par Adrien, le fondateur, et Geoffrey, notre artisan vitrier expert, qui interviennent à Montpellier et dans l'Hérault depuis plus de 10 ans. Chaque intervention est assurée par un professionnel qualifié, certifié RGE et couvert par la garantie décennale.</p>
   <!-- /wp:paragraph -->
   <!-- wp:paragraph -->
-  <p>Chaque chantier est réalisé par un artisan qualifié, avec des matériaux sélectionnés chez des fournisseurs locaux. Devis gratuit, tarif transparent, intervention sans surprise.</p>
+  <p>Notre différence se joue dès le premier appel : on prend le temps de comprendre votre problème, souvent en l'étudiant à distance, pour vous donner une réponse adaptée plutôt qu'un tarif au hasard. Sur un bris de glace pris en charge par votre assurance, on vous guide aussi dans les démarches : quoi vérifier dans votre contrat, comment déclarer, ce qui est couvert.</p>
   <!-- /wp:paragraph -->
+  <!-- wp:paragraph -->
+  <p>De la prise de mesure à la pose, vous savez à chaque étape où en est votre dossier et combien de temps ça prend. Nous intervenons sur tous types de vitrages : simple vitrage, double vitrage, vitrage feuilleté, verre trempé, vitrage anti-effraction ou acoustique. Remplacement d'urgence après un bris de glace, double vitrage sur mesure pour gagner en isolation thermique et phonique, ou pose de verre décoratif : chaque demande est étudiée avec soin.</p>
+  <!-- /wp:paragraph -->
+  <!-- wp:paragraph -->
+  <p>Le devis est toujours gratuit et sans engagement. Nous couvrons Montpellier (tous secteurs, des Facultés au centre) et les communes proches : Lattes, Saint-Jean-de-Védas, Castelnau-le-Lez, Le Crès et alentour.</p>
+  <!-- /wp:paragraph -->
+  <!-- wp:group {"className":"ladb-editorial__stats","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
+  <div class="wp-block-group ladb-editorial__stats">
+    <!-- wp:paragraph {"className":"ladb-editorial__stat"} -->
+    <p class="ladb-editorial__stat">10 ans d'expérience</p>
+    <!-- /wp:paragraph -->
+    <!-- wp:paragraph {"className":"ladb-editorial__stat"} -->
+    <p class="ladb-editorial__stat">4 artisans formés et certifiés</p>
+    <!-- /wp:paragraph -->
+    <!-- wp:paragraph {"className":"ladb-editorial__stat"} -->
+    <p class="ladb-editorial__stat">Garantie décennale</p>
+    <!-- /wp:paragraph -->
+    <!-- wp:paragraph {"className":"ladb-editorial__stat"} -->
+    <p class="ladb-editorial__stat">Devis gratuit, réponse en 2 minutes</p>
+    <!-- /wp:paragraph -->
+  </div>
+  <!-- /wp:group -->
 </div>
 <!-- /wp:group -->
 
