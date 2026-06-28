@@ -49,23 +49,15 @@
 </div>
 <!-- /wp:group -->
 
-<!-- wp:ladb/zone-map {
-  "heading":"Nous intervenons dans tout l'Hérault",
-  "cities":[
-    {"label":"Montpellier","url":""},
-    {"label":"Lattes","url":""},
-    {"label":"Castelnau-le-Lez","url":""},
-    {"label":"Palavas-les-Flots","url":""},
-    {"label":"Lunel","url":""},
-    {"label":"Sète","url":""},
-    {"label":"Béziers","url":""},
-    {"label":"Mauguio","url":""},
-    {"label":"Grabels","url":""},
-    {"label":"Clapiers","url":""}
-  ],
-  "chip1Label":"Intervention rapide","chip1Url":"",
-  "chip2Label":"Devis gratuit","chip2Url":"/devis-gratuit/",
-  "chip3Label":"Artisans locaux","chip3Url":""
+<!-- wp:ladb/map-zones {
+  "cardTitle":"Montpellier",
+  "cardSubtitle":"+ 30 km",
+  "pinLabel":"Montpellier · siège",
+  "legendText":"Couverture 24h · Montpellier Métropole",
+  "zonesText":"Montpellier,Lattes,Mauguio,Juvignac,Castelnau-le-Lez,Lunel,Saint-Jean-de-Védas,Le Crès,Pérols,Saint-Gély-du-Fesc,Vendargues,Baillargues,Frontignan,Sète",
+  "service1Label":"Vitrerie","service1Href":"/service/vitrerie-herault/",
+  "service2Label":"Serrurerie","service2Href":"/service/serrurerie-herault/",
+  "service3Label":"Miroiterie","service3Href":"/service/miroiterie-herault/"
 } /-->
 
 <!-- wp:ladb/garanties /-->
