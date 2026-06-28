@@ -856,5 +856,202 @@ body.ladb-has-mobilecta { padding-bottom: 90px; }
 .entry-content h2 { color: #E1AA6E; }
 .entry-content a { color: #E1AA6E; text-decoration: underline; }
 .entry-content a:hover { color: #C07A3E; }
-.entry-content strong { color: #FAF8F4; }	  
+.entry-content strong { color: #FAF8F4; }
+
+/* ============================================================
+   BREADCRUMB HERO — fil d'Ariane intégré dans ladb-hero
+   ============================================================ */
+.ladb-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  margin-bottom: 20px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--fg-dim);
+  line-height: 1.4;
+}
+.ladb-breadcrumb a {
+  color: var(--fg-mute);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.ladb-breadcrumb a:hover { color: var(--copper-light); }
+.ladb-breadcrumb span[aria-current="page"] { color: var(--copper-light); font-weight: 500; }
+.ladb-breadcrumb__sep { color: var(--fg-dim); font-size: 11px; }
+
+/* ============================================================
+   SECTIONS EDITORIALES — expertise + guide vitrage
+   Fond cream, texte sombre, alternance avec les blocs dark.
+   ============================================================ */
+.ladb-editorial {
+  background: var(--cream);
+  color: var(--fg-onlight);
+  padding: 56px 0;
+}
+@media (min-width: 900px) { .ladb-editorial { padding: 88px 0; } }
+
+/* Container interne — aligner avec le reste du theme */
+.ladb-editorial > .wp-block-group__inner-container,
+.ladb-editorial.wp-block-group > .wp-block-group__inner-container {
+  max-width: var(--container-width, 1180px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+@media (min-width: 768px) {
+  .ladb-editorial > .wp-block-group__inner-container,
+  .ladb-editorial.wp-block-group > .wp-block-group__inner-container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+/* Titres et textes sur fond cream */
+.ladb-editorial h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(28px, 4.5vw, 42px);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--fg-onlight);
+  margin: 0 0 20px;
+}
+.ladb-editorial h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(18px, 2.5vw, 22px);
+  letter-spacing: -0.01em;
+  color: var(--fg-onlight);
+  margin: 32px 0 10px;
+}
+.ladb-editorial h3:first-child { margin-top: 0; }
+.ladb-editorial p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--fg-onlight-mute);
+  max-width: 760px;
+}
+.ladb-editorial a { color: var(--copper); font-weight: 600; text-decoration: none; }
+.ladb-editorial a:hover { text-decoration: underline; }
+
+/* Bandeau de chiffres cles */
+.ladb-editorial__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(11,26,51,.12);
+}
+.ladb-editorial__stat {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--fg-onlight) !important;
+  letter-spacing: -0.005em;
+  max-width: none !important;
+  margin: 0 !important;
+}
+.ladb-editorial__stat::before {
+  content: "/ ";
+  color: var(--copper);
+  font-weight: 400;
+}
+
+/* Zone CTA en bas du guide vitrage */
+.ladb-editorial__cta {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(11,26,51,.12);
+}
+.ladb-editorial__cta p {
+  font-size: 15px;
+  color: var(--fg-onlight-mute);
+  margin-bottom: 20px;
+}
+.ladb-editorial__cta .wp-block-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+.ladb-editorial__cta .wp-block-button a,
+.ladb-editorial__cta .wp-block-button__link {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.005em;
+  border-radius: var(--radius);
+  padding: 13px 22px;
+  text-decoration: none;
+  transition: filter var(--dur-fast) var(--ease-out);
+}
+/* Bouton primaire (reutilise le style copper) */
+.ladb-editorial__cta .wp-block-button:not(.is-style-outline) .wp-block-button__link {
+  background: var(--gradient-copper);
+  color: #2A1A09;
+  box-shadow: var(--shadow-copper);
+}
+.ladb-editorial__cta .wp-block-button:not(.is-style-outline) .wp-block-button__link:hover {
+  filter: brightness(1.05);
+}
+/* Bouton outline telephone */
+.ladb-editorial__cta .wp-block-button.is-style-outline .wp-block-button__link {
+  background: transparent;
+  color: var(--copper);
+  border: 1.5px solid var(--copper);
+}
+.ladb-editorial__cta .wp-block-button.is-style-outline .wp-block-button__link:hover {
+  background: rgba(184,115,51,.08);
+}
+
+/* ============================================================
+   SECTION AUTRES EXPERTISES — fond bleu nuit, 2 colonnes
+   ============================================================ */
+.ladb-autres-expertises {
+  padding: 56px 0;
+}
+@media (min-width: 900px) { .ladb-autres-expertises { padding: 88px 0; } }
+
+.ladb-autres-expertises > .wp-block-group__inner-container {
+  max-width: var(--container-width, 1180px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+@media (min-width: 768px) {
+  .ladb-autres-expertises > .wp-block-group__inner-container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+.ladb-autres-expertises h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(24px, 3.5vw, 36px);
+  letter-spacing: -0.015em;
+  color: #fff;
+  margin: 0 0 32px;
+}
+.ladb-autres-expertises h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+}
+.ladb-autres-expertises h3 a {
+  color: var(--copper-light);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.ladb-autres-expertises h3 a:hover { color: #fff; }
+.ladb-autres-expertises p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--fg-mute);
+}
+.ladb-autres-expertises .wp-block-columns {
+  gap: 32px;
+}
+
 	  

@@ -60,10 +60,6 @@
 </script>
 <!-- /wp:html -->
 
-<!-- wp:paragraph {"className":"ladb-breadcrumb"} -->
-<p class="ladb-breadcrumb" aria-label="Fil d'Ariane"><a href="/">Accueil</a> &rsaquo; Vitrerie</p>
-<!-- /wp:paragraph -->
-
 <!-- wp:ladb/hero {
   "kicker":"Vitrerie · Dépannage · Pose",
   "headlineL1":"Vitrier",
@@ -74,6 +70,7 @@
   "ctaPrimaryUrl":"/devis-gratuit/",
   "ctaPhone":"0686416925",
   "ctaPhoneLabel":"06 86 41 69 25",
+  "photoUrl":"https://aa46-10c4783ab242.wptiger.fr/wp-content/uploads/2026/06/artisan-vitrier-hero.png",
   "liveBadge":"Disponible 24h/24",
   "location":"Artisan vitrier · Montpellier 34"
 } /-->
@@ -329,17 +326,6 @@
   <!-- /wp:group -->
 </div>
 <!-- /wp:group -->
-
-<!-- wp:ladb/map-zones {
-  "cardTitle":"Montpellier",
-  "cardSubtitle":"+ 30 km",
-  "pinLabel":"Montpellier · siège",
-  "legendText":"Couverture 24h · Montpellier Métropole",
-  "zonesText":"Montpellier,Lattes,Mauguio,Juvignac,Castelnau-le-Lez,Lunel,Saint-Jean-de-Védas,Le Crès,Pérols,Saint-Gély-du-Fesc,Vendargues,Baillargues,Frontignan,Sète",
-  "service1Label":"Vitrerie","service1Href":"/service/vitrerie-herault/",
-  "service2Label":"Serrurerie","service2Href":"/service/serrurerie-herault/",
-  "service3Label":"Miroiterie","service3Href":"/service/miroiterie-herault/"
-} /-->
 
 <!-- wp:ladb/garanties {
   "eyebrow":"Pourquoi nous choisir",

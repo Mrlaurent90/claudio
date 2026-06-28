@@ -1,5 +1,17 @@
 <?php
 defined('ABSPATH') || exit;
+
+// Breadcrumb dynamique — reflète la hiérarchie de la page courante
+$bc_post_id = get_the_ID() ?: 0;
+$bc_ancestors = $bc_post_id ? array_reverse(get_ancestors($bc_post_id, 'page')) : [];
+$bc_items = [['label' => 'Accueil', 'url' => home_url('/')]];
+foreach ($bc_ancestors as $bc_anc) {
+    $bc_items[] = ['label' => get_the_title($bc_anc), 'url' => get_permalink($bc_anc)];
+}
+if ($bc_post_id) {
+    $bc_items[] = ['label' => get_the_title($bc_post_id), 'url' => ''];
+}
+
 $kicker       = esc_html($attributes['kicker']          ?? 'Vitrerie · Serrurerie · Miroiterie');
 $hl1          = esc_html($attributes['headlineL1']       ?? 'Votre');
 $hl2          = esc_html($attributes['headlineL2']       ?? 'vitrier');
@@ -31,6 +43,17 @@ $m3s  = esc_html($attributes['marker3Sub']   ?? '03 · Confiance');
 <section class="ladb-hero" id="accueil">
   <div class="ladb-hero__grain" aria-hidden="true"></div>
   <div class="container ladb-hero__inner">
+
+    <nav class="ladb-breadcrumb" aria-label="Fil d'Ariane">
+      <?php foreach ($bc_items as $bc_i => $bc_item): ?>
+        <?php if ($bc_i > 0): ?><span class="ladb-breadcrumb__sep" aria-hidden="true">›</span><?php endif; ?>
+        <?php if ($bc_item['url']): ?>
+          <a href="<?php echo esc_url($bc_item['url']); ?>"><?php echo esc_html($bc_item['label']); ?></a>
+        <?php else: ?>
+          <span aria-current="page"><?php echo esc_html($bc_item['label']); ?></span>
+        <?php endif; ?>
+      <?php endforeach; ?>
+    </nav>
 
     <div class="ladb-hero__top">
       <div class="ladb-hero__est">
