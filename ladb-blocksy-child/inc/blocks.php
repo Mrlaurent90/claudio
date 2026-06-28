@@ -1,14 +1,35 @@
 <?php
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
-add_action( 'init', 'ladb_register_blocks' );
-function ladb_register_blocks() {
-	$blocks_dir = get_stylesheet_directory() . '/blocks';
-	if ( ! is_dir( $blocks_dir ) ) {
-		return;
-	}
-	foreach ( glob( $blocks_dir . '/*/block.json' ) as $block_json ) {
-		$block_dir = dirname( $block_json );
-		register_block_type( $block_dir );
-	}
-}
+/**
+ * Register all LADB custom blocks.
+ * Each block uses a PHP render callback — no build step required.
+ */
+add_action('init', function () {
+    $blocks_dir = get_stylesheet_directory() . '/blocks/';
+
+    $blocks = [
+        'ladb-hero',
+        'ladb-trust-strip',
+        'ladb-services',
+        'ladb-how-it-works',
+        'ladb-reviews',
+        'ladb-faq',
+        'ladb-contact-form',
+        'ladb-map-zones',
+        'ladb-blog-teaser',
+        'ladb-photo-banner',
+        'ladb-pillar-services',
+        'ladb-garanties',
+        'ladb-realisations',
+        'ladb-team',
+        'ladb-equipe',
+    ];
+
+    foreach ($blocks as $block) {
+        $block_path = $blocks_dir . $block;
+        if (is_dir($block_path)) {
+            register_block_type($block_path);
+        }
+    }
+});

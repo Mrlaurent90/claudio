@@ -1,0 +1,28 @@
+{
+  "apiVersion": 3,
+  "name": "ladb/map-zones",
+  "title": "LADB Carte des zones",
+  "description": "Carte Montpellier Métropole stylée + chips de zones + services.",
+  "category": "ladb",
+  "textdomain": "ladb",
+  "attributes": {
+    "cardTitle":    { "type": "string", "default": "Montpellier" },
+    "cardSubtitle": { "type": "string", "default": "+ 30 km" },
+    "mapImageId":   { "type": "number", "default": 0 },
+    "mapImageUrl":  { "type": "string", "default": "" },
+    "insetImageId":  { "type": "number", "default": 0 },
+    "insetImageUrl": { "type": "string", "default": "" },
+    "pinLabel":     { "type": "string", "default": "Montpellier · siège" },
+    "legendText":   { "type": "string", "default": "Couverture <24h · Montpellier Métropole" },
+    "insetCaption": { "type": "string", "default": "● Comédie · 21h47" },
+    "zonesText":    { "type": "string", "default": "Montpellier,Lattes,Juvignac,Castelnau-le-Lez,Le Crès,Pérols,Mauguio,Saint-Jean-de-Védas,Grabels,Clapiers,Saint-Gély-du-Fesc" },
+    "service1Label": { "type": "string", "default": "Vitrerie" },
+    "service1Href":  { "type": "string", "default": "/service/vitrerie-herault/" },
+    "service2Label": { "type": "string", "default": "Serrurerie" },
+    "service2Href":  { "type": "string", "default": "/service/serrurerie-herault/" },
+    "service3Label": { "type": "string", "default": "Miroiterie" },
+    "service3Href":  { "type": "string", "default": "/service/miroiterie-herault/" }
+  },
+  "editorScript": "file:./editor.js",
+  "render": "file:./render.php"
+}

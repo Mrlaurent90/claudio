@@ -1,0 +1,18 @@
+{
+  "apiVersion": 3,
+  "name": "ladb/equipe",
+  "title": "LADB Équipe",
+  "category": "ladb",
+  "attributes": {
+    "sectionEyebrow": { "type": "string", "default": "L'équipe" },
+    "sectionTitle":   { "type": "string", "default": "L'équipe derrière les Alchimistes" },
+    "para1":          { "type": "string", "default": "Derrière LADB, Adrien et son équipe d'artisans qualifiés mettent leur savoir-faire au service de votre habitat ou local professionnel. Vitrerie, serrurerie, miroiterie : chaque intervention est traitée avec rigueur et réactivité." },
+    "para2":          { "type": "string", "default": "Le nom ? Les alchimistes transforment la matière — nous, on transforme vos espaces. Avec les bons gestes, les bons matériaux, et une éthique artisanale qui ne transige pas sur la qualité." },
+    "photoId":        { "type": "number", "default": 0 },
+    "photoUrl":       { "type": "string", "default": "" },
+    "photoAlt":       { "type": "string", "default": "L'équipe LADB — artisans à Montpellier" }
+  },
+  "editorScript": "file:./editor.js",
+  "style": "file:./style.css",
+  "render": "file:./render.php"
+}

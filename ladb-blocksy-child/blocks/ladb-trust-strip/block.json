@@ -1,0 +1,18 @@
+{
+  "apiVersion": 3,
+  "name": "ladb/trust-strip",
+  "title": "LADB Trust Strip",
+  "description": "Bandeau crème — devis gratuit + zone d'intervention.",
+  "category": "ladb",
+  "textdomain": "ladb",
+  "attributes": {
+    "item1Icon":  { "type": "string", "default": "devis" },
+    "item1Title": { "type": "string", "default": "Devis gratuit" },
+    "item1Sub":   { "type": "string", "default": "réponse en 2 minutes" },
+    "item2Icon":  { "type": "string", "default": "zone" },
+    "item2Title": { "type": "string", "default": "Montpellier + 30 km" },
+    "item2Sub":   { "type": "string", "default": "intervention dans l'heure" }
+  },
+  "editorScript": "file:./editor.js",
+  "render": "file:./render.php"
+}

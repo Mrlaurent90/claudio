@@ -1,0 +1,19 @@
+{
+  "apiVersion": 3,
+  "name": "ladb/blog-teaser",
+  "title": "LADB Blog teaser",
+  "description": "Grille dynamique des derniers articles WordPress — catégorie et nombre configurables.",
+  "category": "ladb",
+  "textdomain": "ladb",
+  "attributes": {
+    "sectionEyebrow": { "type": "string", "default": "Le blog" },
+    "sectionTitle":   { "type": "string", "default": "Conseils & guides pratiques" },
+    "sectionIntro":   { "type": "string", "default": "Vitrerie, serrurerie, miroiterie : nos artisans partagent ce qu'ils voient sur le terrain pour vous aider à mieux choisir, mieux entretenir, mieux sécuriser." },
+    "categorySlug":   { "type": "string", "default": "" },
+    "postsCount":     { "type": "number", "default": 4 },
+    "allPostsUrl":    { "type": "string", "default": "/blog/" },
+    "allPostsLabel":  { "type": "string", "default": "Voir tous les articles →" }
+  },
+  "editorScript": "file:./editor.js",
+  "render": "file:./render.php"
+}

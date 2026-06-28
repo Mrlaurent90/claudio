@@ -1,0 +1,11 @@
+{
+  "_comment": "Import ce formulaire dans Contact Form 7 : Admin WP → Contact → Add New → coller le contenu ci-dessous dans l'onglet 'Form'.",
+  "title": "Devis LADB",
+  "form_fields": "[p class:ladb-cf7-field][label]Type d'intervention[br][select service include_blank:false \"Vitrerie\" \"Serrurerie\" \"Miroiterie\" \"Urgence 24/7\"][/p]\n[p class:ladb-cf7-field][label]Nom complet *[br][text* nom placeholder \"Jean Dupont\"][/p]\n[p class:ladb-cf7-field][label]Téléphone *[br][tel* tel placeholder \"06 12 34 56 78\"][/p]\n[p class:ladb-cf7-field][label]Email[br][email email placeholder \"jean@email.com\"][/p]\n[p class:ladb-cf7-field][label]Détails du besoin[br][textarea message rows:4 placeholder \"Vitre brisée double vitrage 80×120 cm dans le séjour…\"][/p]\n[p][checkbox urgent \"C'est une urgence — rappelez-moi maintenant\"][/p]\n[p][submit class:ladb-btn class:ladb-btn--primary class:ladb-btn--full \"Envoyer ma demande de devis →\"][/p]",
+  "mail_settings": {
+    "to": "contact@ladb.fr",
+    "subject": "[ladb.fr] Nouvelle demande de devis — [service]",
+    "body": "Demande de devis reçue via ladb.fr\n\nService : [service]\nNom : [nom]\nTéléphone : [tel]\nEmail : [email]\nUrgence : [urgent]\n\nMessage :\n[message]\n\n---\nSent via Contact Form 7"
+  },
+  "note_install": "Après import : Admin → Contact → Forms → notez l'ID numérique du formulaire → dans l'éditeur Gutenberg, ouvrez le bloc 'Section Contact LADB' → collez l'ID dans le champ 'ID du formulaire CF7'."
+}

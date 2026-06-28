@@ -1,0 +1,33 @@
+{
+  "apiVersion": 3,
+  "name": "ladb/contact-form",
+  "title": "LADB Section Contact",
+  "description": "Section contact complète — formulaire CF7, carte téléphone, carte zones, teaser blog.",
+  "category": "ladb",
+  "textdomain": "ladb",
+  "attributes": {
+    "sectionEyebrow":   { "type": "string",  "default": "Demander un devis" },
+    "sectionTitle":     { "type": "string",  "default": "Décrivez votre besoin, on vous répond en 2 minutes" },
+    "sectionIntro":     { "type": "string",  "default": "Devis gratuit, sans engagement. Pour une urgence, appelez directement le 06 86 41 69 25." },
+    "cf7FormId":        { "type": "number",  "default": 0 },
+    "phoneNumber":      { "type": "string",  "default": "0686416925" },
+    "phoneDisplay":     { "type": "string",  "default": "06 86 41 69 25" },
+    "phoneDesc":        { "type": "string",  "default": "Un artisan vous répond directement, 7j/7 et 24h/24, pour toute urgence vitrerie, serrurerie ou miroiterie." },
+    "availabilityText": { "type": "string",  "default": "Disponible maintenant" },
+    "legalText":        { "type": "string",  "default": "Vos coordonnées restent strictement confidentielles." },
+    "mapImageId":       { "type": "number",  "default": 0 },
+    "mapImageUrl":      { "type": "string",  "default": "" },
+    "mapInsetId":       { "type": "number",  "default": 0 },
+    "mapInsetUrl":      { "type": "string",  "default": "" },
+    "mapInsetCaption":  { "type": "string",  "default": "● Comédie · 21h47" },
+    "mapZonesText":     { "type": "string",  "default": "Montpellier,Lattes,Juvignac,Castelnau-le-Lez,Le Crès,Pérols,Mauguio" },
+    "blogEyebrow":      { "type": "string",  "default": "Le blog" },
+    "blogTitle":        { "type": "string",  "default": "Conseils & guides pratiques" },
+    "blogIntro":        { "type": "string",  "default": "Vitrerie, serrurerie, miroiterie : nos artisans partagent ce qu'ils voient sur le terrain." },
+    "blogCategory":     { "type": "string",  "default": "" },
+    "blogCount":        { "type": "number",  "default": 4 },
+    "blogAllUrl":       { "type": "string",  "default": "/blog/" }
+  },
+  "editorScript": "file:./editor.js",
+  "render": "file:./render.php"
+}

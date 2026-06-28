@@ -1,0 +1,33 @@
+{
+  "apiVersion": 3,
+  "name": "ladb/services",
+  "title": "LADB Services",
+  "description": "3 cartes de services — vitrerie, serrurerie, miroiterie.",
+  "category": "ladb",
+  "textdomain": "ladb",
+  "attributes": {
+    "sectionEyebrow": { "type": "string", "default": "Nos prestations" },
+    "sectionTitle":   { "type": "string", "default": "Un seul artisan, trois métiers maîtrisés" },
+    "sectionIntro":   { "type": "string", "default": "Vitrerie, serrurerie, miroiterie : nos artisans interviennent à Montpellier et 30 km autour, en moins de 24h, garantis décennale." },
+
+    "card1Title":    { "type": "string", "default": "Vitrerie" },
+    "card1Desc":     { "type": "string", "default": "Vitre cassée, double vitrage, verre sur mesure. Intervention en moins de 24h, dépannage 24/7." },
+    "card1Items":    { "type": "string", "default": "Remplacement vitre cassée\nDouble & triple vitrage\nVitrage sécurité (anti-effraction)\nVerre sur mesure" },
+    "card1LinkText": { "type": "string", "default": "Vitrerie à Montpellier" },
+    "card1LinkHref": { "type": "string", "default": "/service/vitrerie/" },
+
+    "card2Title":    { "type": "string", "default": "Serrurerie" },
+    "card2Desc":     { "type": "string", "default": "Ouverture de porte sans dégâts, blindage, changement de cylindre, copie de clé." },
+    "card2Items":    { "type": "string", "default": "Ouverture de porte\nBlindage de porte\nChangement de cylindre\nPose de serrure A2P" },
+    "card2LinkText": { "type": "string", "default": "Serrurerie à Montpellier" },
+    "card2LinkHref": { "type": "string", "default": "/service/serrurerie/" },
+
+    "card3Title":    { "type": "string", "default": "Miroiterie" },
+    "card3Desc":     { "type": "string", "default": "Miroirs sur mesure, parois de douche, verrières d'intérieur, garde-corps en verre." },
+    "card3Items":    { "type": "string", "default": "Miroir sur mesure\nParoi de douche\nVerrière d'intérieur\nGarde-corps verre" },
+    "card3LinkText": { "type": "string", "default": "Miroiterie à Montpellier" },
+    "card3LinkHref": { "type": "string", "default": "/service/miroiterie/" }
+  },
+  "editorScript": "file:./editor.js",
+  "render": "file:./render.php"
+}

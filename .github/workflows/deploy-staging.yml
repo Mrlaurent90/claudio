@@ -1,0 +1,75 @@
+# Deploiement du theme LADB vers le staging o2switch (push-to-deploy).
+#
+# LIVRE DESACTIVE PAR DEFAUT : declenchement manuel uniquement (workflow_dispatch).
+# Pour activer le push-to-deploy, voir DEPLOY.md section 3 :
+#   1. creer les secrets O2SWITCH_SSH_KEY / O2SWITCH_HOST / O2SWITCH_USER /
+#      O2SWITCH_THEME_PATH
+#   2. decommenter le bloc "push:" ci-dessous
+#
+name: deploy-staging
+
+on:
+  workflow_dispatch: {}
+  # Decommenter pour activer le deploiement automatique sur push :
+  # push:
+  #   branches:
+  #     - feat/pilier-vitrerie
+
+# Securite : un seul deploiement a la fois, on annule les anciens en cours.
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verifier la presence des secrets
+        env:
+          SSH_KEY: ${{ secrets.O2SWITCH_SSH_KEY }}
+          HOST: ${{ secrets.O2SWITCH_HOST }}
+          USER: ${{ secrets.O2SWITCH_USER }}
+          THEME_PATH: ${{ secrets.O2SWITCH_THEME_PATH }}
+        run: |
+          missing=0
+          for v in SSH_KEY HOST USER THEME_PATH; do
+            if [ -z "${!v}" ]; then
+              echo "Secret manquant : O2SWITCH_$v (voir DEPLOY.md section 3)"
+              missing=1
+            fi
+          done
+          if [ "$missing" -eq 1 ]; then
+            echo "Configuration incomplete : deploiement annule."
+            exit 1
+          fi
+
+      - name: Preparer la cle SSH
+        env:
+          SSH_KEY: ${{ secrets.O2SWITCH_SSH_KEY }}
+          HOST: ${{ secrets.O2SWITCH_HOST }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Rsync du theme vers le staging
+        env:
+          HOST: ${{ secrets.O2SWITCH_HOST }}
+          USER: ${{ secrets.O2SWITCH_USER }}
+          THEME_PATH: ${{ secrets.O2SWITCH_THEME_PATH }}
+        run: |
+          rsync -a -i \
+            -e "ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes" \
+            --exclude '.git/' \
+            --exclude '.gitignore' \
+            --exclude 'node_modules/' \
+            --exclude 'package.json' \
+            --exclude 'package-lock.json' \
+            --exclude 'webpack.config.js' \
+            --exclude '.DS_Store' \
+            ladb-blocksy-child/ \
+            "${USER}@${HOST}:${THEME_PATH}"

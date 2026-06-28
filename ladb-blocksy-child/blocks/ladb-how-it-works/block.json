@@ -1,0 +1,26 @@
+{
+  "apiVersion": 3,
+  "name": "ladb/how-it-works",
+  "title": "LADB Comment ça marche",
+  "description": "3 étapes avec fond photo et glassmorphisme.",
+  "category": "ladb",
+  "textdomain": "ladb",
+  "attributes": {
+    "sectionEyebrow": { "type": "string", "default": "Comment ça marche" },
+    "sectionTitle":   { "type": "string", "default": "Du téléphone à la pose, en 24h chrono" },
+    "sectionIntro":   { "type": "string", "default": "Une organisation simple, transparente, taillée pour les urgences comme pour les projets planifiés." },
+    "bgPhotoId":      { "type": "number", "default": 0 },
+    "bgPhotoUrl":     { "type": "string", "default": "" },
+    "step1N":         { "type": "string", "default": "01" },
+    "step1Title":     { "type": "string", "default": "Vous appelez" },
+    "step1Desc":      { "type": "string", "default": "Vous décrivez votre besoin au 06 86 41 69 25, 7j/7, 24h/24. Réponse immédiate." },
+    "step2N":         { "type": "string", "default": "02" },
+    "step2Title":     { "type": "string", "default": "Devis gratuit" },
+    "step2Desc":      { "type": "string", "default": "Diagnostic sur place ou photo. Devis clair et détaillé en 2 minutes, sans engagement." },
+    "step3N":         { "type": "string", "default": "03" },
+    "step3Title":     { "type": "string", "default": "Intervention" },
+    "step3Desc":      { "type": "string", "default": "Nos artisans interviennent en moins de 24h. Travail garanti décennale, paiement à réception." }
+  },
+  "editorScript": "file:./editor.js",
+  "render": "file:./render.php"
+}
