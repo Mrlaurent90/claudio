@@ -1,0 +1,20 @@
+{
+  "apiVersion": 3,
+  "name": "ladb/photo-banner",
+  "title": "LADB Bannière photo",
+  "description": "Bannière pleine largeur avec photo, overlay, titre cuivré et sous-titre.",
+  "category": "ladb",
+  "textdomain": "ladb",
+  "attributes": {
+    "photoId":    { "type": "number", "default": 0 },
+    "photoUrl":   { "type": "string", "default": "" },
+    "photoAlt":   { "type": "string", "default": "Montpellier · Promenade du Peyrou" },
+    "capLabel":   { "type": "string", "default": "Montpellier · Promenade du Peyrou" },
+    "titleMain":  { "type": "string", "default": "Votre artisan à" },
+    "titleAccent":{ "type": "string", "default": "Montpellier" },
+    "titleEnd":   { "type": "string", "default": "et 30 km autour." },
+    "subtitle":   { "type": "string", "default": "Vitrerie · Serrurerie · Miroiterie\nIntervention <24h · Garantie décennale" }
+  },
+  "editorScript": "file:./editor.js",
+  "render": "file:./render.php"
+}

@@ -1,0 +1,26 @@
+{
+  "apiVersion": 3,
+  "name": "ladb/faq",
+  "title": "LADB FAQ",
+  "description": "Accordéon FAQ avec fond photo et glassmorphisme. Jusqu'à 8 questions.",
+  "category": "ladb",
+  "textdomain": "ladb",
+  "attributes": {
+    "sectionEyebrow": { "type": "string", "default": "FAQ" },
+    "sectionTitle":   { "type": "string", "default": "Vos questions, nos réponses" },
+    "bgPhotoId":      { "type": "number", "default": 0 },
+    "bgPhotoUrl":     { "type": "string", "default": "" },
+    "faqItems": {
+      "type": "array",
+      "default": [
+        { "q": "Quels sont vos délais d'intervention à Montpellier ?", "a": "Nous intervenons en moins de 24h sur Montpellier et 30 km autour, et en urgence 24/7 pour les vitres cassées, ouvertures de porte et bris glace dangereux. La plupart de nos urgences sont traitées en moins de 2h." },
+        { "q": "Faites-vous payer le devis ?", "a": "Non. Tous nos devis sont gratuits et sans engagement, qu'ils soient réalisés par téléphone, sur photo ou sur place. Vous recevez un devis détaillé en 2 minutes." },
+        { "q": "Êtes-vous couverts par la garantie décennale ?", "a": "Oui. Toutes nos interventions de vitrerie, serrurerie et miroiterie sont couvertes par la garantie décennale. Notre attestation est fournie sur simple demande avant l'intervention." },
+        { "q": "Quelles zones desservez-vous ?", "a": "Montpellier intramuros, l'ensemble de la métropole (Castelnau-le-Lez, Lattes, Pérols, Mauguio, Juvignac, Saint-Jean-de-Védas…) et un rayon de 30 km autour. Au-delà, nous consulter." },
+        { "q": "Acceptez-vous le paiement par assurance ?", "a": "Oui. Nous facturons en direct à votre assurance pour les sinistres pris en charge (effraction, bris de glace, dégât des eaux). Nous vous accompagnons dans la constitution du dossier." }
+      ]
+    }
+  },
+  "editorScript": "file:./editor.js",
+  "render": "file:./render.php"
+}

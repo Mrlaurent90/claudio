@@ -1,87 +1,108 @@
 {
   "$schema": "https://schemas.wp.org/trunk/theme.json",
-  "version": 2,
+  "version": 3,
   "settings": {
     "color": {
       "palette": [
-        { "slug": "bleu-nuit",  "color": "#0B1A33", "name": "Bleu Nuit" },
-        { "slug": "abyssal",    "color": "#060D1A", "name": "Abyssal" },
-        { "slug": "creme",      "color": "#FAF8F4", "name": "Crème" },
-        { "slug": "cuivre",     "color": "#E1AA6E", "name": "Cuivre Clair" },
-        { "slug": "cuivre-mid", "color": "#C07A3E", "name": "Cuivre Moyen" },
-        { "slug": "cuivre-fonce","color": "#9F5E28","name": "Cuivre Foncé" },
-        { "slug": "vert",       "color": "#1FA35F", "name": "Vert" },
-        { "slug": "rouge",      "color": "#C8412E", "name": "Rouge" },
-        { "slug": "blanc",      "color": "#FFFFFF", "name": "Blanc" }
+        { "slug": "blue-stellaire", "color": "#0B1A33", "name": "Bleu nuit" },
+        { "slug": "blue-abyssal",   "color": "#060D1A", "name": "Bleu abyssal" },
+        { "slug": "cream",          "color": "#FAF8F4", "name": "Crème" },
+        { "slug": "copper",         "color": "#B87333", "name": "Cuivre" },
+        { "slug": "copper-light",   "color": "#D9A066", "name": "Cuivre clair" },
+        { "slug": "copper-deep",    "color": "#9A5E27", "name": "Cuivre profond" },
+        { "slug": "green-dispo",    "color": "#1FA35F", "name": "Vert disponibilité" },
+        { "slug": "red-urgence",    "color": "#C8412E", "name": "Rouge urgence" },
+        { "slug": "white",          "color": "#FFFFFF", "name": "Blanc" }
       ],
-      "custom": true,
-      "customGradient": false,
-      "defaultPalette": false
+      "gradients": [
+        {
+          "slug": "gradient-copper",
+          "gradient": "linear-gradient(135deg, #D9A066 0%, #B87333 45%, #9A5E27 100%)",
+          "name": "Dégradé cuivre"
+        }
+      ],
+      "duotone": []
     },
     "typography": {
       "fontFamilies": [
         {
-          "slug": "bricolage",
+          "fontFamily": "\"Bricolage Grotesque\", \"Inter\", system-ui, sans-serif",
+          "slug": "bricolage-grotesque",
           "name": "Bricolage Grotesque",
-          "fontFamily": "'Bricolage Grotesque', sans-serif",
           "fontFace": [
             {
               "fontFamily": "Bricolage Grotesque",
-              "fontWeight": "400 800",
+              "fontWeight": "200 800",
               "fontStyle": "normal",
+              "fontStretch": "75% 100%",
               "fontDisplay": "swap",
-              "src": ["file:./assets/fonts/BricolageGrotesque-Variable.woff2"]
+              "src": ["file:./assets/fonts/BricolageGrotesque-VariableFont_opsz_wdth_wght.ttf"]
             }
           ]
         },
         {
-          "slug": "hanken",
-          "name": "Hanken Grotesk",
-          "fontFamily": "'Hanken Grotesk', sans-serif",
-          "fontFace": [
-            {
-              "fontFamily": "Hanken Grotesk",
-              "fontWeight": "400 700",
-              "fontStyle": "normal",
-              "fontDisplay": "swap",
-              "src": ["file:./assets/fonts/HankenGrotesk-Variable.woff2"]
-            }
-          ]
+          "fontFamily": "\"Hanken Grotesk\", \"Inter\", system-ui, sans-serif",
+          "slug": "hanken-grotesk",
+          "name": "Hanken Grotesk"
         }
       ],
-      "customFontSize": true,
-      "dropCap": false,
-      "fluid": true
-    },
-    "spacing": {
-      "units": ["px", "rem", "%", "vw"],
-      "custom": true,
-      "customSpacingSize": true,
-      "spacingSizes": [
-        { "slug": "xs",   "size": "0.5rem",  "name": "XS" },
-        { "slug": "sm",   "size": "1rem",    "name": "SM" },
-        { "slug": "md",   "size": "1.5rem",  "name": "MD" },
-        { "slug": "lg",   "size": "2.5rem",  "name": "LG" },
-        { "slug": "xl",   "size": "4rem",    "name": "XL" },
-        { "slug": "2xl",  "size": "6rem",    "name": "2XL" },
-        { "slug": "section", "size": "clamp(3rem, 8vw, 6rem)", "name": "Section" }
+      "fontSizes": [
+        { "slug": "eyebrow", "size": "11px", "name": "Eyebrow" },
+        { "slug": "small",   "size": "13px", "name": "Petit" },
+        { "slug": "body",    "size": "15px", "name": "Corps" },
+        { "slug": "large",   "size": "17px", "name": "Grand" },
+        { "slug": "h4",      "size": "23px", "name": "H4" },
+        { "slug": "h3",      "size": "28px", "name": "H3" },
+        { "slug": "h2",      "size": "34px", "name": "H2" }
       ]
     },
-    "layout": {
-      "contentSize": "760px",
-      "wideSize": "1200px"
+    "spacing": {
+      "units": ["px", "rem", "%", "vw"]
     },
-    "useRootPaddingAwareAlignments": true
+    "layout": {
+      "contentSize": "1180px",
+      "wideSize": "1400px"
+    },
+    "blocks": {
+      "core/button": { "color": { "background": true, "text": true } }
+    }
   },
   "styles": {
     "color": {
-      "background": "#FAF8F4",
-      "text": "#0B1A33"
+      "background": "#0B1A33",
+      "text": "#E8EDF5"
     },
     "typography": {
-      "fontFamily": "var(--wp--preset--font-family--hanken)",
-      "fontSize": "1rem",
-      "lineHeight": "1.6"
+      "fontFamily": "var(--wp--preset--font-family--hanken-grotesk)",
+      "fontSize": "15px",
+      "lineHeight": "1.55"
+    },
+    "elements": {
+      "link": {
+        "color": { "text": "#D9A066" }
+      },
+      "h1": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--bricolage-grotesque)",
+          "fontWeight": "700"
+        }
+      },
+      "h2": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--bricolage-grotesque)",
+          "fontWeight": "700"
+        }
+      },
+      "h3": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--bricolage-grotesque)",
+          "fontWeight": "700"
+        }
+      }
     }
-  }
+  },
+  "customTemplates": [],
+  "templateParts": [
+    { "name": "footer", "title": "Footer", "area": "footer" }
+  ]
 }

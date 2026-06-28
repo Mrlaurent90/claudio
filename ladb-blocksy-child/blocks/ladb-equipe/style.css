@@ -1,0 +1,54 @@
+.ladb-equipe__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+@media (min-width: 900px) {
+    .ladb-equipe__inner {
+        grid-template-columns: 1.15fr .85fr;
+        gap: 72px;
+    }
+}
+
+.ladb-equipe__text .ladb-section__head {
+    max-width: none;
+    margin-bottom: 0;
+}
+
+.ladb-equipe__body {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ladb-equipe__body p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--fg-mute);
+    margin: 0;
+}
+
+.ladb-equipe__photo {
+    margin: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(217,160,102,.25);
+    box-shadow: 0 20px 50px rgba(0,0,0,.4);
+}
+
+.ladb-equipe__photo img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+}
+
+.ladb-equipe__deco {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 260px;
+}

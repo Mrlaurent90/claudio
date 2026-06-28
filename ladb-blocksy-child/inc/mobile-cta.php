@@ -1,21 +1,27 @@
 <?php
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
-add_action( 'wp_footer', 'ladb_mobile_cta_bar' );
-function ladb_mobile_cta_bar() {
-	if ( ! is_front_page() && ! is_page() ) {
-		return;
-	}
-	?>
-	<div class="ladb-mobile-cta" aria-label="Actions rapides" role="complementary">
-		<a href="tel:+33686416925" class="ladb-mobile-cta__call">
-			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.27 6.27l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-			<span>Appeler</span>
-		</a>
-		<a href="#ladb-contact" class="ladb-mobile-cta__devis">
-			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-			<span>Devis gratuit</span>
-		</a>
-	</div>
-	<?php
-}
+/**
+ * Output the fixed mobile CTA bar via wp_footer.
+ * Hidden on desktop via CSS (min-width:900px).
+ */
+add_action('wp_footer', function () {
+    ?>
+<div class="ladb-mobilecta" role="navigation" aria-label="Actions rapides mobile">
+  <a href="tel:0686416925" class="ladb-mobilecta__call">
+    <svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7 2 2 0 0 1 2-2.2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>
+    </svg>
+    Appeler
+  </a>
+  <a href="#contact" class="ladb-mobilecta__dev">
+    <svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+      <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+      <polyline points="10 9 9 9 8 9"/>
+    </svg>
+    Devis gratuit
+  </a>
+</div>
+    <?php
+}, 20);

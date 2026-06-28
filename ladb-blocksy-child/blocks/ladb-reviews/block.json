@@ -1,0 +1,39 @@
+{
+  "apiVersion": 3,
+  "name": "ladb/reviews",
+  "title": "LADB Avis Google",
+  "description": "3 avis Google style authentique, score global, lien vers tous les avis.",
+  "category": "ladb",
+  "textdomain": "ladb",
+  "attributes": {
+    "sectionEyebrow": { "type": "string", "default": "Témoignages" },
+    "sectionTitle":   { "type": "string", "default": "47 avis Google · note 5/5" },
+    "sectionIntro":   { "type": "string", "default": "Ce que disent nos clients après une intervention vitrerie, serrurerie ou miroiterie." },
+    "scoreValue":     { "type": "string", "default": "5,0" },
+    "scoreCount":     { "type": "string", "default": "47" },
+    "allReviewsUrl":  { "type": "string", "default": "#" },
+
+    "review1Initials": { "type": "string", "default": "CM" },
+    "review1Name":     { "type": "string", "default": "Claire M." },
+    "review1When":     { "type": "string", "default": "il y a 2 semaines" },
+    "review1Where":    { "type": "string", "default": "Montpellier — Antigone" },
+    "review1AvBg":     { "type": "string", "default": "#1A73E8" },
+    "review1Quote":    { "type": "string", "default": "Intervention en 1h30 un dimanche pour une vitre cassée. Travail soigné, devis tenu, super pro. Je recommande." },
+
+    "review2Initials": { "type": "string", "default": "RT" },
+    "review2Name":     { "type": "string", "default": "Raphaël T." },
+    "review2When":     { "type": "string", "default": "il y a 1 mois" },
+    "review2Where":    { "type": "string", "default": "Castelnau-le-Lez" },
+    "review2AvBg":     { "type": "string", "default": "#9C27B0" },
+    "review2Quote":    { "type": "string", "default": "Changement de cylindre en urgence après un cambriolage. Prix annoncé respecté, conseil de qualité." },
+
+    "review3Initials": { "type": "string", "default": "ÉB" },
+    "review3Name":     { "type": "string", "default": "Émilie B." },
+    "review3When":     { "type": "string", "default": "il y a 2 mois" },
+    "review3Where":    { "type": "string", "default": "Lattes" },
+    "review3AvBg":     { "type": "string", "default": "#E8710A" },
+    "review3Quote":    { "type": "string", "default": "Pose d'une verrière et d'un miroir sur mesure. Finitions impeccables, équipe à l'écoute et ponctuelle." }
+  },
+  "editorScript": "file:./editor.js",
+  "render": "file:./render.php"
+}
